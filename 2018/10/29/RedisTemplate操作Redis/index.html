@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="RedisTemplate操作Redis">
+
+
+
+
+  <meta name="keywords" content="Java, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2018/10/29/RedisTemplate操作Redis/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> RedisTemplate操作Redis - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          RedisTemplate操作Redis
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-10-29
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2018/10/29/RedisTemplate操作Redis/" data-title="RedisTemplate操作Redis">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate"><span class="toc-text">RedisTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate中定义了对5种数据结构操作"><span class="toc-text">RedisTemplate中定义了对5种数据结构操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringRedisTemplate与RedisTemplate"><span class="toc-text">StringRedisTemplate与RedisTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate-的-String-数据结构"><span class="toc-text">RedisTemplate 的 String 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate-的-List-数据结构"><span class="toc-text">RedisTemplate 的 List 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate-的-Hash-数据结构"><span class="toc-text">RedisTemplate 的 Hash 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate-的-Set-数据结构"><span class="toc-text">RedisTemplate 的 Set 数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate-的-Zset-数据结构"><span class="toc-text">RedisTemplate 的 Zset 数据结构</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h2 id="RedisTemplate"><a href="#RedisTemplate" class="headerlink" title="RedisTemplate"></a>RedisTemplate</h2><p>Redis 可以存储键与5种不同数据结构类型之间的映射，这5种数据结构类型分别为String（字符串）、List（列表）、Set（集合）、Hash（散列）和 Zset（有序集合）。<br>#<br>String：可以是字符串、整数或者浮点数</p>
+<p>List：一个链表，链表上的每个节点都包含了一个字符串</p>
+<p>Set：包含字符串的无序收集器(unorderedcollection)，并且被包含的每个字符串都是独一无二的、各不相同</p>
+<p>Hash：包含键值对的无序散列表</p>
+<p>Zset：字符串成员(member)与浮点数分值(score)之间的有序映射，元素的排列顺序由分值的大小决定</p>
+<a id="more"></a>
+<h2 id="RedisTemplate中定义了对5种数据结构操作"><a href="#RedisTemplate中定义了对5种数据结构操作" class="headerlink" title="RedisTemplate中定义了对5种数据结构操作"></a>RedisTemplate中定义了对5种数据结构操作</h2><p>redisTemplate.opsForValue();//操作字符串</p>
+<p>redisTemplate.opsForHash();//操作hash</p>
+<p>redisTemplate.opsForList();//操作list</p>
+<p>redisTemplate.opsForSet();//操作set</p>
+<p>redisTemplate.opsForZSet();//操作有序set</p>
+<h2 id="StringRedisTemplate与RedisTemplate"><a href="#StringRedisTemplate与RedisTemplate" class="headerlink" title="StringRedisTemplate与RedisTemplate"></a>StringRedisTemplate与RedisTemplate</h2><p>两者的关系是StringRedisTemplate继承RedisTemplate。</p>
+<h2 id="RedisTemplate-的-String-数据结构"><a href="#RedisTemplate-的-String-数据结构" class="headerlink" title="RedisTemplate 的 String 数据结构"></a>RedisTemplate 的 String 数据结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">valueOperations.set(<span class="string">"name"</span>, <span class="string">"tom"</span>);</span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"name"</span>));</span><br><span class="line">delete(<span class="string">"name"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置的是10秒失效，十秒之内查询有结果，十秒之后返回为 null</span></span><br><span class="line">valueOperations.set(<span class="string">"name"</span>, <span class="string">"tom"</span>, <span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"name"</span>));</span><br><span class="line">delete(<span class="string">"name"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三个参数是 offset，偏移量</span></span><br><span class="line">valueOperations.set(<span class="string">"key"</span>, <span class="string">"hello world"</span>);</span><br><span class="line">valueOperations.set(<span class="string">"key"</span>, <span class="string">"redis"</span>, <span class="number">6</span>);</span><br><span class="line"><span class="comment">// 输出 hello redis</span></span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"key"</span>));</span><br><span class="line">delete(<span class="string">"key"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该方法的特点是如果redis中已有该数据,不保存返回false,不存在该数据，保存返回true</span></span><br><span class="line">Boolean aBoolean = valueOperations.setIfAbsent(<span class="string">"setIfAbsent"</span>, <span class="string">"setIfAbsent"</span>);</span><br><span class="line">System.out.println(aBoolean);</span><br><span class="line">Boolean bBoolean = valueOperations.setIfAbsent(<span class="string">"setIfAbsent"</span>, <span class="string">"setIfAbsent"</span>);</span><br><span class="line">System.out.println(bBoolean);</span><br><span class="line">delete(<span class="string">"setIfAbsent"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量 set get</span></span><br><span class="line">Map&lt;String, String&gt; maps = <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">4</span>);</span><br><span class="line">maps.put(<span class="string">"multi1"</span>, <span class="string">"multi1"</span>);</span><br><span class="line">maps.put(<span class="string">"multi2"</span>, <span class="string">"multi2"</span>);</span><br><span class="line">maps.put(<span class="string">"multi3"</span>, <span class="string">"multi3"</span>);</span><br><span class="line">valueOperations.multiSet(maps);</span><br><span class="line">List&lt;String&gt; keys = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">keys.add(<span class="string">"multi1"</span>);</span><br><span class="line">keys.add(<span class="string">"multi2"</span>);</span><br><span class="line">keys.add(<span class="string">"multi3"</span>);</span><br><span class="line">List&lt;String&gt; multiSetList = valueOperations.multiGet(keys);</span><br><span class="line">System.out.println(multiSetList);</span><br><span class="line">delete(<span class="string">"multi1"</span>);</span><br><span class="line">delete(<span class="string">"multi2"</span>);</span><br><span class="line">delete(<span class="string">"multi3"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计数器 支持整数和浮点数</span></span><br><span class="line">valueOperations.increment(<span class="string">"increment"</span>, <span class="number">1</span>);</span><br><span class="line">valueOperations.increment(<span class="string">"increment"</span>, <span class="number">1.2</span>);</span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"increment"</span>));</span><br><span class="line">delete(<span class="string">"increment"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果key已经存在并且是一个字符串，则该命令将该值追加到字符串的末尾。</span></span><br><span class="line"><span class="comment">// 如果键不存在，则它被创建并设置为空字符串，因此APPEND在这种特殊情况下将类似于SET。</span></span><br><span class="line">valueOperations.append(<span class="string">"append"</span>, <span class="string">"hello"</span>);</span><br><span class="line">valueOperations.append(<span class="string">"append"</span>, <span class="string">" world"</span>);</span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"append"</span>));</span><br><span class="line">delete(<span class="string">"append"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 截取key所对应的value字符串</span></span><br><span class="line">valueOperations.set(<span class="string">"hello"</span>, <span class="string">"hello world"</span>);</span><br><span class="line"><span class="comment">// hello</span></span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"hello"</span>, <span class="number">0</span>, <span class="number">4</span>));</span><br><span class="line"><span class="comment">// 也支持这种负数形式，不好用</span></span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"hello"</span>, -<span class="number">3</span>, -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回key所对应的value值得长度</span></span><br><span class="line">System.out.println(valueOperations.size(<span class="string">"hello"</span>));</span><br><span class="line">delete(<span class="string">"hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)</span></span><br><span class="line"><span class="comment">// key键对应的值 value 对应的 ascii 码,在 offset 的位置(从左向右数)变为 value</span></span><br><span class="line">valueOperations.set(<span class="string">"bitTest"</span>, <span class="string">"a"</span>);</span><br><span class="line"><span class="comment">// 'a' 的ASCII码是 97。转换为二进制是：01100001</span></span><br><span class="line"><span class="comment">// 'b' 的ASCII码是 98  转换为二进制是：01100010</span></span><br><span class="line"><span class="comment">// 'c' 的ASCII码是 99  转换为二进制是：01100011</span></span><br><span class="line"><span class="comment">// 因为二进制 0 和 1，在 setbit 中 true 为 1，false 为 0，因此我要变为 'b' 的话第六位设置为 1，第七位设置为 0</span></span><br><span class="line">valueOperations.setBit(<span class="string">"bitTest"</span>, <span class="number">6</span>, <span class="keyword">true</span>);</span><br><span class="line">valueOperations.setBit(<span class="string">"bitTest"</span>, <span class="number">7</span>, <span class="keyword">false</span>);</span><br><span class="line"><span class="comment">// 输出 b</span></span><br><span class="line">System.out.println(valueOperations.get(<span class="string">"bitTest"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取键对应值的ascii码的在offset处位值</span></span><br><span class="line">System.out.println(valueOperations.getBit(<span class="string">"bitTest"</span>, <span class="number">7</span>));</span><br><span class="line">delete(<span class="string">"bitTest"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="RedisTemplate-的-List-数据结构"><a href="#RedisTemplate-的-List-数据结构" class="headerlink" title="RedisTemplate 的 List 数据结构"></a>RedisTemplate 的 List 数据结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将所有指定的值插入存储在键的列表的头部。如果键不存在，则在执行推送操作之前将其创建为空列表。（从左边插入）</span></span><br><span class="line">listOperations.leftPush(<span class="string">"list"</span>, <span class="string">"1"</span>);</span><br><span class="line">listOperations.leftPush(<span class="string">"list"</span>, <span class="string">"2"</span>);</span><br><span class="line">listOperations.leftPush(<span class="string">"list"</span>, <span class="string">"3"</span>);</span><br><span class="line">listOperations.leftPush(<span class="string">"list"</span>, <span class="string">"4"</span>);</span><br><span class="line"><span class="comment">// 只有存在key对应的列表才能将这个value值插入到key所对应的列表中</span></span><br><span class="line">listOperations.leftPushIfPresent(<span class="string">"list"</span>, <span class="string">"4"</span>);</span><br><span class="line"><span class="comment">// 在列表中index的位置设置value值</span></span><br><span class="line">listOperations.set(<span class="string">"list"</span>, <span class="number">3</span>, <span class="string">"100"</span>);</span><br><span class="line"><span class="comment">// 从存储在键中的列表中删除等于值的元素的第一个计数事件。将删除列表中存储的列表中第一次次出现的 "100"。</span></span><br><span class="line"><span class="comment">// count&gt; 0：删除等于从头到尾移动的值的元素。</span></span><br><span class="line"><span class="comment">// count &lt;0：删除等于从尾到头移动的值的元素。</span></span><br><span class="line"><span class="comment">// count = 0：删除等于value的所有元素。</span></span><br><span class="line">listOperations.remove(<span class="string">"list"</span>, <span class="number">1</span>, <span class="string">"100"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量把一个数组插入到列表中</span></span><br><span class="line">String[] stringarrays = <span class="keyword">new</span> String[]&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span><br><span class="line">listOperations.leftPushAll(<span class="string">"list2"</span>, stringarrays);</span><br><span class="line">delete(<span class="string">"list2"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量把一个 list 插入到列表中 List&lt;Object&gt; 类型才可以</span></span><br><span class="line">List&lt;Object&gt; list3 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">list3.add(<span class="string">"1"</span>);</span><br><span class="line">list3.add(<span class="string">"2"</span>);</span><br><span class="line">list3.add(<span class="string">"3"</span>);</span><br><span class="line">list3.add(<span class="string">"4"</span>);</span><br><span class="line">listOperations.leftPushAll(<span class="string">"list3"</span>, list3);</span><br><span class="line">delete(<span class="string">"list3"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回存储在键中的列表的指定元素。偏移开始和停止是基于零的索引，其中0是列表的第一个元素（列表的头部），1是下一个元素</span></span><br><span class="line">System.out.println(listOperations.range(<span class="string">"list"</span>, <span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修剪现有列表，使其只包含指定的指定范围的元素，起始和停止都是基于0的索引</span></span><br><span class="line">listOperations.trim(<span class="string">"list"</span>, <span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line">System.out.println(listOperations.range(<span class="string">"list"</span>, <span class="number">0</span>, -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回存储在键中的列表的长度。如果键不存在，则将其解释为空列表，并返回0。当key存储的值不是列表时返回错误。</span></span><br><span class="line">System.out.println(listOperations.size(<span class="string">"list"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据下标获取列表中的值，下标是从 0 开始的</span></span><br><span class="line">System.out.println(listOperations.index(<span class="string">"list"</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 弹出最左边的元素，弹出之后该值在列表中将不复存在</span></span><br><span class="line">System.out.println(listOperations.leftPop(<span class="string">"list"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</span></span><br><span class="line">System.out.println(listOperations.leftPop(<span class="string">"list"</span>, <span class="number">1000</span>, TimeUnit.MICROSECONDS));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用于移除列表的最后一个元素，并将该元素添加到另一个列表并返回。</span></span><br><span class="line">listOperations.rightPopAndLeftPush(<span class="string">"list"</span>, <span class="string">"newList"</span>);</span><br><span class="line">System.out.println(listOperations.range(<span class="string">"list"</span>, <span class="number">0</span>, -<span class="number">1</span>));</span><br><span class="line">System.out.println(listOperations.range(<span class="string">"newList"</span>, <span class="number">0</span>, -<span class="number">1</span>));</span><br><span class="line">delete(<span class="string">"list"</span>);</span><br><span class="line">delete(<span class="string">"newList"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="RedisTemplate-的-Hash-数据结构"><a href="#RedisTemplate-的-Hash-数据结构" class="headerlink" title="RedisTemplate 的 Hash 数据结构"></a>RedisTemplate 的 Hash 数据结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; testMap = <span class="keyword">new</span> HashMap(<span class="number">4</span>);</span><br><span class="line">testMap.put(<span class="string">"name"</span>, <span class="string">"jack"</span>);</span><br><span class="line">testMap.put(<span class="string">"age"</span>, <span class="string">"27"</span>);</span><br><span class="line">testMap.put(<span class="string">"class"</span>, <span class="string">"1"</span>);</span><br><span class="line">hashOperations.putAll(<span class="string">"hash"</span>, testMap);</span><br><span class="line">System.out.println(hashOperations.entries(<span class="string">"hash"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除给定的哈希hashKeys</span></span><br><span class="line">hashOperations.delete(<span class="string">"hash"</span>, <span class="string">"class"</span>);</span><br><span class="line">System.out.println(hashOperations.entries(<span class="string">"hash"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确定哈希 hashKey 是否存在</span></span><br><span class="line">System.out.println(hashOperations.hasKey(<span class="string">"hash"</span>, <span class="string">"name"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从键中的哈希获取给定 hashKey 的值</span></span><br><span class="line">System.out.println(hashOperations.get(<span class="string">"hash"</span>, <span class="string">"name"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从哈希中获取给定 hashKey 的值</span></span><br><span class="line">List&lt;String&gt; kes = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">kes.add(<span class="string">"name"</span>);</span><br><span class="line">kes.add(<span class="string">"age"</span>);</span><br><span class="line">System.out.println(hashOperations.multiGet(<span class="string">"hash"</span>, kes));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过给定的delta增加散列hashKey的值 支持整形、浮点型</span></span><br><span class="line">hashOperations.increment(<span class="string">"hash"</span>, <span class="string">"age"</span>, <span class="number">1</span>);</span><br><span class="line">System.out.println(hashOperations.get(<span class="string">"hash"</span>, <span class="string">"age"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取key所对应的散列表的key</span></span><br><span class="line">System.out.println(hashOperations.keys(<span class="string">"hash"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// size</span></span><br><span class="line">System.out.println(hashOperations.size(<span class="string">"hash"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 仅当 hashKey 不存在时才设置散列 hashKey 的值。</span></span><br><span class="line">Boolean hashIfAbsent = hashOperations.putIfAbsent(<span class="string">"hash"</span>, <span class="string">"age"</span>, <span class="string">"25"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取整个哈希存储的值</span></span><br><span class="line">System.out.println(hashOperations.values(<span class="string">"hash"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取整个哈希存储</span></span><br><span class="line">System.out.println(hashOperations.entries(<span class="string">"hash"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用Cursor在key的hash中迭代，相当于迭代器。</span></span><br><span class="line">Cursor&lt;Map.Entry&lt;String, Object&gt;&gt; hash = hashOperations.scan(<span class="string">"hash"</span>, ScanOptions.NONE);</span><br><span class="line"></span><br><span class="line">delete(<span class="string">"hash"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="RedisTemplate-的-Set-数据结构"><a href="#RedisTemplate-的-Set-数据结构" class="headerlink" title="RedisTemplate 的 Set 数据结构"></a>RedisTemplate 的 Set 数据结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加</span></span><br><span class="line">String[] strarrays = <span class="keyword">new</span> String[]&#123;<span class="string">"strarr1"</span>, <span class="string">"strarr2"</span>&#125;;</span><br><span class="line">setOperations.add(<span class="string">"set"</span>, strarrays);</span><br><span class="line">setOperations.add(<span class="string">"set"</span>, <span class="string">"strarr3"</span>);</span><br><span class="line">setOperations.add(<span class="string">"set"</span>, <span class="string">"strarr3"</span>, <span class="string">"strarr4"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除集合中一个或多个成员</span></span><br><span class="line">setOperations.remove(<span class="string">"set"</span>, <span class="string">"strarr4"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除并返回集合中的一个随机元素</span></span><br><span class="line">setOperations.pop(<span class="string">"set"</span>);</span><br><span class="line">setOperations.pop(<span class="string">"set"</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将 member 元素从 source 集合移动到 new 集合</span></span><br><span class="line">setOperations.move(<span class="string">"set"</span>, <span class="string">"strarr2"</span>, <span class="string">"newSet"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// size</span></span><br><span class="line">System.out.println(setOperations.size(<span class="string">"set"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断 member 元素是否是集合 key 的成员</span></span><br><span class="line">Boolean ismember = setOperations.isMember(<span class="string">"set"</span>, <span class="string">"strarr1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// key 对应的无序集合与 otherKey 对应的无序集合求交集（可以与多个 otherKey 求交集）</span></span><br><span class="line">Set&lt;Object&gt; intersect = setOperations.intersect(<span class="string">"set"</span>, <span class="string">"newSet"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// key 无序集合与 otherkey 无序集合的交集存储到 destKey 无序集合中（可以与多个 otherKey 求交集）</span></span><br><span class="line">setOperations.intersectAndStore(<span class="string">"set"</span>, <span class="string">"newSet"</span>, <span class="string">"newSet2"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// key 无序集合与 otherKey 无序集合的并集（可以与多个 otherKey 求交集）</span></span><br><span class="line">Set&lt;Object&gt; union = setOperations.union(<span class="string">"set"</span>, <span class="string">"newSet"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// key 无序集合与 otherkey 无序集合的并集存储到 destKey 无序集合中（可以与多个 otherKey 求并集）</span></span><br><span class="line">setOperations.unionAndStore(<span class="string">"set"</span>, <span class="string">"newSet"</span>, <span class="string">"newSet3"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// key 无序集合与 otherKey 无序集合的差集（可以与多个 otherKey 求差集）</span></span><br><span class="line">Set&lt;Object&gt; difference = setOperations.difference(<span class="string">"set"</span>, <span class="string">"newSet"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// key无序集合与 otherkey 无序集合的差集存储到 destKey 无序集合中（可以与多个 otherKey 求差集）</span></span><br><span class="line">setOperations.differenceAndStore(<span class="string">"set"</span>, <span class="string">"newSet"</span>, <span class="string">"newSet4"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回集合中的所有成员</span></span><br><span class="line">Set&lt;Object&gt; set = setOperations.members(<span class="string">"set"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机获取 key 无序集合中的一个元素</span></span><br><span class="line">Object randomMember = setOperations.randomMember(<span class="string">"set"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取多个 key 无序集合中的元素（去重），count 表示个数</span></span><br><span class="line">Set&lt;Object&gt; distinctRandomMembers = setOperations.distinctRandomMembers(<span class="string">"set"</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取多个 key 无序集合中的元素，count 表示个数</span></span><br><span class="line">List&lt;Object&gt; randomMembers = setOperations.randomMembers(<span class="string">"set"</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">delete(<span class="string">"set"</span>);</span><br><span class="line">delete(<span class="string">"newSet"</span>);</span><br><span class="line">delete(<span class="string">"newSet2"</span>);</span><br><span class="line">delete(<span class="string">"newSet3"</span>);</span><br><span class="line">delete(<span class="string">"newSet4"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="RedisTemplate-的-Zset-数据结构"><a href="#RedisTemplate-的-Zset-数据结构" class="headerlink" title="RedisTemplate 的 Zset 数据结构"></a>RedisTemplate 的 Zset 数据结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增一个有序集合，存在的话为false，不存在的话为true</span></span><br><span class="line">zSetOperations.add(<span class="string">"zset"</span>, <span class="string">"strarr1"</span>, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增一个有序集合</span></span><br><span class="line">ZSetOperations.TypedTuple&lt;Object&gt; objectTypedTuple1 = <span class="keyword">new</span> DefaultTypedTuple&lt;&gt;(<span class="string">"strarr2"</span>, <span class="number">9.6</span>);</span><br><span class="line">ZSetOperations.TypedTuple&lt;Object&gt; objectTypedTuple2 = <span class="keyword">new</span> DefaultTypedTuple&lt;&gt;(<span class="string">"strarr3"</span>, <span class="number">9.9</span>);</span><br><span class="line">Set&lt;ZSetOperations.TypedTuple&lt;Object&gt;&gt; tuples = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">tuples.add(objectTypedTuple1);</span><br><span class="line">tuples.add(objectTypedTuple2);</span><br><span class="line">zSetOperations.add(<span class="string">"zset"</span>, tuples);</span><br><span class="line">System.out.println(zSetOperations.range(<span class="string">"zset"</span>, <span class="number">0</span>, -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从有序集合中移除一个或者多个元素</span></span><br><span class="line">zSetOperations.remove(<span class="string">"zset"</span>, <span class="string">"strarr3"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增加元素的 score 值，并返回增加后的值</span></span><br><span class="line">zSetOperations.incrementScore(<span class="string">"zset"</span>, <span class="string">"strarr1"</span>, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回有序集中指定成员的排名，其中有序集成员按分数值递减(从大到小)顺序排列</span></span><br><span class="line">System.out.println(zSetOperations.removeRange(<span class="string">"zset"</span>, <span class="number">0</span>, -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过索引区间返回有序集合成指定区间内的成员对象，其中有序集成员按分数值递增(从小到大)顺序排列</span></span><br><span class="line">Set&lt;ZSetOperations.TypedTuple&lt;Object&gt;&gt; zset = zSetOperations.rangeWithScores(<span class="string">"zset"</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过分数返回有序集合指定区间内的成员对象，其中有序集成员按分数值递增(从小到大)顺序排列</span></span><br><span class="line">Set&lt;ZSetOperations.TypedTuple&lt;Object&gt;&gt; zset1 = zSetOperations.rangeByScoreWithScores(<span class="string">"zset"</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过分数返回有序集合指定区间内的成员个数</span></span><br><span class="line">System.out.println(zSetOperations.count(<span class="string">"zset"</span>, <span class="number">0</span>, -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// size</span></span><br><span class="line">System.out.println(zSetOperations.size(<span class="string">"zset"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取指定成员的 score 值</span></span><br><span class="line">System.out.println(zSetOperations.score(<span class="string">"zset"</span>, <span class="string">"strarr1"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算给定的一个有序集的并集，并存储在新的 destKey 中，key 相同的话会把 score 值相加 （可以与多个 otherKey 求并集）</span></span><br><span class="line"><span class="comment">//zSetOperations.unionAndStore("zset", "zset2", "zsetNew");</span></span><br><span class="line"><span class="comment">//zSetOperations.unionAndStore("zset", "zsetList", "zsetNew");</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 key 中 （可以与多个 otherKey 求交集）</span></span><br><span class="line"><span class="comment">//zSetOperations.intersectAndStore("zset", "zset2", "zsetNew");</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历 zset</span></span><br><span class="line">Cursor&lt;ZSetOperations.TypedTuple&lt;Object&gt;&gt; zset2 = zSetOperations.scan(<span class="string">"zset"</span>, ScanOptions.NONE);</span><br><span class="line"></span><br><span class="line">delete(<span class="string">"zset"</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/10/31/FreeMarker使用后台枚举/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">FreeMarker使用后台枚举</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/10/26/三级联动/">
+        <span class="next-text nav-default">三级联动</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

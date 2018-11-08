@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Hexo建站过程总结">
+
+
+
+
+  <meta name="keywords" content="Hexo, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2016/03/20/Hexo建站过程总结/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Hexo建站过程总结 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Hexo建站过程总结
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-03-20
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2016/03/20/Hexo建站过程总结/" data-title="Hexo建站过程总结">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-git"><span class="toc-text">安装 git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Node-js"><span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Hexo-框架"><span class="toc-text">安装 Hexo 框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-Hexo-项目"><span class="toc-text">创建 Hexo 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改deploy"><span class="toc-text">修改deploy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更换主题"><span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装主题"><span class="toc-text">安装主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启用主题"><span class="toc-text">启用主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证主题"><span class="toc-text">验证主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题设定"><span class="toc-text">主题设定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传本地项目"><span class="toc-text">上传本地项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名绑定"><span class="toc-text">域名绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#404、关于我、标签"><span class="toc-text">404、关于我、标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-text">结束语</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <blockquote>
+<p>Hexo 是一个基于 Node.js 快速、简洁且高效的博客框架，可以将 Markdown 文件快速的生成静态网页，托管在 GitHub Pages 上。</p>
+</blockquote>
+<a id="more"></a>
+<p>由于原来博客的主机费用问题，我没有办法再在那个主机上面再进行博客的更新，实在是太贵了，对于我来说。所以就在GitHub上面开始建站，使用Hexo来搭载我的博客。Hexo和WordPress有很大的不同，个人觉得Hexo更加方便快捷，没有WorldPress那么臃肿和繁琐，不需要主机空间，不需要数据库。所有的数据都是保存成html静态的页面。而且可以放在GitHub上面挂载，自己只需要购买一个域名就可以了，甚至连域名都不需要购买，用GitHub自己提供的域名也是不错的——XXX.github.io。</p>
+<h2 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h2><p>打开 Git Bash（路径：C:\Program Files\Git\git-bash.exe），输入：git –version，出现版本号则说明安装成功。</p>
+<h2 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h2><p>百度Node.js然后到官网上面下载安装就好<br>安装完之后，打开 Git Bash，输入：npm -v<br>同样的，出现版本号则说明安装成功。</p>
+<h2 id="安装-Hexo-框架"><a href="#安装-Hexo-框架" class="headerlink" title="安装 Hexo 框架"></a>安装 Hexo 框架</h2><p>在 Git Bash 中输入： <code>npm install -g hexo-cli</code></p>
+<p>安装大约需要5分钟左右（需要使用梯子）</p>
+<h2 id="创建-Hexo-项目"><a href="#创建-Hexo-项目" class="headerlink" title="创建 Hexo 项目"></a>创建 Hexo 项目</h2><ul>
+<li><p>创建本地项目文件夹<br>假设我要创建一个名为 hexo 的项目，项目目录就放在：E:\workspace 目录下，所以我们在 E:\workspace 目录下创建一个 hexo 目录。现在这个项目的全路径是：E:\workspace\hexo</p>
+</li>
+<li><p>打开 Git Bash</p>
+<ul>
+<li>进入该目录： <code>cd e:\workspace\hexo</code></li>
+<li>然后执行  <code>hexo init</code></li>
+<li>最后执行 <code>npm install</code></li>
+<li>安装完成后 E:\workspace\hexo 中应该有这几个文件 node_modules scaffolds source themes _config.yml package.json</li>
+<li>启动服务 <code>hexo server</code></li>
+<li>在浏览器中访问： <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 即可看到 Hexo 页面。</li>
+</ul>
+</li>
+</ul>
+<h2 id="修改deploy"><a href="#修改deploy" class="headerlink" title="修改deploy"></a>修改deploy</h2><p>这里需要在 GitHub 上面申请一个Git Pages。</p>
+<p>接下来打开根目录 hexo_config.yml，找到最下面的deploy。<br>这是我的deploy，你只需把我的用户名改为你的即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repo: git@github.com:ManaStuDent/ManaStuDent.github.io.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>Hexo自带的主题真的感觉很一般，在 Hexo 社区中有很多优秀的主题可以选择,<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">知乎</a>中有很多的推荐。</p>
+<p>我使用的是一个名为 NexT 的主题，这个主题提供的文档很全面，对新人很友好。下面以这个主题为例，优化我的博客。</p>
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>让 Git Bash 保持在 E:\workspace\hexo 目录下，然后输入命令：<code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code> </p>
+<h2 id="启用主题"><a href="#启用主题" class="headerlink" title="启用主题"></a>启用主题</h2><p>打开根目录下的 <code>_config.yml</code> (这个文件主要是用于站点全局的配置)，找到 <code>theme</code> 字段，并且将值改成 <code>next</code>。注意，<code>theme：</code> 和<code>next</code>之间是有一个空格的。即 <code>theme: next</code></p>
+<h2 id="验证主题"><a href="#验证主题" class="headerlink" title="验证主题"></a>验证主题</h2><p>验证之前， 我们使用 <code>hexo clean</code> 来清除 Hexo 的缓存。</p>
+<p>首先启动 Hexo 本地站点，并开启调试模式（即加上 –debug），整个命令是 <code>hexo s --debug</code>。</p>
+<p>当命令行提示出：<code>INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</code><br>此时就可以使用浏览器访问 <code>http://localhost:4000</code>，检查站点是否正确运行。</p>
+<h2 id="主题设定"><a href="#主题设定" class="headerlink" title="主题设定"></a>主题设定</h2><ul>
+<li>选择Scheme</li>
+<li>设置语言</li>
+<li>设置菜单</li>
+<li>设置头像…<br>具体的设置参考<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">http://theme-next.iissnan.com/</a> NexT的介绍页面。</li>
+</ul>
+<h2 id="上传本地项目"><a href="#上传本地项目" class="headerlink" title="上传本地项目"></a>上传本地项目</h2><p>首先要生成自己git本地的私钥和公钥，并将公钥放到自己的 GitHub 上面。</p>
+<p>要把本地的静态博客同步到 Github，我们还需要先安装两个跟部署相关的 hexo 插件：<br>继续在 Git Bash 中输入：<br><code>cnpm install hexo -server --save</code><br><code>cnpm install hexo-deployer-git --save</code></p>
+<ul>
+<li>打开 <code>Git Bash</code></li>
+<li><code>cd e:\workspace\hexo</code></li>
+<li><code>hexo clean</code> //清除项目缓存</li>
+<li><code>hexo g</code> // <code>hexo generate</code>的缩写</li>
+<li><code>hexo s</code> // <code>hexo server</code>的缩写</li>
+<li><code>hexo d</code> // <code>hexo deploy</code>的缩写</li>
+</ul>
+<p>更多的命令可以参考 Hexo 的官方文档 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a></p>
+<h2 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h2><p>首先我们要一个 <code>CNAME</code> 文件，把该文件放在 e:\workspace\hexo\source 目录下，以后一些需要放在根目录的资源文件都可以放这里。在GitHub页面也可以建立这个文件。然后在文件里输入你要绑定的域名，比如说 <code>romition.com</code>。</p>
+<p>接着我们要到<a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSPOD</a>或者<a href="wanwang.aliyun.com">万网</a>上面设置域名解析。</p>
+<p>设置 CNAME 为自己github上面的地址  比如 XXXXXX.github.io.  注意这里最后面有个点<br>设置 A     为 103.245.222.133</p>
+<h2 id="404、关于我、标签"><a href="#404、关于我、标签" class="headerlink" title="404、关于我、标签"></a>404、关于我、标签</h2><p>在新的站点搭建好后，很多主题都是不提供 <code>404、关于我、标签</code> 这三项内容的，是需要我们自己加入的。<br>在项目根目录下 (e:\workspace\hexo) 下启动 Git Bash 。<br>新增一个 <code>404</code> 页面：<code>hexo new page 404</code><br>新增一个 <code>关于我</code> 页面：<code>hexo new page about</code><br>新增一个 <code>标签</code> 页面：<code>hexo new page tags</code> </p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>和 WordPress 一样，Hexo 也是有很多插件可以使用的。<br>插件官网：<a href="https://hexo.io/plugins/" target="_blank" rel="noopener">https://hexo.io/plugins/</a><br>安装插件：<code>npm install 插件名 --save</code><br>卸载插件：<code>npm uninstall 插件名</code><br>更新插件和博客框架（需要在根目录下）：<code>npm update</code></p>
+<p>几个常用的插件：<br>支持RSS：<code>npm install hexo-generator-feed --save</code><br>生成站点地图：<code>npm install hexo-generator-sitemap --save</code><br>生成百度站点地图：<code>npm install hexo-generator-baidu-sitemap --save</code><br>HTML 压缩：<code>npm install hexo-html-minifier --save</code></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>搜索引擎通过一种程序 robot（又称spider），自动访问互联网上的网页并获取网页信息。我们可以在博客中创建一个纯文本文件 <code>robots.txt</code>，在这个文件中声明该网站中不想被 robot 访问的部分，这样，博客的部分内容就可以不被搜索引擎收录了，或者指定搜索引擎只收录指定的内容。</p>
+<p>在根目录（e:\workspace\hexo\source） 目录下，新增一个 <code>robot.txt</code> 文件。</p>
+<p><code>robot.txt</code> 文件内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">User-Agent: *</span><br><span class="line">Allow: /</span><br><span class="line">Disallow: /background</span><br><span class="line">Disallow: /css</span><br><span class="line">Disallow: /img</span><br><span class="line">Disallow: /js</span><br><span class="line">Sitemap: http://romition.com/sitemap.xml</span><br><span class="line">Sitemap: http://romition.com/baidusitemap.xml</span><br></pre></td></tr></table></figure></p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>在搭建过程中可能会遇到各种各样的问题，那么 <a href="www.google.com">Google</a> 会是最好的老师。这次写的很简单，在以后我我会逐步完善。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Created by ManaStuDent on 2016/3/20.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hexo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>版本记录</p>
+<p>2016年3月20日, AM 07:26:13<br>发布 Hexo建站过程总结</p>
+<p>2016年3月20日, PM 09:38:52<br>增加 <code>404、关于我、标签</code>、<code>插件</code> 和 <code>robot</code> 内容<br>修改 版本记录的方式。<br>修改 根目录的表达，统一为 <code>e:\workspace\hexo</code><br>修改 在上传到github前需要安装2个插件</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Hexo/">Hexo</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/03/20/Workflow(一) 入门与第一个Action/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Workflow(一) 入门与第一个Action</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/11/28/WinRAR-和-7-Zip/">
+        <span class="next-text nav-default">WinRAR 和 7-Zip</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

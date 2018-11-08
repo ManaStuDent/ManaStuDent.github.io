@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="原来 Set 集合也可以排序">
+
+
+
+
+  <meta name="keywords" content="Java, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2017/07/10/原来-Set-集合也可以排序/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 原来 Set 集合也可以排序 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          原来 Set 集合也可以排序
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-07-10
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2017/07/10/原来-Set-集合也可以排序/" data-title="原来 Set 集合也可以排序">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HashSet"><span class="toc-text">HashSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkedHashSet"><span class="toc-text">LinkedHashSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeSet"><span class="toc-text">TreeSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原码学习"><span class="toc-text">原码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap-的构造方法"><span class="toc-text">TreeMap 的构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap-的-put-方法"><span class="toc-text">TreeMap 的 put 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种-Set-实现类的总结"><span class="toc-text">几种 Set 实现类的总结</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>Java 集合类主要由两个接口派生而出: Collection 和 Map。在 Collection 集合中，我们经常用到的是 List 集合和 Map 集合，而 Set 集合出场的机会就相对比较的少了。在书本上学习的时候就只知道 Set 集合是无序并且是不可重复的，所以也就对 Set 集合排序的问题没有怎么好好考虑，知其然而不知其所以然。但，最近在项目中就遇到一个关于 Set 集合排序的问题，所以我又拿起了书本，仔细阅读关于集合方面的资料，并且浏览网上相关的教程以及论坛中的帖子等。收集和总结了一些 Set 集合方面的知识，供大家参考。<br><a id="more"></a><br>说起 Set 集合想到的就是 Set 集合是无序并且不重复的集合。当试图把两个相同的对象加入一个 Set 中时,对象会调用 equals 方法比较两个对象元素是否相同，相同则不会加入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// Dummy value to associate with an Object in the backing Map</span><br><span class="line">private static final Object PRESENT = new Object();</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"> * Adds the specified element to this set if it is not already present.</span><br><span class="line"> * More formally, adds the specified element &lt;tt&gt;e&lt;/tt&gt; to this set if</span><br><span class="line"> * this set contains no element &lt;tt&gt;e2&lt;/tt&gt; such that</span><br><span class="line"> * &lt;tt&gt;(e==null ? e2==null : e.equals(e2))&lt;/tt&gt;.</span><br><span class="line"> * If this set already contains the element, the call leaves the set</span><br><span class="line"> * unchanged and returns &lt;tt&gt;false&lt;/tt&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be added to this set</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if this set did not already contain the specified</span><br><span class="line"> * element</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Associates the specified value with the specified key in this map.</span><br><span class="line"> * If the map previously contained a mapping for the key, the old</span><br><span class="line"> * value is replaced.</span><br><span class="line"> *</span><br><span class="line"> * @param key key with which the specified value is to be associated</span><br><span class="line"> * @param value value to be associated with the specified key</span><br><span class="line"> * @return the previous value associated with &lt;tt&gt;key&lt;/tt&gt;, or</span><br><span class="line"> *         &lt;tt&gt;null&lt;/tt&gt; if there was no mapping for &lt;tt&gt;key&lt;/tt&gt;.</span><br><span class="line"> *         (A &lt;tt&gt;null&lt;/tt&gt; return can also indicate that the map</span><br><span class="line"> *         previously associated &lt;tt&gt;null&lt;/tt&gt; with &lt;tt&gt;key&lt;/tt&gt;.)</span><br><span class="line"> */</span><br><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">    if (table == EMPTY_TABLE) &#123;</span><br><span class="line">        inflateTable(threshold);</span><br><span class="line">    &#125;</span><br><span class="line">    if (key == null)</span><br><span class="line">        return putForNullKey(value);</span><br><span class="line">    int hash = hash(key);</span><br><span class="line">    int i = indexFor(hash, table.length);</span><br><span class="line">    for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;</span><br><span class="line">        Object k;</span><br><span class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</span><br><span class="line">            V oldValue = e.value;</span><br><span class="line">            e.value = value;</span><br><span class="line">            e.recordAccess(this);</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    addEntry(hash, key, value, i);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Set集合有几个派生类：<em>HashSet </em> <em>LinkedHashSet </em> <em>TreeSet </em>等</p>
+<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> /**</span><br><span class="line"> * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has</span><br><span class="line"> * default initial capacity (16) and load factor (0.75).</span><br><span class="line"> */</span><br><span class="line">public HashSet() &#123;</span><br><span class="line">    map = new HashMap&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private transient HashMap&lt;E,Object&gt; map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity</span><br><span class="line"> * (16) and the default load factor (0.75).</span><br><span class="line"> */</span><br><span class="line">public HashMap() &#123;</span><br><span class="line">    this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"> * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the specified initial</span><br><span class="line"> * capacity and load factor.</span><br><span class="line"> *</span><br><span class="line"> * @param  initialCapacity the initial capacity</span><br><span class="line"> * @param  loadFactor      the load factor</span><br><span class="line"> * @throws IllegalArgumentException if the initial capacity is negative</span><br><span class="line"> *         or the load factor is nonpositive</span><br><span class="line"> */</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor) &#123;</span><br><span class="line">    if (initialCapacity &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">        initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +</span><br><span class="line">                                           loadFactor);</span><br><span class="line"></span><br><span class="line">    this.loadFactor = loadFactor;</span><br><span class="line">    threshold = initialCapacity;</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The default initial capacity - MUST be a power of two.</span><br><span class="line"> */</span><br><span class="line">static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The load factor used when none specified in constructor.</span><br><span class="line"> */</span><br><span class="line">static final float DEFAULT_LOAD_FACTOR = 0.75f;</span><br></pre></td></tr></table></figure>
+<p>通过查看 JDK 原码我们可以很清晰的看出 HashSet 的底层就是一个 HashMap，所以 HashSet 的很多特性都是 HashMap 的延续。</p>
+<p>HashSet的特点有：</p>
+<ul>
+<li>元素的排列顺序是随机的，不保证排列顺序</li>
+<li>HashSet 非线程安全的，所以速度快</li>
+<li>允许元素值为 null</li>
+</ul>
+<p>HashSet 集合判断两个元素是否相等的标准是两个对象（元素）通过 equals 方法比较返回 true，并且两个对象的 HashCode() 方法返回值也要相等。因为 HashCode 集合中存入一个元素时，HashSet 会调用该对象的的 HashCode 方法得到对象的HashCode 值，决定该对象在 HashCode 中的存储位置。如果加入的两个对象通过equals() 的返回值相等，但是 HashCode() 的返回值不相等，HashSet 依然会认为两个元素是不相等的，可以添加成功。所以，当把某个类的对象作为元素存储到HashSet 中，重写这个类的 equals 方法和 HashCode 方法时，尽量保证两个对象通过 equals() 方法返回 true 时，他们的 HashCode() 方法的返回值也是相等的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * Compares the specified object with this set for equality.  Returns</span><br><span class="line"> * &lt;tt&gt;true&lt;/tt&gt; if the given object is also a set, the two sets have</span><br><span class="line"> * the same size, and every member of the given set is contained in</span><br><span class="line"> * this set.  This ensures that the &lt;tt&gt;equals&lt;/tt&gt; method works</span><br><span class="line"> * properly across different implementations of the &lt;tt&gt;Set&lt;/tt&gt;</span><br><span class="line"> * interface.&lt;p&gt;</span><br><span class="line"> *</span><br><span class="line"> * This implementation first checks if the specified object is this</span><br><span class="line"> * set; if so it returns &lt;tt&gt;true&lt;/tt&gt;.  Then, it checks if the</span><br><span class="line"> * specified object is a set whose size is identical to the size of</span><br><span class="line"> * this set; if not, it returns false.  If so, it returns</span><br><span class="line"> * &lt;tt&gt;containsAll((Collection) o)&lt;/tt&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object to be compared for equality with this set</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if the specified object is equal to this set</span><br><span class="line"> */</span><br><span class="line">public boolean equals(Object o) &#123;</span><br><span class="line">    if (o == this)</span><br><span class="line">        return true;</span><br><span class="line"></span><br><span class="line">    if (!(o instanceof Set))</span><br><span class="line">        return false;</span><br><span class="line">    Collection c = (Collection) o;</span><br><span class="line">    if (c.size() != size())</span><br><span class="line">        return false;</span><br><span class="line">    try &#123;</span><br><span class="line">        return containsAll(c);</span><br><span class="line">    &#125; catch (ClassCastException unused)   &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125; catch (NullPointerException unused) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h2><p>LinkedHashSet 是 HashSet 的一个子类。使用链表来维护元素的次序。也就是说当遍历 LinkedHashSet 集合时，将会以元素添加时的顺序来访问集合中的数据。LinkedHashSet 需要维护元素的插入顺序，因此性能低于 HashSet，但是在迭代访问<br> Set 全部元素时有较好的性能，因为以链表维护内部的顺序。是非同步的，非线程安全。</p>
+<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><p>TreeSet 是 SortedSet 接口的实现类。如其名字，TreeSet 可以确保内部元素有序，采用红黑树的结构来存储集合元素，TreeSet 支持两种排序方法：自然排序和定制排序。</p>
+<p>自然排序：TreeSet 调用集合元素的 compareTo(Object obj) 方法来比较元素之间的大小，然后按照元素升序排列。这就要求对象元素必须实现 Comparable 接口中的<br> compareTo(Object obj) 方法。在自然排序下，TreeSet 判断两个对象是否相同的唯一标准：两个对象通过 compareTo(Object o) 方法比较是否相等：该方法返回 0，则认为相等，返回 1 则认为不相等。Java 的一些常见的类，例如 Character，String，Date 等已经实现了 Comparable 接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * Adds the specified element to this set if it is not already present.</span><br><span class="line"> * More formally, adds the specified element &#123;@code e&#125; to this set if</span><br><span class="line"> * the set contains no element &#123;@code e2&#125; such that</span><br><span class="line"> * &lt;tt&gt;(e==null ? e2==null : e.equals(e2))&lt;/tt&gt;.</span><br><span class="line"> * If this set already contains the element, the call leaves the set</span><br><span class="line"> * unchanged and returns &#123;@code false&#125;.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be added to this set</span><br><span class="line"> * @return &#123;@code true&#125; if this set did not already contain the specified</span><br><span class="line"> *         element</span><br><span class="line"> * @throws ClassCastException if the specified object cannot be compared</span><br><span class="line"> *         with the elements currently in this set</span><br><span class="line"> * @throws NullPointerException if the specified element is null</span><br><span class="line"> *         and this set uses natural ordering, or its comparator</span><br><span class="line"> *         does not permit null elements</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return m.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The backing map.</span><br><span class="line"> */</span><br><span class="line">private transient NavigableMap&lt;E,Object&gt; m;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Associates the specified value with the specified key in this map.</span><br><span class="line"> * If the map previously contained a mapping for the key, the old</span><br><span class="line"> * value is replaced.</span><br><span class="line"> *</span><br><span class="line"> * @param key key with which the specified value is to be associated</span><br><span class="line"> * @param value value to be associated with the specified key</span><br><span class="line"> *</span><br><span class="line"> * @return the previous value associated with &#123;@code key&#125;, or</span><br><span class="line"> *         &#123;@code null&#125; if there was no mapping for &#123;@code key&#125;.</span><br><span class="line"> *         (A &#123;@code null&#125; return can also indicate that the map</span><br><span class="line"> *         previously associated &#123;@code null&#125; with &#123;@code key&#125;.)</span><br><span class="line"> * @throws ClassCastException if the specified key cannot be compared</span><br><span class="line"> *         with the keys currently in the map</span><br><span class="line"> * @throws NullPointerException if the specified key is null</span><br><span class="line"> *         and this map uses natural ordering, or its comparator</span><br><span class="line"> *         does not permit null keys</span><br><span class="line"> */</span><br><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">    Entry&lt;K,V&gt; t = root;</span><br><span class="line">    if (t == null) &#123;</span><br><span class="line">        compare(key, key); // type (and possibly null) check</span><br><span class="line"></span><br><span class="line">        root = new Entry&lt;&gt;(key, value, null);</span><br><span class="line">        size = 1;</span><br><span class="line">        modCount++;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    int cmp;</span><br><span class="line">    Entry&lt;K,V&gt; parent;</span><br><span class="line">    // split comparator and comparable paths</span><br><span class="line">    Comparator&lt;? super K&gt; cpr = comparator;</span><br><span class="line">    if (cpr != null) &#123;</span><br><span class="line">        do &#123;</span><br><span class="line">            parent = t;</span><br><span class="line">            cmp = cpr.compare(key, t.key);</span><br><span class="line">            if (cmp &lt; 0)</span><br><span class="line">                t = t.left;</span><br><span class="line">            else if (cmp &gt; 0)</span><br><span class="line">                t = t.right;</span><br><span class="line">            else</span><br><span class="line">                return t.setValue(value);</span><br><span class="line">        &#125; while (t != null);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        if (key == null)</span><br><span class="line">            throw new NullPointerException();</span><br><span class="line">        Comparable&lt;? super K&gt; k = (Comparable&lt;? super K&gt;) key;</span><br><span class="line">        do &#123;</span><br><span class="line">            parent = t;</span><br><span class="line">            cmp = k.compareTo(t.key);</span><br><span class="line">            if (cmp &lt; 0)</span><br><span class="line">                t = t.left;</span><br><span class="line">            else if (cmp &gt; 0)</span><br><span class="line">                t = t.right;</span><br><span class="line">            else</span><br><span class="line">                return t.setValue(value);</span><br><span class="line">        &#125; while (t != null);</span><br><span class="line">    &#125;</span><br><span class="line">    Entry&lt;K,V&gt; e = new Entry&lt;&gt;(key, value, parent);</span><br><span class="line">    if (cmp &lt; 0)</span><br><span class="line">        parent.left = e;</span><br><span class="line">    else</span><br><span class="line">        parent.right = e;</span><br><span class="line">    fixAfterInsertion(e);</span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定制排序：在创建 TreeSet 集合对象时，需要关联一个 Comparator 对象，并且实现 Comparator 中的 compare(T obj1,T obj 2)，该方法用于比较 o1 和 o2 的大小。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * Constructs a new, empty tree set, sorted according to the specified</span><br><span class="line"> * comparator.  All elements inserted into the set must be &lt;i&gt;mutually</span><br><span class="line"> * comparable&lt;/i&gt; by the specified comparator: &#123;@code comparator.compare(e1,</span><br><span class="line"> * e2)&#125; must not throw a &#123;@code ClassCastException&#125; for any elements</span><br><span class="line"> * &#123;@code e1&#125; and &#123;@code e2&#125; in the set.  If the user attempts to add</span><br><span class="line"> * an element to the set that violates this constraint, the</span><br><span class="line"> * &#123;@code add&#125; call will throw a &#123;@code ClassCastException&#125;.</span><br><span class="line"> *</span><br><span class="line"> * @param comparator the comparator that will be used to order this set.</span><br><span class="line"> *        If &#123;@code null&#125;, the &#123;@linkplain Comparable natural</span><br><span class="line"> *        ordering&#125; of the elements will be used.</span><br><span class="line"> */</span><br><span class="line">public TreeSet(Comparator&lt;? super E&gt; comparator) &#123;</span><br><span class="line">    this(new TreeMap&lt;&gt;(comparator));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"> * Constructs a new, empty tree map, ordered according to the given</span><br><span class="line"> * comparator.  All keys inserted into the map must be &lt;em&gt;mutually</span><br><span class="line"> * comparable&lt;/em&gt; by the given comparator: &#123;@code comparator.compare(k1,</span><br><span class="line"> * k2)&#125; must not throw a &#123;@code ClassCastException&#125; for any keys</span><br><span class="line"> * &#123;@code k1&#125; and &#123;@code k2&#125; in the map.  If the user attempts to put</span><br><span class="line"> * a key into the map that violates this constraint, the &#123;@code put(Object</span><br><span class="line"> * key, Object value)&#125; call will throw a</span><br><span class="line"> * &#123;@code ClassCastException&#125;.</span><br><span class="line"> *</span><br><span class="line"> * @param comparator the comparator that will be used to order this map.</span><br><span class="line"> *        If &#123;@code null&#125;, the &#123;@linkplain Comparable natural</span><br><span class="line"> *        ordering&#125; of the keys will be used.</span><br><span class="line"> */</span><br><span class="line">public TreeMap(Comparator&lt;? super K&gt; comparator) &#123;</span><br><span class="line">    this.comparator = comparator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The comparator used to maintain order in this tree map, or</span><br><span class="line"> * null if it uses the natural ordering of its keys.</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">private final Comparator&lt;? super K&gt; comparator;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"> * The comparator used to maintain order in this tree map, or</span><br><span class="line"> * null if it uses the natural ordering of its keys.</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">private final Comparator&lt;? super K&gt; comparator;</span><br></pre></td></tr></table></figure></p>
+<h2 id="原码学习"><a href="#原码学习" class="headerlink" title="原码学习"></a>原码学习</h2><p>由于 TreeSet 底层其实就是调用的 TreeMap 的方法，所以我们再仔细看一下 TreeMap 的原码。</p>
+<h3 id="TreeMap-的构造方法"><a href="#TreeMap-的构造方法" class="headerlink" title="TreeMap 的构造方法"></a>TreeMap 的构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public TreeMap() &#123;</span><br><span class="line">    comparator = null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public TreeMap(Comparator&lt;? super K&gt; comparator) &#123;</span><br><span class="line">    this.comparator = comparator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public TreeMap(Map&lt;? extends K, ? extends V&gt; m) &#123;</span><br><span class="line">    comparator = null;</span><br><span class="line">    putAll(m);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public TreeMap(SortedMap&lt;K, ? extends V&gt; m) &#123;</span><br><span class="line">    comparator = m.comparator();</span><br><span class="line">    try &#123;</span><br><span class="line">        buildFromSorted(m.size(), m.entrySet().iterator(), null, null);</span><br><span class="line">    &#125; catch (java.io.IOException cannotHappen) &#123;</span><br><span class="line">    &#125; catch (ClassNotFoundException cannotHappen) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造方法一，默认的构造方法，comparator 为空，即采用自然顺序维持TreeMap中节点的顺序。<br>构造方法二，提供指定的比较器，用于实现比较。<br>构造方法三，采用自然序维持TreeMap中节点的顺序，同时将传入的Map中的内容添加到 TreeMap 中。<br>构造方法四，接收 SortedMap 参数，根据 SortedMap 的比较器维持 TreeMap 中的节点顺序。同时通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private final Entry&lt;K,V&gt; buildFromSorted(int level, int lo, int hi,</span><br><span class="line">                                             int redLevel,</span><br><span class="line">                                             Iterator it,</span><br><span class="line">                                             java.io.ObjectInputStream str,</span><br><span class="line">                                             V defaultVal)</span><br></pre></td></tr></table></figure></p>
+<p>方法将 SortedMap 中的内容添加到 TreeMap 中。</p>
+<h3 id="TreeMap-的-put-方法"><a href="#TreeMap-的-put-方法" class="headerlink" title="TreeMap 的 put 方法"></a>TreeMap 的 put 方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">   * Associates the specified value with the specified key in this map.</span><br><span class="line">   * If the map previously contained a mapping for the key, the old</span><br><span class="line">   * value is replaced.</span><br><span class="line">   *</span><br><span class="line">   * @param key key with which the specified value is to be associated</span><br><span class="line">   * @param value value to be associated with the specified key</span><br><span class="line">   *</span><br><span class="line">   * @return the previous value associated with &#123;@code key&#125;, or</span><br><span class="line">   *         &#123;@code null&#125; if there was no mapping for &#123;@code key&#125;.</span><br><span class="line">   *         (A &#123;@code null&#125; return can also indicate that the map</span><br><span class="line">   *         previously associated &#123;@code null&#125; with &#123;@code key&#125;.)</span><br><span class="line">   * @throws ClassCastException if the specified key cannot be compared</span><br><span class="line">   *         with the keys currently in the map</span><br><span class="line">   * @throws NullPointerException if the specified key is null</span><br><span class="line">   *         and this map uses natural ordering, or its comparator</span><br><span class="line">   *         does not permit null keys</span><br><span class="line">   */</span><br><span class="line">  public V put(K key, V value) &#123;</span><br><span class="line">      Entry&lt;K,V&gt; t = root;</span><br><span class="line">      if (t == null) &#123;</span><br><span class="line">      //如果根节点为null，将传入的键值对构造成根节点（根节点没有父节点，所以传入的父节点为null）</span><br><span class="line">          root = new Entry&lt;K,V&gt;(key, value, null);</span><br><span class="line">          size = 1;</span><br><span class="line">          modCount++;</span><br><span class="line">          return null;</span><br><span class="line">      &#125;</span><br><span class="line">      // 记录比较结果</span><br><span class="line">      int cmp;</span><br><span class="line">      Entry&lt;K,V&gt; parent;</span><br><span class="line">      // 分割比较器和可比较接口的处理</span><br><span class="line">      Comparator&lt;? super K&gt; cpr = comparator;</span><br><span class="line">      // 有比较器的处理</span><br><span class="line">      if (cpr != null) &#123;</span><br><span class="line">          // do while实现在root为根节点移动寻找传入键值对需要插入的位置</span><br><span class="line">          do &#123;</span><br><span class="line">              // 记录将要被掺入新的键值对将要节点(即新节点的父节点)</span><br><span class="line">              parent = t;</span><br><span class="line">              // 使用比较器比较父节点和插入键值对的key值的大小</span><br><span class="line">              cmp = cpr.compare(key, t.key);</span><br><span class="line">              // 插入的key较大</span><br><span class="line">              if (cmp &lt; 0)</span><br><span class="line">                  t = t.left;</span><br><span class="line">              // 插入的key较小</span><br><span class="line">              else if (cmp &gt; 0)</span><br><span class="line">                  t = t.right;</span><br><span class="line">              // key值相等，替换并返回t节点的value(put方法结束)</span><br><span class="line">              else</span><br><span class="line">                  return t.setValue(value);</span><br><span class="line">          &#125; while (t != null);</span><br><span class="line">      &#125;</span><br><span class="line">      // 没有比较器的处理</span><br><span class="line">      else &#123;</span><br><span class="line">          // key为null抛出NullPointerException异常</span><br><span class="line">          if (key == null)</span><br><span class="line">              throw new NullPointerException();</span><br><span class="line">          Comparable&lt;? super K&gt; k = (Comparable&lt;? super K&gt;) key;</span><br><span class="line">          // 与if中的do while类似，只是比较的方式不同</span><br><span class="line">          do &#123;</span><br><span class="line">              parent = t;</span><br><span class="line">              cmp = k.compareTo(t.key);</span><br><span class="line">              if (cmp &lt; 0)</span><br><span class="line">                  t = t.left;</span><br><span class="line">              else if (cmp &gt; 0)</span><br><span class="line">                  t = t.right;</span><br><span class="line">              else</span><br><span class="line">                  return t.setValue(value);</span><br><span class="line">          &#125; while (t != null);</span><br><span class="line">      &#125;</span><br><span class="line">      // 没有找到key相同的节点才会有下面的操作</span><br><span class="line">      // 根据传入的键值对和找到的“父节点”创建新节点</span><br><span class="line">      Entry&lt;K,V&gt; e = new Entry&lt;K,V&gt;(key, value, parent);</span><br><span class="line">      // 根据最后一次的判断结果确认新节点是“父节点”的左孩子还是又孩子</span><br><span class="line">      if (cmp &lt; 0)</span><br><span class="line">          parent.left = e;</span><br><span class="line">      else</span><br><span class="line">          parent.right = e;</span><br><span class="line">      // 对加入新节点的树进行调整</span><br><span class="line">      fixAfterInsertion(e);</span><br><span class="line">      // 记录size和modCount</span><br><span class="line">      size++;</span><br><span class="line">      modCount++;</span><br><span class="line">      // 因为是插入新节点，所以返回的是null</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>首先一点通性是 TreeMap 的 put 方法和其他 Map 的 put 方法一样，向 Map 中加入键值对，若原先 “键（key）”已经存在则替换 “值（value）”，并返回原先的值。</p>
+<p>在 put(K key,V value) 方法的末尾调用了 fixAfterInsertion(Entry&lt;K,V&gt; x) 方法，这个方法负责在插入节点后调整树结构和着色，以满足「红黑树」的要求。</p>
+<ul>
+<li>每一个节点或者着成红色，或者着成黑色</li>
+<li>根是黑色的</li>
+<li>如果一个节点是红色的，那么它的子节点必须是黑色的</li>
+<li>一个节点到一个 null 引用的每一条路径必须包含相同数量的黑色节点</li>
+</ul>
+<h2 id="几种-Set-实现类的总结"><a href="#几种-Set-实现类的总结" class="headerlink" title="几种 Set 实现类的总结"></a>几种 Set 实现类的总结</h2><p>HashSet 的性能比 TreeSet 的性能高（查询、添加等），因为 TreeSet 需要红黑树算法来维护内部元素的顺序。只有要实现保持排序状态的 Set 时，才用到 TreeSet ，否则应该使用 HashSet；</p>
+<p>LinkedHashSet 对于插入和删除操作性能比 HashSet 要差，因为LinkedHashSet 是利用链表来维护添加顺序的，但是正因如此，遍历操作要比 HashSet 要快；</p>
+<p>在 HashSet 和 TreeSet 中尽量只添加不可变对象；</p>
+<p>HashSet 和 TreeSet  的实现类都是线程不安全的。如果多个线程同时访问修改一个Set集合，必须手动实现线程同步性。例如通过Collections工具类的synchronizeSorted方法包装Set集合来保证Set集合的线程安全性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SortedSet sortedSet = Collection.synchronizeSorted(new HashSet());</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/07/10/IDEA-快捷键/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">IDEA 快捷键</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/04/13/Java-单例/">
+        <span class="next-text nav-default">Java 单例</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

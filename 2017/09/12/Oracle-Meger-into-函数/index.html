@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Oracle Meger into 函数">
+
+
+
+
+  <meta name="keywords" content="Oracle, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2017/09/12/Oracle-Meger-into-函数/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Oracle Meger into 函数 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Oracle Meger into 函数
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-12
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2017/09/12/Oracle-Meger-into-函数/" data-title="Oracle Meger into 函数">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#管中窥豹"><span class="toc-text">管中窥豹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPDATE-或-INSERT-子句是可选的"><span class="toc-text">UPDATE 或 INSERT 子句是可选的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加-WHERE-子句"><span class="toc-text">添加 WHERE 子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE-子句来去除一些不需要的行"><span class="toc-text">DELETE 子句来去除一些不需要的行</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>Oracle 在 9i 引入了 merge 命令, 通过这个 merge 能够在一个SQL 语句中对一个表同时执行 inserts 和 updates 操作。Merge into 可以实现用 B 表来更新 A 表数据（如果匹配上），如果 A 表中没有，则把 B 表的数据插入 A 表中。<br><a id="more"></a></p>
+<h2 id="管中窥豹"><a href="#管中窥豹" class="headerlink" title="管中窥豹"></a>管中窥豹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MERGE INTO [your table-name] [rename your table here] </span><br><span class="line">USING ( [write your query here] )[rename your query-sql and using just like a table] </span><br><span class="line">ON ([conditional expression here] AND [...]...) </span><br><span class="line">WHEN MATHED THEN [here you can execute some update sql or something else ] </span><br><span class="line">WHEN NOT MATHED THEN [execute something else here ! ]</span><br></pre></td></tr></table></figure>
+<p>举个栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">merge into new_products p using old_products op </span><br><span class="line">on (p.product_id = np.product_id) </span><br><span class="line">when matched then </span><br><span class="line">update set p.product_name = op.product_name </span><br><span class="line">when not matched then </span><br><span class="line">insert values(</span><br><span class="line">op.product_id, op.product_name, op.category)</span><br></pre></td></tr></table></figure></p>
+<p>使用 old_products 表中的输入插入 new_products 中，匹配关系为 on 后面的条件字句的内容。when matched then 就是根据匹配关系匹配上了，when not matched then 就是没有匹配上需要做的相应操作。网上的一般资料都显示在做 merge 的时候，这样同样的情况下，merge 的性能是优于同等功能的update/insert 语句的。</p>
+<p>在Oracle 10g中MERGE有如下一些改进：<br>1、UPDATE 或 INSERT 子句是可选的<br>2、UPDATE 和 INSERT 子句可以加 WHERE 子句<br>3、UPDATE 子句后面可以跟 DELETE 子句来去除一些不需要的行</p>
+<h2 id="UPDATE-或-INSERT-子句是可选的"><a href="#UPDATE-或-INSERT-子句是可选的" class="headerlink" title="UPDATE 或 INSERT 子句是可选的"></a>UPDATE 或 INSERT 子句是可选的</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">merge into new_products p using old_products op </span><br><span class="line">on (p.product_id = np.product_id) </span><br><span class="line">when matched then </span><br><span class="line">update set p.product_name = op.product_name</span><br></pre></td></tr></table></figure>
+<p>when matched then 和 when not matched then 都是可选则参数，可以根据具体的业务类型来进行数据库操作，而不用拘泥于原有特定的语法。</p>
+<h2 id="添加-WHERE-子句"><a href="#添加-WHERE-子句" class="headerlink" title="添加 WHERE 子句"></a>添加 WHERE 子句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">merge into new_products p using old_products op </span><br><span class="line">on (p.product_id = np.product_id) </span><br><span class="line">when matched then </span><br><span class="line">update set p.product_name = op.product_name where op.name like &apos;%co2fe%&apos;</span><br><span class="line">when not matched then </span><br><span class="line">insert values(</span><br><span class="line">op.product_id, op.product_name, op.category) where op.name like &apos;%co2fe%&apos;</span><br></pre></td></tr></table></figure>
+<p>在添加了 where 条件之后我们的 update/insert 就会变得更加的灵活，能够满足更多的业务需求。</p>
+<h2 id="DELETE-子句来去除一些不需要的行"><a href="#DELETE-子句来去除一些不需要的行" class="headerlink" title="DELETE 子句来去除一些不需要的行"></a>DELETE 子句来去除一些不需要的行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">merge into new_products p using old_products op </span><br><span class="line">on (p.product_id = np.product_id) </span><br><span class="line">when matched then </span><br><span class="line">update set p.product_name = op.product_name </span><br><span class="line">delete where op.name like &apos;%co2fe%&apos;</span><br><span class="line">when not matched then </span><br><span class="line">insert values(</span><br><span class="line">op.product_id, op.product_name, op.category)</span><br></pre></td></tr></table></figure>
+<p>同样的，使用 delete 语句之后我们可以实现更多的功能和业务，扩展了 merge into 的使用面。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Oracle/">Oracle</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/18/fastjson/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">fastjson</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/10/工作一年总结/">
+        <span class="next-text nav-default">工作一年总结</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="zsh 的简单介绍">
+
+
+
+
+  <meta name="keywords" content="zsh, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2017/03/17/zsh-的简单介绍/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> zsh 的简单介绍 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          zsh 的简单介绍
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-03-17
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2017/03/17/zsh-的简单介绍/" data-title="zsh 的简单介绍">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#将-zsh-作为默认终端"><span class="toc-text">将 zsh 作为默认终端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Oh-My-Zsh"><span class="toc-text">安装 Oh-My-Zsh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题"><span class="toc-text">主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#autojump"><span class="toc-text">autojump</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-text">结束语</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>什么是 zsh，要想解释好这个问题，那么得先说明什么是 shell。不负责任的解释说法就是 shell 就是一个壳。这个壳可不是蜗牛的壳，而是计算机的一个壳，当然也不是计算机的外壳啦，这个壳是相对于计算机内核的一个壳。是指“提供使用者使用界面”的软件，也可以说是一种命令解析器，它将人类输入的字符变成计算机可以识别的字符，或者是展现出计算机所计算出来的结果。<br><a id="more"></a><br>同时 shell 也是一种脚本语言，可以有很多有意思的用法。传统意义上的 shell 指的是命令行形式的 shell，在 Unix/Linux 系统下常用的 shell 有 bash/zsh/ksh/sh/csh 等等不一而同。</p>
+<p>我们最常用的也是很多操作系统默认的 shell 就是 bash，它是一个为 GUN 计划编写的 shell，全称为 Bourne-Again SHell。而今天的主角显然不是这位默认集成的 bash，今天的主人翁是以拥有更加强大功能著称的 zsh。</p>
+<p>zsh 是一款功能强大的 shell 软件，它可以兼容 bash，并且提供了很多高效的改进：</p>
+<ul>
+<li>更好的自动补全</li>
+<li>更好的文件名展开</li>
+<li>强大的定制性<h2 id="将-zsh-作为默认终端"><a href="#将-zsh-作为默认终端" class="headerlink" title="将 zsh 作为默认终端"></a>将 zsh 作为默认终端</h2>首先先看看当前系统中有哪些可以使用的终端：<br><code>cat /etc/shells</code><br>我的电脑中显示如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在 Mac 下已经默认安装了，<br>一般的安装方法就是:<br><code>sudo yum install zsh</code><br><code>sudo apt-get install zsh</code><br>更多的安装方法可以查看这个网址：<a href="http://www.zsh.org/" target="_blank" rel="noopener">http://www.zsh.org/</a></p>
+<p>安装完成后敲击以下内容到终端：<br><code>chsh -s /bin/zsh</code><br>如果一切顺利，那么再次打开终端的时候 zsh 就会是默认的终端。</p>
+<h2 id="安装-Oh-My-Zsh"><a href="#安装-Oh-My-Zsh" class="headerlink" title="安装 Oh-My-Zsh"></a>安装 Oh-My-Zsh</h2><p>单单是用 zsh 是一件非常苦恼的事情，对于非程序员光是 shell 就已经算是很难以使用了，不过我想应该不会有非程序员使用终端吧。<br>zsh 相对于 bash 来说增加了很多的功能，所以是使用难度也自然而然的就提升了很多。还好有一群爱折腾的年轻小伙子，开发了一款 zsh 的插件集合——<br>“Oh My ZSH”</p>
+<blockquote>
+<p>Oh-My-Zsh is an open source, community-driven framework for managing your ZSH configuration. It comes bundled with a ton of helpful functions, helpers, plugins, themes, and a few things that make you shout…</p>
+</blockquote>
+<p>这是 Oh My ZSH 的官方介绍，可以在  <a href="http://ohmyz.sh/" target="_blank" rel="noopener">http://ohmyz.sh/</a> 中看到它的身影，它简明意概的说明了它是一个开源的管理 zsh 配置框架，它内置了非常多的插件、主题、functions等等。安装 oh my zsh 也是一件非常简单的事情，只要在终端中键入：(需要有 git 环境。安装同 zsh，只要把 zsh 替换成 git 即可)<br><code>wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</code><br>当然我们也可以选择使用原码安装:<br><code>git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</code><br><code>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</code><br>这些命令都不复杂，如果一切顺利的话，安装完成之后我们再次打开终端时，我们的终端就会变得和原来大不一样，终端会以多彩的形式呈现出来。oh my zsh 有很多强大的配置，这里就不展开说了，zsh 的配置主要集中在用户当前目录的 .zshrc 里了，我们可以根据官网的介绍来配置我们的 zsh。</p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>好马配好鞍，有了一个强大的终端之后怎么可以没有一个配套的主题和第三方终端工具呢？按照我的审美习惯我从众多的 zsh 的主题中选择了 agnoster 这个主题以及一款非常好用的终端工具 iTerm。具体怎么安装和配置我就不在这里展开了，百度一下就可以有非常多的答案越于眼前了。在 Mac 系统下一般遇到的错误都是没有安装苹果自家的 Command line 引起的，只要安装了已经基本就不会遇到什么错误了。跟着晚上的教程一步一步做准没错。</p>
+<h2 id="autojump"><a href="#autojump" class="headerlink" title="autojump"></a>autojump</h2><p>在我们使用终端的时候往往会为频繁的输入路径而烦恼，虽然 zsh 已经有非常强大的路径补全功能，但任然不能满足我们对于效率的追求。而这么强大的 zsh 这么可能会没有解决方案呢？答案是肯定有，是有的。在 zsh 的众多插件当中，一款名为 autojump 的插件满足了我们的需求。</p>
+<p>autojump - a faster way to navigate your filesystem，这是一款非常好用的插件，它通过记录我们常用目录并通过一定的算法分析我们将要去的目录，以达到快速到达的目的。比如说我要启动 MySql 数据库，那么我就得这样：<br><code>cd /usr/local/mysql/support-files/</code><br><code>mysql.server start</code><br>而如果我们使用 autojump 的话，这一操作将变得极其简单，打开 MySQL 将会变成这样：<br><code>j mysql</code><br><code>mysql.server start</code><br>因为我经常访问这个目录，所以 aotojump 会记录下这个路径，这样在我键入 <code>j mysql</code> 的时候，它就会自动帮我跳转到这个目录下。可以说是非常的方便。我们也可以为某个目录设置权重，这样就可以方便的“初始化”想要快速到达的目录了。autojump 不仅仅支持 zsh,像 bash,fish都是支持的。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>使用好终端可以方便我们的操作，可以让我们以一种不同角度去感受计算机，这里要感谢 Mac OS，如果不是它我也不会踏上 shell 这一条道路上来，让我感受到了 Unix/Linux 的魅力所在。以前也常常使用虚拟机折腾 Linux 系统，但往往都是一时热情，毕竟对于一个并不是很懂 Linux 的人来说，很多问题都会让自己很沮丧。而 Mac 这种开箱即用，并不需要折腾的系统或许是体验 Unix 哲学的最佳栖息地。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/zsh/">zsh</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/03/25/记录一次因为懒惰而吃亏的事情/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">记录一次因为懒惰而吃亏的事情</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/03/12/时隔4个月我又拾起我的博客/">
+        <span class="next-text nav-default">时隔4个月我又拾起我的博客</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

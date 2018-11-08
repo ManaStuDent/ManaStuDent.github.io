@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Tomcat Session Clustering">
+
+
+
+
+  <meta name="keywords" content="Tomcat, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2017/10/11/Tomcat-Session-Clustering/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Tomcat Session Clustering - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Tomcat Session Clustering
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-10-11
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2017/10/11/Tomcat-Session-Clustering/" data-title="Tomcat Session Clustering">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#For-the-impatient"><span class="toc-text">For the impatient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cluster-Basics"><span class="toc-text">Cluster Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管中窥豹"><span class="toc-text">管中窥豹</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>搭建 Tomcat 集群需要解决很多的问题，其中之一就是要解决 Session 共享问题。小规模集群可以使用 Tomcat 提供的 Session  Clustering 来解决。<br><a id="more"></a></p>
+<h2 id="For-the-impatient"><a href="#For-the-impatient" class="headerlink" title="For the impatient"></a>For the impatient</h2><p>Simply add</p>
+<p><code>&lt;Cluster className=&quot;org.apache.catalina.ha.tcp.SimpleTcpCluster&quot;/&gt;</code></p>
+<p>to your <code>&lt;Engine&gt;</code> or your <code>&lt;Host&gt;</code> element to enable clustering.</p>
+<p>Using the above configuration will enable all-to-all session replication using the <code>DeltaManager</code> to replicate session deltas. By all-to-all we mean that the session gets replicated to all the other nodes in the cluster. This works great for smaller cluster but we don’t recommend it for larger clusters(a lot of Tomcat nodes). Also when using the delta manager it will replicate to all nodes, even nodes that don’t have the application deployed.<br>To get around this problem, you’ll want to use the BackupManager. This manager only replicates the session data to one backup node, and only to nodes that have the application deployed. Downside of the BackupManager: not quite as battle tested as the delta manager.</p>
+<p>Here are some of the important default values:</p>
+<p>Multicast address is 228.0.0.4<br>Multicast port is 45564 (the port and the address together determine cluster membership.<br>The IP broadcasted is <code>java.net.InetAddress.getLocalHost().getHostAddress()</code> (make sure you don’t broadcast 127.0.0.1, this is a common error)<br>The TCP port listening for replication messages is the first available server socket in range 4000-4100<br>Listener is configured <code>ClusterSessionListener</code><br>Two interceptors are configured <code>TcpFailureDetector</code> and <code>MessageDispatch15Interceptor</code><br>The following is the default cluster configuration:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Cluster</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.tcp.SimpleTcpCluster"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">channelSendOptions</span>=<span class="string">"8"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">          <span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.DeltaManager"</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">expireSessionsOnShutdown</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">notifyListenersOnReplication</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">          <span class="tag">&lt;<span class="name">Channel</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.group.GroupChannel"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Membership</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.membership.McastService"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">address</span>=<span class="string">"228.0.0.4"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">port</span>=<span class="string">"45564"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">frequency</span>=<span class="string">"500"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">dropTime</span>=<span class="string">"3000"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Receiver</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.transport.nio.NioReceiver"</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">address</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">port</span>=<span class="string">"4000"</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">autoBind</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">selectorTimeout</span>=<span class="string">"5000"</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">maxThreads</span>=<span class="string">"6"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">Sender</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.transport.ReplicationTransmitter"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">Transport</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.transport.nio.PooledParallelSender"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Sender</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Interceptor</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Interceptor</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">Channel</span>&gt;</span></span><br><span class="line"></span><br><span class="line">          <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.tcp.ReplicationValve"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">filter</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.JvmRouteBinderValve"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">          <span class="tag">&lt;<span class="name">Deployer</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.deploy.FarmWarDeployer"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">tempDir</span>=<span class="string">"/tmp/war-temp/"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">deployDir</span>=<span class="string">"/tmp/war-deploy/"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">watchDir</span>=<span class="string">"/tmp/war-listen/"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">watchEnabled</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">          <span class="tag">&lt;<span class="name">ClusterListener</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.JvmRouteSessionIDBinderListener"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">ClusterListener</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.ClusterSessionListener"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Cluster</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Cluster-Basics"><a href="#Cluster-Basics" class="headerlink" title="Cluster Basics"></a>Cluster Basics</h2><p>To run session replication in your Tomcat 7.0 container, the following steps should be completed:</p>
+<p>All your session attributes must implement <code>java.io.Serializable</code><br>Uncomment the <code>Cluster</code> element in server.xml<br>If you have defined custom cluster valves, make sure you have the <code>ReplicationValve</code> defined as well under the Cluster element in server.xml<br>If your Tomcat instances are running on the same machine, make sure the <code>Receiver.port</code> attribute is unique for each instance, in most cases Tomcat is smart enough to resolve this on it’s own by autodetecting available ports in the range 4000-4100<br>Make sure your <code>web.xml</code> has the <code>&lt;distributable/&gt;</code> element<br>If you are using mod_jk, make sure that jvmRoute attribute is set at your Engine <code>&lt;Engine name=&quot;Catalina&quot; jvmRoute=&quot;node01&quot; &gt;</code> and that the jvmRoute attribute value matches your worker name in workers.properties<br>Make sure that all nodes have the same time and sync with NTP service!<br>Make sure that your loadbalancer is configured for sticky session mode.<br>Load balancing can be achieved through many techniques, as seen in the Load Balancing chapter.</p>
+<p>Note: Remember that your session state is tracked by a cookie, so your URL must look the same from the out side otherwise, a new session will be created.</p>
+<p>Note: Clustering support currently requires the JDK version 1.5 or later.</p>
+<p>The Cluster module uses the Tomcat JULI logging framework, so you can configure logging through the regular logging.properties file. To track messages, you can enable logging on the key: <code>org.apache.catalina.tribes.MESSAGES</code></p>
+<p>more see <a href="http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html" target="_blank" rel="noopener">http://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html</a></p>
+<h2 id="管中窥豹"><a href="#管中窥豹" class="headerlink" title="管中窥豹"></a>管中窥豹</h2><p>我们打开conf下的server.xml文件，找到下面这一行：</p>
+<p><code>&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot;&gt;</code></p>
+<p>在这一行的下面加入如下代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Cluster</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.tcp.SimpleTcpCluster"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">channelSendOptions</span>=<span class="string">"8"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">         <span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.DeltaManager"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">expireSessionsOnShutdown</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">notifyListenersOnReplication</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">         <span class="tag">&lt;<span class="name">Channel</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.group.GroupChannel"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">Membership</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.membership.McastService"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">address</span>=<span class="string">"228.0.0.4"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">port</span>=<span class="string">"45564"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">frequency</span>=<span class="string">"500"</span></span></span><br><span class="line"><span class="tag">                       <span class="attr">dropTime</span>=<span class="string">"3000"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">Receiver</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.transport.nio.NioReceiver"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">address</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">port</span>=<span class="string">"4000"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">autoBind</span>=<span class="string">"100"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">selectorTimeout</span>=<span class="string">"5000"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">maxThreads</span>=<span class="string">"6"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">Sender</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.transport.ReplicationTransmitter"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">Transport</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.transport.nio.PooledParallelSender"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">Sender</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">Interceptor</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">Interceptor</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">Channel</span>&gt;</span></span><br><span class="line"></span><br><span class="line">         <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.tcp.ReplicationValve"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">filter</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.JvmRouteBinderValve"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">         <span class="tag">&lt;<span class="name">Deployer</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.deploy.FarmWarDeployer"</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">tempDir</span>=<span class="string">"/tmp/war-temp/"</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">deployDir</span>=<span class="string">"/tmp/war-deploy/"</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">watchDir</span>=<span class="string">"/tmp/war-listen/"</span></span></span><br><span class="line"><span class="tag">                   <span class="attr">watchEnabled</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">         <span class="tag">&lt;<span class="name">ClusterListener</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.JvmRouteSessionIDBinderListener"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">ClusterListener</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.ha.session.ClusterSessionListener"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">Cluster</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后再在 web 项目的 web.xml 中添加 <code>&lt;distributable/&gt;</code> 后即可完成 Tomcat Session 共享。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Tomcat/">Tomcat</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/10/15/Oracle-dbms-job/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle dbms_job</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/28/ORACLE-表空间扩展/">
+        <span class="next-text nav-default">ORACLE 表空间扩展</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

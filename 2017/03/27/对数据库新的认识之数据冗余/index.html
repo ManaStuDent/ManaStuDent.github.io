@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="对数据库新的认识之数据冗余">
+
+
+
+
+  <meta name="keywords" content="sql, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2017/03/27/对数据库新的认识之数据冗余/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 对数据库新的认识之数据冗余 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          对数据库新的认识之数据冗余
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-03-27
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2017/03/27/对数据库新的认识之数据冗余/" data-title="对数据库新的认识之数据冗余">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库范式"><span class="toc-text">数据库范式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一定的冗余可以提升性能"><span class="toc-text">一定的冗余可以提升性能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-空间换时间"><span class="toc-text">1.空间换时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-查询某一个状态值数据"><span class="toc-text">2.查询某一个状态值数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-拆分活跃数据和不活跃数据"><span class="toc-text">3.拆分活跃数据和不活跃数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-汇总数据单独存放"><span class="toc-text">4.汇总数据单独存放</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>学习和实践往往有很大的不同，而这些技巧也只有在企业中才可以学到。如果在工作的路上有高人指导，肯定会事半功倍。但大多数都没有这样的机遇，只好以梦为马，以书为基，在程序员的道路上不断披荆斩棘，克服困难，勇往直前。今天记录一次公司的技术分享，让我明白了，原来数据冗余也是一个利器。<br><a id="more"></a></p>
+<h2 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h2><p>在上学学习数据库的时候肯定都是要讲到范式的，这里简单回顾一下。<br>-第一范式（1NF）<br>所有的域都应该是原子性的，即数据库表的每一列都是不可分割的原子数据项，而不能是集合，数组，记录等非原子数据项，即没有重复域。<br>-第二范式（2NF）<br>在满足第一范式的基础上，要求数据库表中的每个实例或记录必须可以被唯一地区分。<br>-第三范式（3NF）<br>在满足第二范式的基础上，任何非主属性不依赖于其它非主属性。</p>
+<h2 id="一定的冗余可以提升性能"><a href="#一定的冗余可以提升性能" class="headerlink" title="一定的冗余可以提升性能"></a>一定的冗余可以提升性能</h2><blockquote>
+<p>冗余是指在一个数据集合中重复的数据称为数据冗余。</p>
+</blockquote>
+<h4 id="1-空间换时间"><a href="#1-空间换时间" class="headerlink" title="1.空间换时间"></a>1.空间换时间</h4><p>有一张字典表 city 其中有 id 和 cityName 两个字段，有一张业务表，其中有 id 、cityId、XXX、XXX…字段。<br>如果查询业务表的话，就必须 join 一下 city 字典表，如果业务表很大很大，那么就会查询的很慢，这个时候我们就可以使用冗余来解决这个问题，直接将业务表中的 cityId 更换成 cityName，这样我们在查询业务表的时候就不需要去 join 那一张 city 的字典表了。这样的方式显然是不符合我们数据库设计的范式的，但是这样的冗余或许很有必要。</p>
+<h4 id="2-查询某一个状态值数据"><a href="#2-查询某一个状态值数据" class="headerlink" title="2.查询某一个状态值数据"></a>2.查询某一个状态值数据</h4><p>业务表中有一个字段 status 用来存储提交和未提交，假设这张表中未提交的数据相对于提交的数据是很少的，当用户查询所有未提交的数据的时候，就需要在全部的数据，然后筛选出未同意的数据。如果这张业务表非常的庞大，那么这样的查询的效率就非常的慢。<br>这个时候我们就可以把这张业务表中的未同意的数据冗余到一张新表中，这样用户查询未提交的数据的时候就可以直接在这张未提交的表中查询，查询速度提交很多。</p>
+<h4 id="3-拆分活跃数据和不活跃数据"><a href="#3-拆分活跃数据和不活跃数据" class="headerlink" title="3.拆分活跃数据和不活跃数据"></a>3.拆分活跃数据和不活跃数据</h4><p>某业务表有这样的一个特点，用户往往都在查询最近三个月（或几个月的）数据，数据每天都在增长，由于数据库表的增长，查询变得原来越慢，性能遇到瓶颈。这个时候可以根据业务将这张表拆分成三个月内数据和三个月外数据，其中三个月外数据还可以按照年份（或月份或季度）拆分成不同的分片。这样用户的查询会大量的命中与三个月内的那张表中，而这张表的数据是有限的，并且数据量并不会特别大，从而解决性能的瓶颈。</p>
+<h4 id="4-汇总数据单独存放"><a href="#4-汇总数据单独存放" class="headerlink" title="4.汇总数据单独存放"></a>4.汇总数据单独存放</h4><p>某业务表存放着每天的交易数据，用户有的时候想查看某个季度，某一年份的交易总额。几个用户还好，当用户量增加，查询数增加，那么实时查询的方法已经满足不了要求，这个时候我们可以将这一类的汇总数据单独的存放到一张表中，通过在夜间用户量较少的时候计算出来，当用户再次查询的时候我们直接显示这张汇总表中的数据，而不通过查询交易数据表实时计算，这样可以大量的提高性能。</p>
+<p>在刚刚工作的时候我心里还抱怨说公司数据库设计的一点都不好，大量的数据冗余，这么连第二范式都不符合呢？这里应该使用外键链接啊…现在才明白自己当时是多么的无知。最近一直在反思自己是不是太浮躁，在别人面前班门弄釜，或许真的应该“将肉扣在碗底吃”？好好钻研技术，该说的就说，不该说的坚决不说。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/sql/">sql</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/03/28/Linux-文件权限/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Linux 文件权限</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/03/25/记录一次因为懒惰而吃亏的事情/">
+        <span class="next-text nav-default">记录一次因为懒惰而吃亏的事情</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

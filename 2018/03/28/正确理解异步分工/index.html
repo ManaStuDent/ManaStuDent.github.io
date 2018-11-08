@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="正确理解异步分工">
+
+
+
+
+  <meta name="keywords" content="Java, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2018/03/28/正确理解异步分工/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 正确理解异步分工 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          正确理解异步分工
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-28
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2018/03/28/正确理解异步分工/" data-title="正确理解异步分工">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#同步方案"><span class="toc-text">同步方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#交接"><span class="toc-text">交接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步方案1"><span class="toc-text">异步方案1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#弊病"><span class="toc-text">弊病</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#再次交接"><span class="toc-text">再次交接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步方案2"><span class="toc-text">异步方案2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步方案2完善"><span class="toc-text">异步方案2完善</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结果"><span class="toc-text">结果</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>一个果园会产出5种水果，ABCDE，每种水果有不同处理方式。<br>果园每天只采摘一次，每次只采摘一种水果，当天会摘哪一种，会看长势临时决定。<br><a id="more"></a><br>水果种类=事件类型</p>
+<p>果农和工人=线程/代码函数</p>
+<p>贴纸条=发布消息</p>
+<p>看纸条=接收消息</p>
+<h1 id="同步方案"><a href="#同步方案" class="headerlink" title="同步方案"></a>同步方案</h1><p>果园里只有一个老果农打理，他每天进园采摘一种水果。如果摘到ABC三种水果，他就送到市场上去卖，如果是C水果，在卖的时候还要帮人加工一下。如果摘到D水果，就送隔壁去喂猪，如果是E水果，就带回家榨果汁。</p>
+<h1 id="交接"><a href="#交接" class="headerlink" title="交接"></a>交接</h1><p>再后来他干不动了，想找个人接班，但是找不到，因为这个人既要会摘水果，还要会卖东西管帐，卖的时候还要会加工，还要会喂猪，还要会榨果汁，一件事可能一天都干不完，在他熟练前水果已经烂在地里了。</p>
+<h1 id="异步方案1"><a href="#异步方案1" class="headerlink" title="异步方案1"></a>异步方案1</h1><p>老果农不缺钱，只差人手，决定多人分工，工人甲只负责摘果子，放到仓库里，然后在果园外贴个纸条，今天摘了什么果子。工人乙看到有人贴了纸条，就会跑过去看内容，如果是ABC水果，就去仓库里拉出来去市场上卖，如果是C水果，就边卖边加工。如果看到是D水果，就要拉去喂猪，如果是E水果，就什么也不管，留给果农回家榨果汁。</p>
+<h1 id="弊病"><a href="#弊病" class="headerlink" title="弊病"></a>弊病</h1><p>工人甲很轻松，每天摘下果子，贴张纸条，剩下什么也不用管。工人乙承担了大量的工作，仍然需要一身技能，而且还时不时会看到垃圾信息（摘到了E水果）。</p>
+<h1 id="再次交接"><a href="#再次交接" class="headerlink" title="再次交接"></a>再次交接</h1><p>随着果园产出果越来越大，水果种类也越来越多，工人乙不胜其烦，最后老果农发现局面和自己退休时一样，也找不到一个合适的全才来接工人乙的工作。</p>
+<h1 id="异步方案2"><a href="#异步方案2" class="headerlink" title="异步方案2"></a>异步方案2</h1><p>工人甲仍然只负责摘果子，放到仓库里，但是贴纸条的要求变了，如果是ABC水果，贴个红色纸条，工人丙看到红色纸条出现以后就去仓库拉水果去卖。如果是C水果，要再贴张黄色纸条，工人丁看到黄色纸条出现，就会去市场上找工人丙，帮他加工水果。如果是D水果，贴绿色纸条，然后工人戊会拉去喂猪，如果是E水果，什么也不贴，大家没看到纸条，什么也不用做，留给老果农带回家榨果汁。</p>
+<h1 id="异步方案2完善"><a href="#异步方案2完善" class="headerlink" title="异步方案2完善"></a>异步方案2完善</h1><p>有时候工人丁看到黄色纸条，到了市场上，会发现工人丙还没到，需要等待，于是工人丙承担了黄色纸条的发布工作，每次工人丙看到红条，在出发去市场上之前，在自家门口贴上黄条，这时候工人丁看到了，动身，再也不会发生时间不合拍的问题。</p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p><strong>工人甲对贴纸条的不偷懒</strong>，让其他工人不再需要跑过来看内容，只要远远看颜色就知道要做什么了。<strong>每个收到信息的工人只需要一项技能</strong>，维护简单，容易交接。并且<strong>再也没有人为了垃圾信息白跑一趟去看纸条</strong>。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/03/29/IDEA-打开多个项目/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">IDEA 打开多个项目</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/03/28/MySQL的source命令/">
+        <span class="next-text nav-default">MySQL的source命令</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

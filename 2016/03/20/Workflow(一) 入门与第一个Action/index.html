@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Workflow(一) 入门与第一个Action">
+
+
+
+
+  <meta name="keywords" content="IOS, Workflow, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2016/03/20/Workflow(一) 入门与第一个Action/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Workflow(一) 入门与第一个Action - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Workflow(一) 入门与第一个Action
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-03-20
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2016/03/20/Workflow(一) 入门与第一个Action/" data-title="Workflow(一) 入门与第一个Action">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Workflow，它有什么用"><span class="toc-text">什么是Workflow，它有什么用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Workflow-的优越性"><span class="toc-text">Workflow 的优越性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门动作–拍摄照片后合成为Gif动画"><span class="toc-text">入门动作–拍摄照片后合成为Gif动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开始界面"><span class="toc-text">开始界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Actions"><span class="toc-text">Actions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Take-Photo"><span class="toc-text">Take Photo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Make-GIF"><span class="toc-text">Make GIF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Look"><span class="toc-text">Quick Look</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finish"><span class="toc-text">Finish</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继续学习"><span class="toc-text">继续学习</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>Workflow 是一款 iOS 端的付费应用，通过流程化自动处理各种事情，让很多原本在 IOS 上非常机械化的需要来回切换的动作变得简单和高效。即便在 IOS 如此封闭的系统中，通过内置动作的巧妙组合，合理搭配，几乎可以实现任何复杂的流程任务。</p>
+<a id="more"></a>
+<p>Powerful automation made simple</p>
+<p>当今社会，iphone 已经是属于烂大街的手机了，无论你走到那里都可以看到 iPhone 的影子。不可否认的说，IOS 是一个非常好的系统，iphone 也是一部非常优秀的手机，现在的安卓手机想要超越 iPhone 真的还是需要很长一段时间的。(samsung galaxy s7 edge 说不定可以将这个差距拉小不少)</p>
+<p>但是又有几个人真正的发挥了 iPhone 的应该有的水平呢？我想说 iphone 不应该仅仅这样使用，它还有更加强大的功能，只是被我们忘记了。</p>
+<h2 id="什么是Workflow，它有什么用"><a href="#什么是Workflow，它有什么用" class="headerlink" title="什么是Workflow，它有什么用"></a>什么是Workflow，它有什么用</h2><p>比如说这样一组动作：</p>
+<blockquote>
+<p>截图 → 打开一个编辑图片的应用 → 选择刚才的截图 → 处理下照片 → 保存到相机胶卷 → 分享给朋友 → 删除截图</p>
+</blockquote>
+<p>整个过程看似简单，但是一天要是来来回回做个好几遍就会让人觉得好烦琐。有没有什么软件可以一下子做出上面这些动作呢？截图后按一个按钮，然后自动帮我分享到朋友圈，最后自动删除截图。</p>
+<p>这个软件当然存在！前面已经说道，Workflow 是一款让人开心的效率应用，它可以缩短我们日常操作的流程，简化我们的操作。懂软件编程的人喜欢它，因为它非常的耐折腾，有很多的变化和惊喜等着我们；小白用户也喜欢它，通过简单的拖拽动作块就可以制作出一个Action。Workflow 和 Launch Center Pro 有着很多类似的东西，但是个人觉得 Workflow 更加人性化，不需要编程基础，适用性更广，效率更高。</p>
+<h2 id="Workflow-的优越性"><a href="#Workflow-的优越性" class="headerlink" title="Workflow 的优越性"></a>Workflow 的优越性</h2><ul>
+<li><p>效率为王：通过 Workflow 创建的工作流程，使得原本在手机上需要繁琐步骤才能完成的任务，现在很可能只需一键搞定；</p>
+</li>
+<li><p>四通发达：Workflow 内置的 150+ 动作(不断更新中)涵盖了大部分手机功能，并进一步延伸至第三方 APP，如 开启相机、获取当前 GPS 位置、生成 PDF、打开 URL 链接、新建 EeverNote 笔记等等，只要能巧妙组合，搭配合理，几乎能实现使用者任何的复杂任务流程；</p>
+</li>
+<li><p>化繁为简：图形化的美观界面将复杂的代码部分完全隐藏至背后，极大降低了使用门槛。通过简单的拖曳操作来设定想要实现的功能步骤，而无需用户懂得任何代码；</p>
+</li>
+<li><p>凌波微步：做成一个 Workflow ，想分享给别人是非常容易的，只要点击 Workflow 界面右上角的齿轮就可以看到分享的选项。Workflow 的分享机制只要是生成一个链接，然后将链接通过你选择的分享渠道分享出去。任何人只要点这个链接就可以看到你的 Workflow 的大概内容，然后点按下载就可以直接下载到自己的 Workflow 里。下载了的 Workflow 可以直接查看具体的内容和编辑，所以这非常利于学习和交流，极大拓宽了 Workflow 适用场景；</p>
+</li>
+<li><p>大有可为：Workflow 可以通过「<code>Variable</code>（变量）」、「<code>If</code>（条件匹配）」、「<code>Repeat</code>（重复）」、「<code>List</code>（列表）」、「<code>Menu</code>（菜单）」之间的配合来制作相对来说较为复杂的动作，这些是你不需要具备编程知识，只要思路清晰就能摸索出来的。</p>
+</li>
+</ul>
+<p>本段来自：<a href="http://www.appinn.com/workflow-for-ios-one/" target="_blank" rel="noopener">Workflow 工作流 iOS 神作 – 初识 (为什么它值得你去了解)</a> 和 <a href="http://sspai.com/27733" target="_blank" rel="noopener">Workflow 教程（一）：Workflow 是款什么样的应用？ | 深度测评</a></p>
+<h2 id="入门动作–拍摄照片后合成为Gif动画"><a href="#入门动作–拍摄照片后合成为Gif动画" class="headerlink" title="入门动作–拍摄照片后合成为Gif动画"></a>入门动作–拍摄照片后合成为Gif动画</h2><h3 id="开始界面"><a href="#开始界面" class="headerlink" title="开始界面"></a>开始界面</h3><p>OK，说的再多也没有自己动手做一个来的实在。我们开始做第一个 Workflow 的 <code>Action</code>，亲自感受下 Workflow 的魅力。</p>
+<p>打开应用后的第一个界面就是Workflow的标语哈，Powerful automation made simple。然后我们按照提示，Get Started。</p>
+<p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/Workflow1-1.jpg?imageView/2/h/400" alt=""></p>
+<hr>
+<h3 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Workflow.</span><br><span class="line">Let&apos;s bulid a workflow to make an animated GIF.</span><br></pre></td></tr></table></figure>
+<p>屏幕中间的(<code>Take Photo</code>)像卡片一样的东西就是 Workflow 最基本的组成部分–<code>动作</code>。一个卡片就是一个<code>动作</code>。Workflow 中有非常多的 <code>动作</code>，多个 <code>动作</code>组成一个 <code>Action</code>。</p>
+<p>Drag <strong>Take Photo</strong> to the <strong>right</strong>.<br>将 <strong>Take Photo</strong> 拖拽到右边。</p>
+<p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/Workflow1-3.png?imageView/2/h/400" alt=""></p>
+<hr>
+<h3 id="Take-Photo"><a href="#Take-Photo" class="headerlink" title="Take Photo"></a>Take Photo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This is a Workflow.</span><br><span class="line">Workflow are made of a series of actions(the items on the left).</span><br><span class="line">Next,let&apos;s add a Make GIF action,which will animate the photos from the first action.</span><br></pre></td></tr></table></figure>
+<p>在我们将 <strong>Take Photo</strong> 拖拽到右边后，<strong>Take Photo</strong> 变成了一个更加详细的”卡片”。</p>
+<p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/Workflow1-2.png?imageView/2/h/400" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- `Show Camera Peview`：显示照片预览</span><br><span class="line">- `Take 3 Photos`：照3张照片，可以减少，可以增加</span><br><span class="line">- `Camera`：前置摄像头还是后置摄像头</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="Make-GIF"><a href="#Make-GIF" class="headerlink" title="Make GIF"></a>Make GIF</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Drag **Make GIF** after the **Take Photo** action.</span><br></pre></td></tr></table></figure>
+<p>过了一会，界面又回到了刚刚的地方，Workflow 提示我们加入第二个 <code>动作</code>–<strong>Make GIF</strong>。同样的，我们将 <strong>Make GIF</strong> 拖拽到右边。并且放在 <strong>Take Photo</strong> 动作的后面。</p>
+<p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/Workflow1-4.png?imageView/2/h/400" alt=""></p>
+<hr>
+<h3 id="Quick-Look"><a href="#Quick-Look" class="headerlink" title="Quick Look"></a>Quick Look</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Add **Quick Look** to preview your GIF.</span><br></pre></td></tr></table></figure>
+<p>和刚刚一样，我们再将第三个 <code>动作</code>–<strong>Quick Look</strong> 拖拽到右边，并且放在 <strong>Make GIF</strong> 的下面。</p>
+<p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/Workflow1-5.png?imageView/2/h/400" alt=""></p>
+<hr>
+<h3 id="Finish"><a href="#Finish" class="headerlink" title="Finish"></a>Finish</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Congrats!</span><br><span class="line">You just created your first Workflow.Now press the **play button** to run it!</span><br></pre></td></tr></table></figure>
+<p>Workflow 祝贺我们完成了第一个 Workflow 的 Action.现在我们点击 <code>开始</code> 按钮，系统会打开摄像头，然后我们拍摄三张照片，最后 Workflow 会帮我们完成后面制作 GIF 的事情。</p>
+<p>神奇的一幕发生了，我们刚刚拍摄的三张照片竟然变成了 GIF 动态图片！而我们只是拖拽了几个”卡片”而已。</p>
+<p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/Workflow1-6.png?imageView/2/h/400" alt=""></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本文简短的介绍了 Workflow 以及向大家演示了 Workflow 的第一个 <code>Action</code>。可能你会问「这样的应用适合我吗？」这样的问题，我觉得只有自己亲自使用过的，才能知道合不合适，鞋子舒不舒服，自己穿过了才知道嘛。如果你很有欲望获得更多的关于 Workflow 教程并自己开始学习或者折腾，那么可以看 reddit 的 <a href="https://www.reddit.com/r/workflow" target="_blank" rel="noopener">Workflow</a>区，里面有很多关于 Workflow 的动作和教程。当然你也可以在 Google 上面搜索有关于 Workflow 的文章，那都是对你有用的。</p>
+<p>我也会在以后的日子里陆续更新关于 Workflow 的更多的基础和应用，致力于让跟多的人用好 IOS，提高生产力和节约时间。</p>
+<h2 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h2><p>我这篇文章非常简单的描述了一下什么是 Workflow，如果你有兴趣继续学习和使用 Workflow 的话，<a href="http://sspai.com/27733" target="_blank" rel="noopener">http://sspai.com/27733</a>这里的几篇文章可以带你快速入门和进阶 Workflow，而且写的非常的棒。希望看完文章之后你会喜欢上 Workflow。</p>
+<p>版本记录</p>
+<p>2016年3月20日, PM 09:36:58<br>发布 Workflow(一) 入门与第一个Action</p>
+<p>2016年3月21日, AM 11:10:40<br>修改 什么是Workflow，它有什么用<br>删除 一些过激的话语</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/IOS/">IOS</a>
+            
+              <a href="/tags/Workflow/">Workflow</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/03/22/Workflow(二) 入门与第二个Action/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Workflow(二) 入门与第二个Action</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/03/20/Hexo建站过程总结/">
+        <span class="next-text nav-default">Hexo建站过程总结</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

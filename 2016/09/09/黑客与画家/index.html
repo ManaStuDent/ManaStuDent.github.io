@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="黑客与画家">
+
+
+
+
+  <meta name="keywords" content="书, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2016/09/09/黑客与画家/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 黑客与画家 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          黑客与画家
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-09-09
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2016/09/09/黑客与画家/" data-title="黑客与画家">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年8月30日"><span class="toc-text">2016年8月30日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年8月31日"><span class="toc-text">2016年8月31日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月1日"><span class="toc-text">2016年9月1日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月2日"><span class="toc-text">2016年9月2日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月3日"><span class="toc-text">2016年9月3日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月5号"><span class="toc-text">2016年9月5号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月6日"><span class="toc-text">2016年9月6日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月7日"><span class="toc-text">2016年9月7日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月8日"><span class="toc-text">2016年9月8日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月9日"><span class="toc-text">2016年9月9日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月12日"><span class="toc-text">2016年9月12日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月13日"><span class="toc-text">2016年9月13日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月14号"><span class="toc-text">2016年9月14号</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <blockquote>
+<p>黑客的行为必须包含三个特点：好玩、高智商、探索精神。</p>
+</blockquote>
+<p>每天读书半个小时，一个月应该可以读2本书左右。在快节奏的生活中，抽出时间来读书真的是一件非常美妙的事情。公司9点钟开始上班，但是我家离得比较近，所以我就8点钟就到公司门口旁的天台坐着。拿出我的Kindle，沉浸在书的海洋里，品味书中的百态。就这样开始我一天的生活…</p>
+<a id="more"></a>
+<h2 id="2016年8月30日"><a href="#2016年8月30日" class="headerlink" title="2016年8月30日"></a>2016年8月30日</h2><p>黑客的行为必须包含三个特点：好玩、高智商、探索精神</p>
+<p>传统意义上的黑客才能被称为hacker，而那些恶意入侵计算机系统的人应该被称为cracker（入侵者）</p>
+<p>黑客理论：</p>
+<p>1.使用计算机以及所有有助于了解这个世界本质的事物都不应该受到任何限制。任何事情都应该亲手尝试。</p>
+<p>2.信息应该全部免费。</p>
+<p>3.不信任权威，提倡去中心化。</p>
+<p>4.判断一名黑客的水平应该看他的技术能力，而不是看他的学历、年龄或者地位等其他标准。</p>
+<p>5.你可以用计算机创造美和艺术。</p>
+<p>6.计算机使生活更美好。</p>
+<p>黑客价值观的核心原则：分享、开放、民主、计算机的自由使用、进步。</p>
+<p>黑客只是怀有一门特殊手艺、有创造天赋的普通人。</p>
+<h2 id="2016年8月31日"><a href="#2016年8月31日" class="headerlink" title="2016年8月31日"></a>2016年8月31日</h2><p>在任何社会等级制度中，那些对自己没自信的人就会通过虐待他们眼中的下等人来凸显自己的身份。</p>
+<p>学校是一个很奇怪的、人为设计出来的体系，一班像是无菌室，一半像是野蛮洪荒之地。它就像人生一样，里面无所不包，但又不是事物的真实样子。它只是一个暂时的过程，只要你向前看，你就能超越它，哪怕现在你还是身在其中。</p>
+<p>聪明的小孩读中学时往往是不快乐的。他们有其他的兴趣，没有多余的精力用来使自己更受欢迎。你在其他地方有所得，就会在这个地方有所失。</p>
+<p>14岁的孩子开始抽大麻，并不是因为他们听说这样有助于忘记烦恼，而是因为他们想要加入一个不同的团体。</p>
+<h2 id="2016年9月1日"><a href="#2016年9月1日" class="headerlink" title="2016年9月1日"></a>2016年9月1日</h2><p>黑客与画家的共同之处，在于他们都是创作者。</p>
+<p>但是，我认识的黑客，没有一个喜欢用静态类型语言编程。我们需要的是一种可以随时涂抹、擦擦改改的语言，我们不想正襟危坐，把一个盛满各种变量类型的茶杯，小心翼翼放在自己的洗盖上，为了与一丝不苟的编译器大婶交谈，努力的挑选词语，确保变量类型匹配，好让自己显得礼貌又周到。</p>
+<p>大学喝实验室强迫黑客成为科学家，企业强迫黑客成为工程师。</p>
+<p>正真竞争软件设计的战场是新兴领域的市场，这里嗨没有人建立过防御工事。只要你能做出大胆的设计，由一个人或一批人同时负责设计和实现产品，你就能在这里战胜大公司。</p>
+<p>黑客通过实践学习编程。创作者另一个学习的途径是通过范例学习。</p>
+<p>如果可以的话，最好把文档说明写的像编程语言规范那样清晰。</p>
+<p>普通黑客与优秀黑客的所有区别之中，会不会“换位思考”可能是最重要的单个因素。</p>
+<p>判断一个人是否具备“换位思考”的能力有一个好的方法，那就是看他怎么样向没有技术背景的人解释技术问题。</p>
+<p>程序写出来是给人看的，附带能在机器上运行。 –《计算机程序的结构与解释》</p>
+<h2 id="2016年9月2日"><a href="#2016年9月2日" class="headerlink" title="2016年9月2日"></a>2016年9月2日</h2><p>要是能坐上时间机器回到过去，不管哪一个年代，有一件事都是不会改变的，那就是“祸从口出”。</p>
+<p>为了防止他人复制，古代制作地图的工匠会故意在地图上画错一个小地方，如果你的地图与他的地图一样，就说明不太可能是你自己独立制作的。</p>
+<p>做一个异端是有回报的，不仅实在科学领域，在任何有竞争的地方，只要你能看到别人看不到或不敢看的东西，你就有很大的优势。</p>
+<p>与笨蛋辩论，你也会变成笨蛋。</p>
+<p>”守口如瓶，笑脸相迎“。</p>
+<p>逐步把辩论提升到一个抽象的层次。（对事不对人）</p>
+<p>所有反击方法之中，最好的一种可能就是幽默，狂热分子都有一个共同点：缺乏幽默感。</p>
+<p>如果自己就是潮水的一部分，怎么能看见潮流的方向呢？你只能永远保持质疑。问自己，什么话是我不能说的？为什么？</p>
+<h2 id="2016年9月3日"><a href="#2016年9月3日" class="headerlink" title="2016年9月3日"></a>2016年9月3日</h2><p>公民自由是国家富强的原因，而不是结果。</p>
+<p>专制国家会变成腐败国家，腐败国家会变成贫穷国家，贫穷国家会变成弱小国家。</p>
+<p>黑客对于公民自由是非常敏感的，因为这对他们至关重要。他们远远地就能感到极权主义的威胁，好比动物能够感知即将来临的暴风雨。</p>
+<h2 id="2016年9月5号"><a href="#2016年9月5号" class="headerlink" title="2016年9月5号"></a>2016年9月5号</h2><p>网页程序的bug要比桌面程序要少一个或几个数量级。</p>
+<p>在发布前测试的时候，你知道应该最仔细地测试哪个部分——显然就是你修改过的部分。</p>
+<p>互联网软件的发布规则是：它运行不了，你就无法发布；一旦它运行了，你就可以立即发布。</p>
+<p>版本这个概念不是用于互联网软件。</p>
+<h2 id="2016年9月6日"><a href="#2016年9月6日" class="headerlink" title="2016年9月6日"></a>2016年9月6日</h2><p>解决新代码的bug要比解决历史遗留代码的bug容易。</p>
+<p>随着软件规模的增大，开发成本指数式上升。这可能是因为修正旧bug的原因。如果bug都能被快速发现，成本的上升形态就能基本保持线性。</p>
+<p>最难修补的是复合式bug，两个bug是互相弥补的，好比“负负得正”，软件反而能够运行。当你修正了其中的一个bug，另一个bug才会暴露出来。这时对你来说，你会觉得刚才修正错了，因为那是你最后修改的地方，你就怀疑自己在那里做错了，但是你其实是对的。</p>
+<p>“函数式编程”（funcational programming）可以避免复合式bug。</p>
+<p>所谓“人月”就是一个人在一个月内所能完成的工作量。假如某个项目预估需要12个人月，那么派4个人处理这个项目，理论上需要3个月，派6个人则只需要2个月。但是，布鲁克斯认为这种换算机制在软件行业行不通，是一个神话。因为软件项目是交互关系复杂的工作，需要大量的沟通成本，人力的增加会使沟通成本急剧上升，反而无法达到缩短工期的目的。在本质上，软件项目的人力与工期是无法交换的，当项目进度落后时，光靠增加人力到该项目中，并不会加快进度，反而有可能使进度更加延后。</p>
+<p>随着参与人数的增加，人与人之间需要的沟通呈现指数式增长。人数越来越多，开会讨论各个部分如何协同工作所需的时间越来越长，无法预见的互相影响越多越大，产生的bug也越来越多。幸运的是，这个过程逆向也成立：人数越来越少，软件开发的效率将指数式增长。</p>
+<p>不要在半夜里发布代码，然后回家睡觉。</p>
+<h2 id="2016年9月7日"><a href="#2016年9月7日" class="headerlink" title="2016年9月7日"></a>2016年9月7日</h2><p>没有盗版是一种“优势”，但也是一个问题。一定数量的盗版对软件公司是有好处的。不管你的软件定价多少，有些用户永远都不会购买。如果这样的用户使用盗版，你并没有任何损失。事实上，你反而赚到了，因为你的软件现在多了一个用户，市场影响力就更大了一些，而这个用户可能毕业以后就会出钱购买你的软件。</p>
+<p>只要有可能，商业性公司就会采用一种叫做“价格歧视”（price discrimination）的定价方法，也就是针对不同的客户给出不同的报价，使得利润最大化。</p>
+<p>如果某样东西易于购买，你就会多买一些。</p>
+<p>个人和小企业决策比较灵活，有需要低成本的新技术，所以他们更愿意尝试新事物。</p>
+<p>帕金森定律：因为你必须做到，所以你能够做到。</p>
+<p>桌面软件迫使用户变成系统管理员，互联网软件则是迫使程序员变成系统管理员：用户压力变小了，程序员的压力变大了。</p>
+<h2 id="2016年9月8日"><a href="#2016年9月8日" class="headerlink" title="2016年9月8日"></a>2016年9月8日</h2><p>财富才是你的目标，金钱不是。</p>
+<p>交换媒介的优点是，它使得交易可以进行下去。缺点是，它往往模糊了交易的实质。人们觉得做生意就是为了挣钱，但是金钱其实只是一种中介，让大家可以更方便地获得自己想要的东西。大多数生意的目地是为了创造财富，做出人们正真需要的东西。</p>
+<p>公司一切行为的目地都是盈利，从而生存下去。</p>
+<p>如果你有一个令你感到安全的工作，你是不会致富的，因为没有危险，就几乎等于没有可放大性。</p>
+<p>大公司就像巨型的古罗马战舰，一千个划船手共同划桨，推动它前进。但是，两个因素使得它快不起来。一个因素是，每个划船手看不到自己更努力划桨有何不同；另一个因素是，一千人的团队使得任何个人的努力都被大大地平均话了。</p>
+<p>我们不需要小村庄的那种“小”，而需要全明星第一阵容的那种“小”。</p>
+<h2 id="2016年9月9日"><a href="#2016年9月9日" class="headerlink" title="2016年9月9日"></a>2016年9月9日</h2><p>技术的发展是否加剧了贫富分化？</p>
+<p>今日的社会身份的差异也要比100年前来的小。</p>
+<p>垃圾邮件过滤器：对单词进行贝叶斯判断。即使用贝叶斯算法来屏蔽垃圾邮件。</p>
+<h2 id="2016年9月12日"><a href="#2016年9月12日" class="headerlink" title="2016年9月12日"></a>2016年9月12日</h2><p>好设计是简单的设计。</p>
+<p>好设计是永不过时的设计。</p>
+<p>好设计是解决问主要问题的设计。</p>
+<p>好设计是启发性的设计。</p>
+<p>好设计通常是有点趣味性的设计。</p>
+<p>好设计是艰苦的设计。</p>
+<p>好设计是看似容易的设计。</p>
+<p>好设计是对称的设计。</p>
+<p>好设计是模仿大自然的设计。</p>
+<p>好设计是一种再设计。</p>
+<p>好设计是能够复制的设计。</p>
+<p>好设计是成批出现的。</p>
+<p>好设计常常是大胆的设计。</p>
+<p>在大多数领域，看上去容易的事情，背后都需要大量的练习。</p>
+<p>（1）一百年后的编程语言再理论上今天就可能设计出来；<br>（2）如果今天真能设计处这样一种语言，很可能现在就适合编程，并且能够产生更好的结果。</p>
+<p>如果我们把这两种观点联系起来，那就得出了一些有趣的可能性。为什么不现在就动手尝试写出一百年后的编程语言呢？</p>
+<p>当你设计语言的适合，心里牢牢记住的原则就是要把车开直，不适通过将车身对齐画在地上的分割线，而是通过瞄准远处的某个点。即使你的目标只在目标现在几米开外，这样做也是正确的。我认为，设计编程语言时，我们也应该这样做。</p>
+<h2 id="2016年9月13日"><a href="#2016年9月13日" class="headerlink" title="2016年9月13日"></a>2016年9月13日</h2><p>《呆伯特》漫画</p>
+<p>Lisp很值得学习。你掌握它以后，会感到它给你带来的极大启发。这会大大提高你的编程水平，使你成为一个更好的程序员。尽管再实际工作中极少会用到Lisp。</p>
+<p>到了一定年龄之后，程序员极少主动更换自己的编程语言。不管习惯使用的是哪一种语言，他们往往认为这种语言已经足够好了。</p>
+<p>技术的变化通常是很快的。</p>
+<p>那些经理奇迹般的同事具备了两种很常见但很难结合再一起的特点：（a）对技术一无所知；（b）对技术有强烈的个人观点。</p>
+<p>Lisp是一种很特别的编程语言。</p>
+<h2 id="2016年9月14号"><a href="#2016年9月14号" class="headerlink" title="2016年9月14号"></a>2016年9月14号</h2><p>使用一种不常见的语言会出现的问题我想到了三个：你的程序可能我发很好地与使用其他语言写的程序协同工作；你可能找不到很多的函数库；你可能不容易雇到程序员。</p>
+<p>选择更强大的编程语言会减少所需要的开发人员数量。因为：（1）如果你使用的语言很大，可能会减少一些编程的工作量，也就是不需要那么多黑客了；（2）使用更高级语言的黑客可能比别的程序员更聪明。</p>
+<p>对于同一个软件，如果用一种语言写出来的代码比另一种语言长三倍，这意味着你开发它耗费的时间也会多三倍。而且即使多雇人手，也无助于缩短开发时间，因为当团队规模超过某个门槛时，再增加人手只会带来净损失。《人月神话》中描述中描述了这种现象。</p>
+<p>在大型组织内部，有一个专门的属于描述这种跟随大多数人的选择的做法，叫做”业界最佳实践“。</p>
+<p>第一：不同语言的编程能力不一样；第二：大多数经理故意忽视第一点。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/书/">书</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/09/09/HHKB-静电容键盘/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">HHKB-静电容键盘</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/08/31/对自己的建议/">
+        <span class="next-text nav-default">对自己的建议</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>

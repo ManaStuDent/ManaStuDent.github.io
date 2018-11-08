@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Lambda 表达式">
+
+
+
+
+  <meta name="keywords" content="Java, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2017/07/16/Lambda-表达式/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Lambda 表达式 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Lambda 表达式
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-07-16
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2017/07/16/Lambda-表达式/" data-title="Lambda 表达式">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda-管中窥豹"><span class="toc-text">Lambda 管中窥豹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在哪里以及如何使用-Lambda"><span class="toc-text">在哪里以及如何使用 Lambda?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#来一个栗子"><span class="toc-text">来一个栗子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用函数式接口"><span class="toc-text">使用函数式接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Predicate"><span class="toc-text">Predicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Consumer"><span class="toc-text">Consumer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function"><span class="toc-text">Function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录A"><span class="toc-text">附录A</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p><img src="http://7xs2vh.com1.z0.glb.clouddn.com/lambda.png?imageView2/2/w/600/h/400/q/75|imageslim" alt="lambda"><br>什么是 Lambda 表达式，我觉得是我们开始学习 Lambda 表达式之前应该要弄清楚的一个概念。我们可以把 Lambda 表达式理解为简洁地表示可以传递的匿名函数的一种方式：它没有名称，但它有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表。[^footnote1]<br>简单的说 Lambda 有以下的特点：<br>1.匿名，它没有一个明确的名字。<br>2.函数，是的， Lambda 表达式确实是一种函数，这毋庸置疑。<br>3.传递，Lambda 表达式可以作为参数传递给方法。<br>4.简洁，没有什么比 Lambda 更加简洁的语法了(Java 中)</p>
+<a id="more"></a>
+<h2 id="Lambda-管中窥豹"><a href="#Lambda-管中窥豹" class="headerlink" title="Lambda 管中窥豹"></a>Lambda 管中窥豹</h2><p>概念说完我们就开始我们的代码之旅——Lambda 的语法：<br><code>(paramenters) -&gt; expression</code><br>或者<br><code>(paramenters) -&gt; { statements; }</code></p>
+<p><code>Lambda 参数</code> + <code>箭头</code> + <code>Lambda 主体</code> 构成。在 Java8 中 Lambda 表达式的体现形式有以下 5 中：<br>1.<code>(String s) -&gt; s.length()</code><br>这个 Lambda 表达式具有一个 String 类型的参数并且返回一个 Int。[^footnote2]</p>
+<p>2.<code>(Apple a) -&gt; a.getWeight() &gt; 150</code><br>这个 Lambda 表达式具有一个 Apple 类型的参数并且返回一个 Boolean。</p>
+<p>3.<code>(int x, int y) -&gt; (System.out.println(x + y))</code><br>这个 Lambda 表达式具有一个 String 类型的参数然而它并没有返回值(void 返回)。</p>
+<p>4.<code>() -&gt; 93</code><br>这个 Lambda 表达式没有参数，返回一个 Int。</p>
+<p>5.<code>（Apple a, Apple b) -&gt; a1.getWeight().compareTo(a2.getWeight())</code><br>最后一个 Lambda 表达式具有两个 Apple 类型的参数，返回一个 Int。</p>
+<h2 id="在哪里以及如何使用-Lambda"><a href="#在哪里以及如何使用-Lambda" class="headerlink" title="在哪里以及如何使用 Lambda?"></a>在哪里以及如何使用 Lambda?</h2><p>我们刚刚已经了解了 Lambda 表达式的语法以及基本的 5 中表现形式，那么应该在哪里使用 Lambda 表达式以及如何使用 Lambda 表达式呢？一般我们可以在函数式接口[^footnote3]上使用 Lambda 表达式。附录 A 列举了 JDK 8之前已有的函数式接口。</p>
+<p>我们最常用的应该是 java.lang.Runnable 接口了，在 Java8 之前要开启一个多线程，那么必定会写以下这段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runnable run = new Runnable()&#123;</span><br><span class="line">    public void run()&#123;</span><br><span class="line">        System.out.println(&quot;Start a  new Thread&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>按照正常的缩进，我们开启一个线程最少需要写 5 行代码，其中只有一行使我们的主要核心，其他 4 行代码都是为之服务的，或者称之为样板式代码。有点像 JDBC 数据库连接池一样，先要创建连接对象…最后关闭连接池。而使用 Lambda 表达式可以有效的缩短代码的行数，并且让代码写的更加的清晰。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runnable run = () -&gt; System.out.println(&quot;Start a  new Thread&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>没错，就这么简单，一切显得是那么的优雅和华丽，没有什么多余的样板式代码，一眼就能够看代码的意图。再也不用主动过滤掉无用的代码了，应为留下来的都是有用的代码。可能你一时还不习惯这样的方式或是写法，没关系接着往下，会有更多的列子和惊喜。</p>
+<p>刚刚我们用函数式接口来使用 Lambda 表达式，还有一种方式是使用函数描述符——函数式接口的抽象方法基本上就是 Lambda 表达式的签名。就拿刚刚线程的代码来说，Runnable 接口可以看做一个什么都没有返回的的函数签名，应为它只有一个 run 的抽象方法，这个方法既不接受参数也不返回参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void process(Runnable r)&#123;</span><br><span class="line">    r.run();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process(() -&gt; System.out.println(&quot;Start a  new Thread&quot;));</span><br></pre></td></tr></table></figure>
+<h2 id="来一个栗子"><a href="#来一个栗子" class="headerlink" title="来一个栗子"></a>来一个栗子</h2><p>废话不多说，先上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class ExecuteAround &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String ...args) throws IOException&#123;</span><br><span class="line"></span><br><span class="line">        // method we want to refactor to make more flexible</span><br><span class="line">        String result = processFileLimited();</span><br><span class="line">        System.out.println(result);</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;---&quot;);</span><br><span class="line">        </span><br><span class="line">        // 使用 Lambda 表达式改进</span><br><span class="line">        String oneLine = processFile((BufferedReader b) -&gt; b.readLine());</span><br><span class="line">        System.out.println(oneLine);</span><br><span class="line"></span><br><span class="line">        String twoLines = processFile((BufferedReader b) -&gt; b.readLine() + b.readLine());</span><br><span class="line">        System.out.println(twoLines);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    public static String processFileLimited() throws IOException &#123;</span><br><span class="line">        try (BufferedReader br =</span><br><span class="line">                     new BufferedReader(new FileReader(&quot;data.txt&quot;))) &#123;</span><br><span class="line">            return br.readLine();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	public static String processFile(BufferedReaderProcessor p) throws IOException &#123;</span><br><span class="line">		try(BufferedReader br = new BufferedReader(new FileReader(&quot;data.txt&quot;)))&#123;</span><br><span class="line">			return p.process(br);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public interface BufferedReaderProcessor&#123;</span><br><span class="line">		public String process(BufferedReader b) throws IOException;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子就是我们平时处理资源的一段代码，我们打开一个资源，做一些处理（读啊，写啊），然后关闭资源。这里对比了使用传统方式和使用 Lambda 表达式的方式来写这一段代码。这里可以看出使用 Lambda 表达式可以使代码更加灵活，在这段代码中的提现是：可以由传入参数的不同而决定方法的实现。</p>
+<h2 id="使用函数式接口"><a href="#使用函数式接口" class="headerlink" title="使用函数式接口"></a>使用函数式接口</h2><p>正如前面说的，函数式接口定义且只定义了一个抽象方法。我们在 JDK8 之前常用的如 Comparable、Runnable 和 Callable 等，在 Java8 中伟大的设计师又引进了几个新的函数式接口，这里介绍其中的一些作为了解。</p>
+<h3 id="Predicate"><a href="#Predicate" class="headerlink" title="Predicate"></a>Predicate</h3><p>java.util.function.Predicate<t> 接口定义了一个名叫 test 的抽象方法，它接受泛型 T 对象，并返回一个 boolean。</t></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface Predicate&lt;T&gt;&#123;</span><br><span class="line">    boolean test(T t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static List&lt;Apple&gt; filter(List&lt;Apple&gt; inventory, ApplePredicate p)&#123;</span><br><span class="line">		List&lt;Apple&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">		for(Apple apple : inventory)&#123;</span><br><span class="line">			if(p.test(apple))&#123;</span><br><span class="line">				result.add(apple);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">List&lt;Apple&gt; greenApples = filter(inventory, (Apple a) -&gt; &quot;green&quot;.equals(a.getColor()));</span><br><span class="line">System.out.println(greenApples);</span><br></pre></td></tr></table></figure>
+<h3 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h3><p>java.util.function.Consumer<t> 接口定义了一个名叫 accept 的抽象方法，它接受泛型 T 对象，但并没有返回值。如果需要访问类型 T 的对象，并对其执行某些操作，就可以使用这个接口。比如循环一个对象。</t></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface Consumer&lt;T&gt;&#123;</span><br><span class="line">    void accept(T t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; forEach(List&lt;T&gt; list, Consumer&lt;T&gt; c)&#123;</span><br><span class="line">    for(T i: list)&#123;</span><br><span class="line">        c.accept(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;int&gt; list = Arrays.asList(1, 2, 3, 4, 5);</span><br><span class="line">//Lambda 是 Consumer 中 accept 方法的实现</span><br><span class="line">forEach(list, (Integer i) -&gt; System.out.println(i))</span><br></pre></td></tr></table></figure>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><p>java.util.function.Function&lt;T, R&gt; 接口定义了一个叫做 apply 的方法，该方法接受一个泛型的 T 对象，返回一个泛型的 R 对象。如果你需要一个 Lambda 表达式将对象的信息映射到输出，那么久可以使用这个接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface Function&lt;T, R&gt;&#123;</span><br><span class="line">    R apply(T t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static &lt;T, R&gt; List&lt;R&gt; map(List&lt;T&gt; list, Function&lt;T, R&gt; f)&#123;</span><br><span class="line">    List&lt;R&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    for(T s: list)&#123;</span><br><span class="line">        result.add(f.apply(s));</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;int&gt; list = Arrays.asList(&quot;java8&quot;, &quot;in&quot;, &quot;action&quot;);</span><br><span class="line">List&lt;Interger&gt; listFun = map &#123;</span><br><span class="line">    list,(String s) -&gt; s.length();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="附录A"><a href="#附录A" class="headerlink" title="附录A"></a>附录A</h2><p>JDK 8之前已有的函数式接口:<br>java.lang.Runnable<br>java.util.concurrent.Callable<br>java.security.PrivilegedAction<br>java.util.Comparator<br>java.io.FileFilter<br>java.nio.file.PathMatcher<br>java.lang.reflect.InvocationHandler<br>java.beans.PropertyChangeListener<br>java.awt.event.ActionListener<br>javax.swing.event.ChangeListener</p>
+<p>[^footnote1]: Java8 实战中对 Lambda 的描述。<br>[^footnote2]: 注意 Lambda 没有 return 语句，其本身隐含了一个 return，故不用显示声明出来。<br>[^footnote3]: 函数式接口(Functional Interface)是Java 8对一类特殊类型的接口的称呼。 这类接口只定义了唯一的抽象方法的接口。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/08/15/Oracle序列更新为主键最大值/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle序列更新为主键最大值</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/14/iTerm2常用的快捷键/">
+        <span class="next-text nav-default">iTerm2常用的快捷键</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>
