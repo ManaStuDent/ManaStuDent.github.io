@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Tomcat优化">
+
+
+
+
+  <meta name="keywords" content="Tomcat, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2018/12/12/Tomcat优化/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz",
+      appKey: "YAjI1L7xgOU7mECsqCdHhtdQ"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BbwF5HUqUuyHNVtGClHgqrGb-gzGzoHsz","app_key":"YAjI1L7xgOU7mECsqCdHhtdQ"},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Tomcat优化 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Tomcat优化
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-12-12
+        </span>
+        
+        
+        <span class="post-visits" data-url="/2018/12/12/Tomcat优化/" data-title="Tomcat优化">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat-中的三种运行模式之运行模式的优化"><span class="toc-text">Tomcat 中的三种运行模式之运行模式的优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat-执行器（线程池）的优化"><span class="toc-text">Tomcat 执行器（线程池）的优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat-优化之禁用AJP连接器实现动静分离"><span class="toc-text">Tomcat 优化之禁用AJP连接器实现动静分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat-中-JVM-参数优化"><span class="toc-text">Tomcat 中 JVM 参数优化</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>最近由于工作上的原因，需要对 Tomcat 并发进行优化。之前也做过一次 Tomcat 优化，但并没有记录下来，趁着最近不忙，学习并记录一下优化的过程。</p>
+<a id="more"></a>
+<h3 id="Tomcat-中的三种运行模式之运行模式的优化"><a href="#Tomcat-中的三种运行模式之运行模式的优化" class="headerlink" title="Tomcat 中的三种运行模式之运行模式的优化"></a>Tomcat 中的三种运行模式之运行模式的优化</h3><p>修改 Tomcat 的运行模式：</p>
+<p>将 <code>&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot;  redirectPort=&quot;8443&quot; /&gt;</code> 修改为NIO模式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot;</span><br><span class="line">     connectionTimeout=&quot;20000&quot;</span><br><span class="line">     redirectPort=&quot;8443&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>验证成功方式：Tomcat 日志控制台最后<br>如果是 http-bio-8080 是 bio<br>如果是 http-nio-8080 是 nio</p>
+<p>1、BIO（阻塞式）：Tomcat 的默认模式，该模式性能较低，没有经过任何优化处理和支持，一个线程处理一个请求。缺点：并发量过大时，线程数较多，浪费资源。Tomcat7 及以下版本，在 linux 系统中默认使用该模式。</p>
+<p>2、NIO-Non-blocking IO（非阻塞IO）：Java NIO 可以让你非阻塞的使用 IO，例如：当线程从通道读取数据到缓冲区时，线程还是可以进行其他事情。当数据被写入到缓冲区时，线程可以继续处理它。从缓冲区写入通道也类似。Tomcat8 在Linux系统中默认使用这种方式。</p>
+<p>3、APR：Apache Portable Runtime，从操作系统层面解决io阻塞问题。Tomcat7 或 Tomcat8 在 Win7 或以上的系统中启动默认使用这种方式。Linux 如果安装了 apr 和 native，Tomcat 直接启动就支持 apr。</p>
+<h3 id="Tomcat-执行器（线程池）的优化"><a href="#Tomcat-执行器（线程池）的优化" class="headerlink" title="Tomcat 执行器（线程池）的优化"></a>Tomcat 执行器（线程池）的优化</h3><p>Tomcat 默认是没有启用线程池的，在 Tomcat 中每一个用户请求都是一个线程，所以我们可以使用线程池来提高性能。Tomcat 的前段有一个调度线程，会将用户的请求放入线程池中，一定时间后线程池中的用户请求任务就变为工作线程。</p>
+<p>1、开启线程池：打开 server.xml 中关于线程池的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Executor name=&quot;TomcatThreadPool&quot; namePrefix=&quot;catalina-exec-&quot;</span><br><span class="line">        maxThreads=&quot;600&quot; minSpareThreads=&quot;10&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>重要参数说明：</p>
+<p>name：共享线程池的名字。这是 Connector 为了共享线程池要引用的名字，该名字必须唯一。默认值：None；</p>
+<p>namePrefix:在 JVM 上，每个运行线程都可以有一个 name 字符串。这一属性为线程池中每个线程的 name 字符串设置了一个前缀，Tomcat 将把线程号追加到这一前缀的后面。默认值：Tomcat-exec-；</p>
+<p>maxThreads：该线程池可以容纳的最大线程数。默认值：200；</p>
+<p>maxIdleTime：在 Tomcat 关闭一个空闲线程之前，允许空闲线程持续的时间(以毫秒为单位)。只有当前活跃的线程数大于 minSpareThread 的值，才会关闭空闲线程。默认值：60000(一分钟)。</p>
+<p>minSpareThreads：Tomcat 应该始终打开的最小不活跃线程数。默认值：25。</p>
+<p>2、引用线程池<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector</span><br><span class="line">     port=&quot;8080&quot; protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot;</span><br><span class="line">     connectionTimeout=&quot;20000&quot;</span><br><span class="line">     redirectPort=&quot;8443&quot;</span><br><span class="line"></span><br><span class="line">     maxThreads=&quot;1000&quot;</span><br><span class="line">     minSpareThreads=&quot;100&quot;</span><br><span class="line">     acceptCount=&quot;1000&quot;</span><br><span class="line">     maxConnections=&quot;1000&quot;</span><br><span class="line">     maxHttpHeaderSize=&quot;8192&quot;</span><br><span class="line">     tcpNoDelay=&quot;true&quot;</span><br><span class="line">     compression=&quot;on&quot;</span><br><span class="line">     disableUploadTimeout=&quot;true&quot;</span><br><span class="line">     enableLookups=&quot;false&quot;</span><br><span class="line">     URIEncoding=&quot;UTF-8&quot;</span><br><span class="line">     /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>maxThreads:最大线程数<br>minSpareThreads:最小线程数<br>acceptCount:接受最大队列长度<br>maxConnections:最大连接数<br>connectionTimeout：超时等待时间 毫秒<br>maxHttpHeaderSize:请求头最大值<br>tcpNoDelay:如果为true，服务器socket会设置TCP_NO_DELAY选项，在大多数情况下可以提高性能。缺省情况下设为true<br>compression：是否开启压缩GZIP on开启 off 关闭 forde：所有情况下都压缩<br>disableUploadTimeout：限定上传时间<br>enableLookups：关闭DNS反向查询，DNS反查很耗时间</p>
+<h3 id="Tomcat-优化之禁用AJP连接器实现动静分离"><a href="#Tomcat-优化之禁用AJP连接器实现动静分离" class="headerlink" title="Tomcat 优化之禁用AJP连接器实现动静分离"></a>Tomcat 优化之禁用AJP连接器实现动静分离</h3><p>AJP：协议是一个面向包的。web 服务器和 servlet 容器通过 TCP 链接进行交互，为了节省 SOCKET 创建的昂贵代价，WEB服务器会尝试维护一个永久 TCP 链接到 Servlet 容器，并在多个请求和响应周期过程会重用链接。</p>
+<p>由于 Tomcat 服务器相对于 Nginx 服务器在处理静态资源上效率较低。因此我们的网站服务器一般是 Nginx+Tomcat，Nginx 负责处理静态资源，因此 AJP 协议我们在使用 Nginx+Tomcat 架构时可以关闭它来进行效率的优化。</p>
+<p>注释 Tomcat server.xml 中 <code>&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot; /&gt;</code> 即可。</p>
+<h3 id="Tomcat-中-JVM-参数优化"><a href="#Tomcat-中-JVM-参数优化" class="headerlink" title="Tomcat 中 JVM 参数优化"></a>Tomcat 中 JVM 参数优化</h3><p>对jvm参数的优化我们主要是对堆内存的优化</p>
+<p>Linux 下 catalina.sh 在一大段注释的下面，正文配置的上面加入：</p>
+<p>JAVA_OPTS=”-server -Xmx2688M -Xms2688M -Xmn960M -XX:MaxTenuringThreshold=10 -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=512m”</p>
+<p>最后推荐一个可以在线对 JVM 参数进行优化的网站：<a href="http://xxfox.perfma.com" target="_blank" rel="noopener">http://xxfox.perfma.com</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Tomcat/">Tomcat</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/12/05/mac-nginx/">
+        <span class="next-text nav-default">mac nginx</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>
