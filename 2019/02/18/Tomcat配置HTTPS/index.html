@@ -17,12 +17,12 @@
 
 
 
-  <meta name="description" content="Java注释模版">
+  <meta name="description" content="Tomcat配置HTTPS">
 
 
 
 
-  <meta name="keywords" content="Eclipse, 一任阶前">
+  <meta name="keywords" content="Tomcat, 一任阶前">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/2016/07/23/Java注释模版/">
+<link rel="canonical" href="http://www.co2fe.com/2019/02/18/Tomcat配置HTTPS/">
 
 
 
@@ -89,7 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"server":{"port":4000,"log":false,"compress":false,"header":true},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title> Java注释模版 - 一任阶前 </title>
+    <title> Tomcat配置HTTPS - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -169,13 +169,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Java注释模版
+          Tomcat配置HTTPS
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2016-07-23
+          2019-02-18
         </span>
         
         
@@ -188,7 +188,9 @@
 
     <div class="post-content">
       
-        <p>设置注释模板的入口： Window-&gt;Preference-&gt;Java-&gt;Code Style-&gt;Code Template 然后展开Comments节点就是所有需设置注释的元素。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">文件(Files)注释标签：</span><br><span class="line">/**  </span><br><span class="line">* @Title $&#123;file_name&#125;</span><br><span class="line">* @Package $&#123;package_name&#125;</span><br><span class="line">* @Description </span><br><span class="line">* @author Chenglong  </span><br><span class="line">* @date $&#123;date&#125; $&#123;time&#125;</span><br><span class="line">* @version V1.0  </span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">类型(Types)注释标签（类的注释）：</span><br><span class="line">/**</span><br><span class="line">* @ClassName $&#123;type_name&#125;</span><br><span class="line">* @Description</span><br><span class="line">* @author Chenglong</span><br><span class="line">* @date $&#123;date&#125; $&#123;time&#125;</span><br><span class="line">* @version V1.0</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">字段(Fields)注释标签：</span><br><span class="line">/**</span><br><span class="line">* @Fields $&#123;field&#125;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">构造函数标签：</span><br><span class="line">/**</span><br><span class="line">* &lt;p&gt;Title &lt;/p&gt;</span><br><span class="line">* &lt;p&gt;Description &lt;/p&gt;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">方法(Constructor &amp; Methods)标签：</span><br><span class="line">/**</span><br><span class="line"> * @Description</span><br><span class="line"> * $&#123;tags&#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">覆盖方法(Overriding Methods)标签：</span><br><span class="line">/* (非 Javadoc) </span><br><span class="line">* &lt;p&gt;Title: $&#123;enclosing_method&#125;&lt;/p&gt; </span><br><span class="line">* &lt;p&gt;Description: &lt;/p&gt; </span><br><span class="line">* $&#123;tags&#125; </span><br><span class="line">* $&#123;see_to_overridden&#125; </span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">代表方法(Delegate Methods)标签：</span><br><span class="line">/** </span><br><span class="line">* $&#123;tags&#125; </span><br><span class="line">* $&#123;see_to_target&#125; </span><br><span class="line">*/ </span><br><span class="line"></span><br><span class="line">getter方法标签：</span><br><span class="line">/** </span><br><span class="line">* @return $&#123;bare_field_name&#125; </span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">setter方法标签：</span><br><span class="line">/** </span><br><span class="line">* @param $&#123;param&#125; 要设置的 $&#123;bare_field_name&#125; </span><br><span class="line">*/</span><br></pre></td></tr></table></figure></p>
+        <p>下载证书文件可获得 Tomcat 文件夹，其中有密钥库 <a href="http://www.domain.com.jks。" target="_blank" rel="noopener">www.domain.com.jks。</a></p>
+<p>证书安装<br>配置SSL连接器，将 <a href="http://www.domain.com.jks" target="_blank" rel="noopener">www.domain.com.jks</a> 文件存放到 conf 目录下，然后配置同目录下的 server.xml 文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;443&quot; protocol=&quot;HTTP/1.1&quot; SSLEnabled=&quot;true&quot;</span><br><span class="line">   maxThreads=&quot;150&quot; scheme=&quot;https&quot; secure=&quot;true&quot;</span><br><span class="line">   keystoreFile=&quot;conf/www.domain.com.jks&quot;</span><br><span class="line">   keystorePass=&quot;changeit&quot;</span><br><span class="line">   clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; /&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -208,7 +210,7 @@
         
           <div class="post-tags">
             
-              <a href="/tags/Eclipse/">Eclipse</a>
+              <a href="/tags/Tomcat/">Tomcat</a>
             
           </div>
         
@@ -216,15 +218,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2016/07/26/CentOS安装JDK/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">CentOS安装JDK</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2016/07/22/新的开始/">
-        <span class="next-text nav-default">新的开始</span>
+      <a class="next" href="/2019/02/15/Nginx配置https/">
+        <span class="next-text nav-default">Nginx配置https</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
