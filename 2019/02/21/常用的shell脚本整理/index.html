@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="爱生活，爱Java，认真过好每一天。">
+  <meta name="description" content="常用的shell脚本整理">
 
 
 
+
+  <meta name="keywords" content="Linux, 一任阶前">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/archives/2015/04/">
+<link rel="canonical" href="http://www.co2fe.com/2019/02/21/常用的shell脚本整理/">
 
 
 
@@ -87,11 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title>
-  
-    归档 - 一任阶前
-  
-</title>
+    <title> 常用的shell脚本整理 - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -167,64 +165,92 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          常用的shell脚本整理
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            目前共计 113 篇日志
-          </span>
-        </div>
-      
-    
-
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-21
+        </span>
         
         
+      </div>
+    </header>
 
+    
+    
+
+
+    <div class="post-content">
+      
+        <p>启动指定目录下的 tomcat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">ROOT=&quot;/usr/local/tomcat-server/tomcat-platform/bin&quot;</span><br><span class="line">cd &quot;$ROOT&quot;</span><br><span class="line">nohup startup.sh 1&gt;/dev/null 2&gt;/dev/null &amp;</span><br><span class="line">echo $! &gt; &quot;$ROOT”/platform.pid</span><br></pre></td></tr></table></figure>
+<p>Tomcat 重启脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">cd /usr/local/tomcat-server/tomcat-platform/</span><br><span class="line">tomcat_home=`pwd`</span><br><span class="line">pid=$(ps -ef|grep $tomcat_home|grep -v grep|awk &apos;&#123;print $2&#125;&apos;)</span><br><span class="line">if [ $pid ] ;then</span><br><span class="line">     kill -9 $&#123;pid[*]&#125;</span><br><span class="line">     rm -rf $tomcat_home/temp/*  $tomcat_home/work/*</span><br><span class="line">     nohup $tomcat_home/bin/startup.sh 1&gt;/dev/null 2&gt;/dev/null &amp;</span><br><span class="line">else</span><br><span class="line">     rm -rf $tomcat_home/temp/*  $tomcat_home/work/*</span><br><span class="line">     nohup $tomcat_home/bin/startup.sh 1&gt;/dev/null 2&gt;/dev/null &amp;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
         
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2015</h2>
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/">Linux</a>
+            
           </div>
         
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            04-14
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/04/14/戴尔P2314H/" class="archive-post-link">
-            戴尔P2314H
-          </a>
-        </span>
-      </div>
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2019/02/20/Redis集群方案/">
+        <span class="next-text nav-default">Redis集群方案</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
 
       
+  
+  
+
+  
+
 
 
       <footer id="footer" class="footer">

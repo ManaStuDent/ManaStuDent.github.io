@@ -171,6 +171,50 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2019/02/21/常用的shell脚本整理/">常用的shell脚本整理</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-21
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>启动指定目录下的 tomcat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">ROOT=&quot;/usr/local/tomcat-server/tomcat-platform/bin&quot;</span><br><span class="line">cd &quot;$ROOT&quot;</span><br><span class="line">nohup startup.sh 1&gt;/dev/null 2&gt;/dev/null &amp;</span><br><span class="line">echo $! &gt; &quot;$ROOT”/platform.pid</span><br></pre></td></tr></table></figure>
+<p>Tomcat 重启脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">cd /usr/local/tomcat-server/tomcat-platform/</span><br><span class="line">tomcat_home=`pwd`</span><br><span class="line">pid=$(ps -ef|grep $tomcat_home|grep -v grep|awk &apos;&#123;print $2&#125;&apos;)</span><br><span class="line">if [ $pid ] ;then</span><br><span class="line">     kill -9 $&#123;pid[*]&#125;</span><br><span class="line">     rm -rf $tomcat_home/temp/*  $tomcat_home/work/*</span><br><span class="line">     nohup $tomcat_home/bin/startup.sh 1&gt;/dev/null 2&gt;/dev/null &amp;</span><br><span class="line">else</span><br><span class="line">     rm -rf $tomcat_home/temp/*  $tomcat_home/work/*</span><br><span class="line">     nohup $tomcat_home/bin/startup.sh 1&gt;/dev/null 2&gt;/dev/null &amp;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2019/02/20/Redis集群方案/">Redis集群方案</a>
         
       </h1>
@@ -570,51 +614,6 @@
           <p>公司直播平台使用的是七牛直播，今天有客户表示想将直播回放视频下载下来，数据妹子犯了愁，表示这个不会下载给客户，于是乎这个任务就落在了我的头上。熟练的打开视频，在 HTML 源代码播放地址为 <a href="http://xxxxxx/video/video.m3u8" target="_blank" rel="noopener">http://xxxxxx/video/video.m3u8</a></p>
           <div class="read-more">
             <a href="/2018/12/17/m3u8格式转MP4/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-      
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/12/12/Tomcat优化/">Tomcat优化</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-12-12
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>最近由于工作上的原因，需要对 Tomcat 并发进行优化。之前也做过一次 Tomcat 优化，但并没有记录下来，趁着最近不忙，学习并记录一下优化的过程。</p>
-          <div class="read-more">
-            <a href="/2018/12/12/Tomcat优化/" class="read-more-link">阅读更多</a>
           </div>
         
       
