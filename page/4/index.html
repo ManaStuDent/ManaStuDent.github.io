@@ -171,6 +171,53 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2018/07/10/自动化部署笔记/">自动化部署笔记</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-07-10
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <h3 id="安装-JDK-和-Maven"><a href="#安装-JDK-和-Maven" class="headerlink" title="安装 JDK 和 Maven"></a>安装 JDK 和 Maven</h3><p>将下载好的 JDK 和 Maven 的文件解压至 <code>/home/jdk/jdk1.8.0_171</code>  和  <code>/home/maven/apache-maven-3.5.3</code> 目录中</p>
+<p>编辑 /etc/profile 文件，最下面输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/home/jdk/jdk1.8.0_171</span><br><span class="line">export CLASSPATH=$JAVA_HOME/lib/</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export PATH JAVA_HOME CLASSPATH</span><br><span class="line"></span><br><span class="line">export MAVEN_HOME=/home/maven/apache-maven-3.5.3</span><br><span class="line">export PATH=$MAVEN_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+          <div class="read-more">
+            <a href="/2018/07/10/自动化部署笔记/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2018/07/01/使用阿里云maven镜像加速jar包下载/">使用阿里云maven镜像加速jar包下载</a>
         
       </h1>
@@ -557,51 +604,6 @@
           <p>今天被五张表的关系弄的无助了一下午，记录一下这五张表，希望以后不会再这样。<br>
           <div class="read-more">
             <a href="/2018/04/25/bug/" class="read-more-link">阅读更多</a>
-          </div>
-        
-      
-    </p></div>
-
-    
-
-    
-
-  </article>
-
-      
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/04/24/什么是MVC/">什么是MVC</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-04-24
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>今天看了一篇名为<a href="http://www.cnblogs.com/aspwebchh/p/8853659.html" target="_blank" rel="noopener">深入理解MVC</a>的文章，文章中总结和说明了什么是 MVC，也谈了他对于 MVC 的认识和理解。是一篇很好的文章，读完后让我对 MVC 有了一种新的认识。<br>
-          <div class="read-more">
-            <a href="/2018/04/24/什么是MVC/" class="read-more-link">阅读更多</a>
           </div>
         
       

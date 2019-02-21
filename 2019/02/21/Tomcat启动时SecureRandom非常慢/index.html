@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="爱生活，爱Java，认真过好每一天。">
+  <meta name="description" content="Tomcat启动时SecureRandom非常慢">
 
 
 
+
+  <meta name="keywords" content="Tomcat, 一任阶前">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/archives/2019/">
+<link rel="canonical" href="http://www.co2fe.com/2019/02/21/Tomcat启动时SecureRandom非常慢/">
 
 
 
@@ -87,11 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title>
-  
-    归档 - 一任阶前
-  
-</title>
+    <title> Tomcat启动时SecureRandom非常慢 - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -167,204 +165,107 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Tomcat启动时SecureRandom非常慢
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            目前共计 114 篇日志
-          </span>
-        </div>
-      
-    
-
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-21
+        </span>
         
         
+      </div>
+    </header>
 
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么是什么原因导致-Tomcat-突然就慢了呢？"><span class="toc-text">那么是什么原因导致 Tomcat 突然就慢了呢？</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>今天重置服务器并重新安装 tomcat 的时候，原来的项目突然需要很长时间才可以启动,于是进行了一番排查…</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">21-Feb-2019 17:56:58.631 WARNING [localhost-startStop-1] org.apache.catalina.util.SessionIdGeneratorBase.createSecureRandom Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [425,505] milliseconds.</span><br></pre></td></tr></table></figure>
+<p>查看 Tomcat 日志发现上面的问题。</p>
+<p>网上说是 SecureRandom generateSeed 的原因，当会使用 /dev/random 生成种子。但是 /dev/random 是一个阻塞数字生成器，如果它没有足够的随机数据提供，它就一直等，这迫使 JVM 等待。</p>
+<p>解决方案大致为两种：</p>
+<p>1.在Tomcat环境中解决：<br>在 catalina.sh 中加入这么一行：<code>-Djava.security.egd=file:/dev/./urandom</code> 即可。</p>
+<p>2.在 JVM 环境中解决：<br>打开 $JAVA_PATH/jre/lib/security/java.security 这个文件，找到下面的内容：<br><code>securerandom.source=file:/dev/random</code><br>替换成：<br><code>securerandom.source=file:/dev/./urandom</code></p>
+<h3 id="那么是什么原因导致-Tomcat-突然就慢了呢？"><a href="#那么是什么原因导致-Tomcat-突然就慢了呢？" class="headerlink" title="那么是什么原因导致 Tomcat 突然就慢了呢？"></a>那么是什么原因导致 Tomcat 突然就慢了呢？</h3><p>原因出在这是一台新的 Linux 服务器。</p>
+<p>Tomcat 的 session id 的生成主要通过 java.security.SecureRandom 生成随机数来实现，随机数算法使用的是”SHA1PRNG”。</p>
+<p>在linux上，与之相关的是 /dev/random 和 /dev/urandom。这两个设备会返回小于熵池噪声总数的随机字节。若熵池空了，对/dev/random 的读操作将会被阻塞，直到收集到了足够的环境噪声（鼠标、键盘、输入等）为止。</p>
+<p>而我今天启动的是一台新的刚刚装好的 Linux 系统，并且 Tomcat 在启动的时候在使用 /dev/random 这个阻塞随机数获取，从而出现上面的长时间的耗时。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
         
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2019</h2>
+          <div class="post-tags">
+            
+              <a href="/tags/Tomcat/">Tomcat</a>
+            
           </div>
         
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-21
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/02/21/Tomcat启动时SecureRandom非常慢/" class="archive-post-link">
-            Tomcat启动时SecureRandom非常慢
-          </a>
-        </span>
-      </div>
+        
+        
+  <nav class="post-nav">
     
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-21
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/02/21/常用的shell脚本整理/" class="archive-post-link">
-            常用的shell脚本整理
-          </a>
-        </span>
-      </div>
     
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-20
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/02/20/Redis集群方案/" class="archive-post-link">
-            Redis集群方案
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-18
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/02/18/Tomcat配置HTTPS/" class="archive-post-link">
-            Tomcat配置HTTPS
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-15
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/02/15/Nginx配置https/" class="archive-post-link">
-            Nginx配置https
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-09
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/02/09/SSL证书/" class="archive-post-link">
-            SSL证书
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            01-30
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/01/30/如何让其他机器访问你的-oracle-数据库/" class="archive-post-link">
-            如何让其他机器访问你的 oracle 数据库
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            01-12
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/01/12/Docker-常用容器/" class="archive-post-link">
-            Docker 常用容器
-          </a>
-        </span>
-      </div>
-    
-  </section>
-
-  
-  <nav class="pagination">
-    
+      <a class="next" href="/2019/02/21/常用的shell脚本整理/">
+        <span class="next-text nav-default">常用的shell脚本整理</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
 
       
+  
+  
+
+  
+
 
 
       <footer id="footer" class="footer">
