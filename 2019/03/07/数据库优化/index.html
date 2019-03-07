@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="爱生活，爱Java，认真过好每一天。">
+  <meta name="description" content="数据库优化">
 
 
 
+
+  <meta name="keywords" content="MySql, 一任阶前">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/tags/英雄/">
+<link rel="canonical" href="http://www.co2fe.com/2019/03/07/数据库优化/">
 
 
 
@@ -87,11 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"coding":"git@git.coding.net:ManaStuDent/ManaStuDent.git,master","github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"tag_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title>
-  
-    英雄 · 一任阶前
-  
-</title>
+    <title> 数据库优化 - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -185,47 +183,97 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          数据库优化
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title tag">
-          <h2 class="archive-name">英雄</h2>
-        </div>
-      
-    
-
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-09-27
-          
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-07
         </span>
-        <span class="archive-post-title">
-          <a href="/2016/09/27/英雄/" class="archive-post-link">
-            英雄
-          </a>
-        </span>
+        
+        
       </div>
-    
-  </section>
+    </header>
 
-  
-  <nav class="pagination">
     
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初步分析"><span class="toc-text">初步分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化方法"><span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法方面"><span class="toc-text">语法方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库表结构设计"><span class="toc-text">数据库表结构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库参数"><span class="toc-text">数据库参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件优化"><span class="toc-text">硬件优化</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>最近公司项目有几个逻辑运行的比较慢，于是通过对其执行的 SQL 进行分析，优化部分实现，以满足性能的要求，这里简单记录一下优化的过程和方法。</p>
+<a id="more"></a>
+<h2 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h2><p>1.首先找到需要优化的 SQL<br>云数据库一般都有提供慢 SQL 的页面<br>自己搭建的数据库就相对比较麻烦了，需要修改 my.cnf 中相关的配置文件来开启慢 SQL 记录功能。</p>
+<p>2.分析慢 SQL<br>筛选出有问题的 SQL，我们可以使用 MySQL 提供的 explain 查看 SQL 执行计划情况（关联表，表查询顺序、索引使用情况等）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from xxxTable;</span><br></pre></td></tr></table></figure></p>
+<p>返回结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; explain select * from xxxTable;</span><br><span class="line">+----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+</span><br><span class="line">| id | select_type | table    | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |</span><br><span class="line">+----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+</span><br><span class="line">|  1 | SIMPLE      | xxxTable | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |   100.00 | NULL  |</span><br><span class="line">+----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>关键的是 <code>type</code> 这一列<br>type：表的连接类型，其值，性能由高到底排列如下：<br>system：表只有一行记录，相当于系统表<br>const：通过索引一次就找到，只匹配一行数据<br>eq_ref：唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配。常用于主键或唯一索引扫描<br>ref：非唯一性索引扫描，返回匹配某个单独值的所有行。用于=、&lt; 或 &gt; 操作符带索引的列<br>range：只检索给定范围的行，使用一个索引来选择行。一般使用between、&gt;、&lt;情况<br>index：只遍历索引树<br>ALL：全表扫描，性能最差</p>
+<p>调整相应的 SQL 语句以满足高效的执行效率。</p>
+<h2 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h2><h3 id="语法方面"><a href="#语法方面" class="headerlink" title="语法方面"></a>语法方面</h3><p>1) 避免 SELECT *，需要什么数据，就查询对应的字段。<br>2) 小表驱动大表，即小的数据集驱动大的数据集。如：以 A，B 两表为例，两表通过 id 字段进行关联。<br>3) 一些情况下，可以使用连接代替子查询，因为使用 join，MySQL 不会在内存中创建临时表。<br>4) 适当添加冗余字段，减少表关联。<br>5) 合理使用索引。</p>
+<h3 id="数据库表结构设计"><a href="#数据库表结构设计" class="headerlink" title="数据库表结构设计"></a>数据库表结构设计</h3><p>1) 使用可以存下数据最小的数据类型<br>2) 使用简单的数据类型。int 要比 varchar 类型在mysql处理简单<br>3) 尽量使用 tinyint、smallint、mediumint 作为整数类型而非 int<br>4) 尽可能使用 not null 定义字段，因为 null 占用4字节空间<br>5) 尽量少用 text 类型,非用不可时最好考虑分表<br>6) 尽量使用 timestamp 而非 datetime<br>7) 单表不要有太多字段，建议在 20 以内</p>
+<h3 id="数据库参数"><a href="#数据库参数" class="headerlink" title="数据库参数"></a>数据库参数</h3><p>如果是云服务器的话，这一步就不用做了，云服务器都是由服务器提供商进行优化的。<br>自己搭建的数据库的话可以参照网上教程进行优化。</p>
+<h3 id="硬件优化"><a href="#硬件优化" class="headerlink" title="硬件优化"></a>硬件优化</h3><p>1）提升内存空间<br>2）提高硬盘的 IO 读取速度，比如说由机械硬盘更换成 SSD<br>3）提高 CPU 的处理性能</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/MySql/">MySql</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/03/05/Tomcat中URI不支持特殊字符解决方案/">
+        <span class="next-text nav-default">Tomcat中URI不支持特殊字符解决方案</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
