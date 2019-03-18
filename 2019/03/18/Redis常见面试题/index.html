@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Redis常见面试题">
+
+
+
+
+  <meta name="keywords" content="Redis, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2019/03/18/Redis常见面试题/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"category_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"server":{"port":4000,"log":false,"compress":false,"header":true},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Redis常见面试题 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Redis常见面试题
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-18
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-在互联网公司一般有已下应用："><span class="toc-text">Redis 在互联网公司一般有已下应用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-为什么会这么快？"><span class="toc-text">Redis 为什么会这么快？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-缓存雪崩该如何避免？"><span class="toc-text">Redis 缓存雪崩该如何避免？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存击穿如何避免？"><span class="toc-text">缓存击穿如何避免？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存与数据库双写一致"><span class="toc-text">缓存与数据库双写一致</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>在平时我们常常使用 Redis ，这里总结一下 Redis 的相关面试题和一些常见问题的解决方案。</p>
+<a id="more"></a>
+<h2 id="Redis-在互联网公司一般有已下应用："><a href="#Redis-在互联网公司一般有已下应用：" class="headerlink" title="Redis 在互联网公司一般有已下应用："></a>Redis 在互联网公司一般有已下应用：</h2><ul>
+<li>String：缓存、限流、计数器、分布式锁、分布式 Session</li>
+<li>Hash：存储用户信息、用户主页访问量、组合查询</li>
+<li>List：微博关注人时间轴列表、简单队列</li>
+<li>Set：踩、赞、标签、好友关系</li>
+<li>Zset：排行榜</li>
+</ul>
+<h2 id="Redis-为什么会这么快？"><a href="#Redis-为什么会这么快？" class="headerlink" title="Redis 为什么会这么快？"></a>Redis 为什么会这么快？</h2><ul>
+<li>Redis 是纯内存操作，并且异步持久化到硬盘中。</li>
+<li>Redis 是单线程，从而避免了多线程中上下文频繁切换的问题。</li>
+<li>Redis 底层数据结构简单，对数据的操作也简单。</li>
+<li>Redis 使用非阻塞多路 I/O 复用模型，效率高。</li>
+</ul>
+<h2 id="Redis-缓存雪崩该如何避免？"><a href="#Redis-缓存雪崩该如何避免？" class="headerlink" title="Redis 缓存雪崩该如何避免？"></a>Redis 缓存雪崩该如何避免？</h2><p>1.对缓存设置相同的过期时间，导致某段时间内缓存失效，请求全部走数据库</p>
+<p>在缓存的时候给过期时间加上一个随机值，这样就会大幅减少缓存再同一时间过期。</p>
+<p>2.Redis 挂掉了，请求全部走数据库</p>
+<p>事发前：实现 Redis 的高可用<br>事发中：本地缓存（ehcache）+限流（hystrix），尽可能的减少数据库被干掉的可能<br>事发后：使用 Redis 的持久化机制，重启后快速恢复缓存数据</p>
+<h2 id="缓存击穿如何避免？"><a href="#缓存击穿如何避免？" class="headerlink" title="缓存击穿如何避免？"></a>缓存击穿如何避免？</h2><p>缓存击穿是指查询一个一定不存在的数据，由于缓存不命中，并且从数据库查询不到的数据不写入缓存，这将导致这个不存在的数据每次请求都要到数据库去查询，失去了缓存的意义。</p>
+<p>1.对请求的参数使用布隆过滤器（BloomFilter）或者提前拦截这个请求，不让其请求到数据库。<br>2.我们也可以对这个空值对象缓存到 Redis，当然我们必须设置一个较短的过期时间，以防止这空值对象对业务数据产生影响。</p>
+<h2 id="缓存与数据库双写一致"><a href="#缓存与数据库双写一致" class="headerlink" title="缓存与数据库双写一致"></a>缓存与数据库双写一致</h2><p>一般的我们队读操作都有一个套路：<br>1.如果我们的数据在缓存中有，我们就直接取缓存中的。<br>2.如果缓存中没有我们想要的数据，我们会先去查询数据库，然后将数据库查询出来的数据写到缓存中。<br>3.最后将数据返回给用户请求。</p>
+<p>高并发情况下，无论是先操作数据库还是后操作数据库，再加上缓存更新，就更加容易导致数据库与缓存数据不一致的问题。如果每次更新了数据库都去更新缓存将是一个非常耗费性能的操作，不如将缓存直接删除掉。等下次读取的时候，缓存没有找到，再到数据库找，再将数据库中的数据缓存到 Redis 中。</p>
+<p>解决思路：<br>先更新数据库，再删除缓存<br>这样可以解决大部分的并发问题，但是也存在一定的概率（极小）导致缓存不一致的情况。</p>
+<ul>
+<li>缓存刚好失效</li>
+<li>线程 A 查询数据库，得到一个旧值</li>
+<li>线程 B 将新值写入数据库</li>
+<li>线程 B 删除缓存</li>
+<li>线程 A将插到的旧数据写入缓存</li>
+</ul>
+<p>先删除缓存，再删除数据库<br>这样其实也可以解决并发问题，但是其实也会有一定概率导致缓存不一致的情况。</p>
+<ul>
+<li>线程 A 删除了缓存</li>
+<li>线程 B 查询，发现缓存已不存在</li>
+<li>线程 B 去数据库查询得到旧数据</li>
+<li>线程 B 将旧数据写入缓存</li>
+<li>线程 A 将新值写入数据库</li>
+</ul>
+<p>但是上面两种方式都是在很极端的情况下才会发生的情况，如果在需要缓存和数据强一致性的情况下可以将删除缓存、修改数据库放在一个队列中去执行，实现串行化，这样就可以保证缓存和数据库的一致性。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Redis/">Redis</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/18/布隆过滤器/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">布隆过滤器</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/03/18/Sql的优化方法/">
+        <span class="next-text nav-default">Sql的优化方法</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>
