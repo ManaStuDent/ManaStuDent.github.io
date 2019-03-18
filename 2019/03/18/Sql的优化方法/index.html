@@ -17,12 +17,12 @@
 
 
 
-  <meta name="description" content="程序员的思维修炼">
+  <meta name="description" content="Sql的优化方法">
 
 
 
 
-  <meta name="keywords" content="生活, 一任阶前">
+  <meta name="keywords" content="MySql, 一任阶前">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/2016/09/19/程序员的思维修炼/">
+<link rel="canonical" href="http://www.co2fe.com/2019/03/18/Sql的优化方法/">
 
 
 
@@ -89,7 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"category_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":10,"order_by":"-date"},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title> 程序员的思维修炼 - 一任阶前 </title>
+    <title> Sql的优化方法 - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -187,13 +187,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          程序员的思维修炼
+          Sql的优化方法
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2016-09-19
+          2019-03-18
         </span>
         
         
@@ -202,42 +202,11 @@
 
     
     
-  <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2016年9月19日"><span class="toc-text">2016年9月19日</span></a></li></ol>
-    </div>
-  </div>
-
 
 
     <div class="post-content">
       
-        <p>一本值得再次阅读的书，一本需要反复实践的书。</p>
-<a id="more"></a>
-<h2 id="2016年9月19日"><a href="#2016年9月19日" class="headerlink" title="2016年9月19日"></a>2016年9月19日</h2><p>程序设计其实就是解决问题，它需要发明、创造和灵感。不论你从事什么职业，可能都需要创造性地去解决问题。</p>
-<p>这挖暖是我们自己的错误造成的。我们自身往往增加了程序设计的难度。随着软件行业的不断发展，我们似乎失去了做为一名软件开发人员所必须的最基础、最重要的技能。</p>
-<p>软件并不是在集成开发环境（IDE）或其他工具上设计出来的，它是在我们的大脑中想象和创造出来的。</p>
-<p>现在我们需要研究的正在难题是团队内部和团队间的交流，甚至更困难的问题是完全陈旧的思想。没有任何项目是孤岛，软件不可能独立地创造或者运行。</p>
-<p>学习能力、批判性的思考能力和创造力——所有这些扩展思维的能力，都取决于你自己。</p>
-<p>随着不断成长和适应，人们需要改变自己的习惯和方法。生命中没有什么是恒久不变的，只有死鱼才随波逐流，尝试改变自己。</p>
-<p>特别关注成为一名专家的关键要素：应用你自己的实践经验、理解情境和利用直觉。</p>
-<p>制造问题的思维方式无法用来解决问题。——爱因斯坦</p>
-<p>专家通常很难把他们的行为恰如其分地解释清楚，他们的很多行为是如此地熟练以至于已经变成无意识的了。他们的大量经验都是通过大脑的非语言、无意识区域存储的，这让我们难以观察，而专家则难以表述。</p>
-<p>从新手到专家要经历巨大的变化。在这个过程中，人们不只是“知道更多”或者获得了技术，而且还在如何认识世界，如何解决问题以及如何形成使用的思维模型等方面体验到根本性的区别。</p>
-<p>德雷福斯模型：新手 -&gt; 高级新手 -&gt; 胜任者 -&gt; 精通者 -&gt; 专家</p>
-<p>新手非常在乎他们是否成功。没有太多经验指导他们，他们不知道自己的行为是对是错。新手不是特别想要学习，他们只是想实现一个立竿见影的目标。他们不知道如何应付错误，所以出错的时候，他们非常容易慌乱。</p>
-<p>高级新手能够开始多多少少地摆脱固定的规则。他们可以独自尝试任务，但仍难以解决问题。</p>
-<p>高级新手能够根据过去的经验，逐步在正确的情境中采纳建议，但比较吃力。同时，他们呢能够开始形成一些总体规则，但不是“全貌”。他们没有完全的理解，而却的却不想有。如果你试图把一个更大的情境强加给高级新手，他们呢可能会认为该情境与那些原则不相关而忽略掉。</p>
-<p>第三阶段从业者现在能够建立问题域的概念模型，并有效地使用它们。他们可以独立解决自己遇到的往年提，并开始考虑如何解决新的问题——那些他们之前没有遇到的问题。他们开始寻求和运用专家的意见，并有效利用。</p>
-<p>胜任者——他们是团队里的好人，既可以指导新手，也不会经常骚扰专家。</p>
-<p>处于精通水平的从业人员有一向重大突破：他们能够纠正以往不好的工作表现。他们会反思以前是如何做的，并修改其做法，期望下一次表现得更好。到这个阶段，自我改进才会出现。</p>
-<p>伴随着向他人学习的能力而来的，是理解和运用格言经验之谈的能力。</p>
-<p>精通者可以充分利用思考和反馈，这些都是敏捷方法的核心。</p>
-<p>敏捷开发就是在一个高度协作的环境中，不断地使用反馈进行自我调整和完善。但是基于以往表现进行自我纠正，只在较高的技能水平上才能实现。</p>
-<p>专家凭直觉工作。</p>
-<p>专家知道哪些是无关紧要的细节，哪些是非创重要的细节。也许不是有意识的，但是专家知道应该关注哪些细节，可以放心地忽略哪些细节。专家非常擅长做有针对性的特征匹配。</p>
-<p>无知往往来自于自信而不是知识。</p>
+        <p>1.比较运算能用 <code>=</code> 就不用 <code>&lt;&gt;</code>。<br>2.明知就只有一条查询结果就使用 <code>limit 1</code>，这样可以避免全表扫描。<br>3.建表时为列选择合适的数据类型。<br>4.使用 <code>union all</code> 代替 <code>union</code>，如果结果集允许重复的话。<code>union</code> 会对结果集去重，效率很低。<br>5.为获得相同结果集的多次执行，请保持 SQL 语句前后一致。<br>比如第一次查询 <code>select * from u_user where name = &#39;张三&#39; and age = &#39;21&#39;</code>，那么第二次查询请保持 <code>name</code> 和 <code>age</code> 的查询顺序不便，这样可以使用查询缓存，提高查询效率。<br>6.劲量避免 <code>select *</code>。<br>7.使用 <code>Explain</code> 关键字去查看执行计划，根据执行计划对 SQL 进行优化。<br>8.合理使用 <code>in</code>、<code>exists</code> 关键字，<code>exists</code> 适合外表小而内表大的情况。而 <code>not in</code> 和 <code>not exists</code> 更推荐使用 <code>not exists</code>。<br>9.避免在 where 字句中对字段进行 <code>null</code> 值判断，对 <code>null</code> 值判断将会进行全表扫描。<br>10.不建议使用 <code>%</code> 前缀模糊查询，这种查询会导致索引失效而进行全表扫描。可以使用 <code>like name%</code>。但是如果需要进行前缀模糊查询的时候，我们可以对需要模糊查询的列添加全文索引。<br>11.劲量使用小表去驱动大表，比如 <code>A left join B</code> 那么 <code>A</code> 表最小是小表。</p>
 
       
     </div>
@@ -257,7 +226,7 @@
         
           <div class="post-tags">
             
-              <a href="/tags/生活/">生活</a>
+              <a href="/tags/MySql/">MySql</a>
             
           </div>
         
@@ -265,15 +234,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2016/09/25/呆伯特法则/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">呆伯特法则</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2016/09/14/JRebel/">
-        <span class="next-text nav-default">JRebel</span>
+      <a class="next" href="/2019/03/07/数据库优化/">
+        <span class="next-text nav-default">数据库优化</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
