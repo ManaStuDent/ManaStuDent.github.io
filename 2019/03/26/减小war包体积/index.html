@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="爱生活，爱Java，认真过好每一天。">
+  <meta name="description" content="减小war包体积">
 
 
 
+
+  <meta name="keywords" content="Java, 一任阶前">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/tags/英雄/">
+<link rel="canonical" href="http://www.co2fe.com/2019/03/26/减小war包体积/">
 
 
 
@@ -87,11 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"index_generator":{"per_page":10,"order_by":"-date"},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title>
-  
-    英雄 · 一任阶前
-  
-</title>
+    <title> 减小war包体积 - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -185,47 +183,84 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          减小war包体积
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title tag">
-          <h2 class="archive-name">英雄</h2>
-        </div>
-      
-    
-
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2016-09-27
-          
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-26
         </span>
-        <span class="archive-post-title">
-          <a href="/2016/09/27/英雄/" class="archive-post-link">
-            英雄
-          </a>
-        </span>
+        
+        
       </div>
-    
-  </section>
+    </header>
 
-  
-  <nav class="pagination">
     
+    
+
+
+    <div class="post-content">
+      
+        <p>现在使用 Jenkins 自动化部署项目有这样一个问题，那就是项目使用到的 jar 包比较多，这就导致每次将 war 包上传到服务器上的时间就比较长。今天无意间看到一个方法可以大幅减少 war 包大小，提升效率。</p>
+<a id="more"></a>
+<p>方法很简单就是将第三方 jar 包直接放到 tomcat 的 lib 目录下，而不是放在项目的 lib 文件夹下，这样就可以让一个 war 包显著的缩小体积，并且不影响项目本身。</p>
+<p>在 <code>tomcat_home/lib</code> 下新建自定义jar包文件，比如 <code>jsdoctor</code>，导入项目所需其他jar包(以后有新增的话，单独再导一次)<br>修改 <code>tomcat_home/conf/catalina.properties</code> 在 <code>shared.loader</code> 后面加上 <code>${catalina.base}/lib/jsdoctor/*.jar</code></p>
+<p>下面是一段我自己编写的 shell 脚本，目的是去除 war 包中的第三方 jar 包并且保留项目自己模块的 jar。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 将 core 和 common 包移动到临时位置</span><br><span class="line">mv /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin-1.0-SNAPSHOT/WEB-INF/lib/jsdoctor-common-1.0-SNAPSHOT.jar /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target</span><br><span class="line"></span><br><span class="line">mv /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin-1.0-SNAPSHOT/WEB-INF/lib/jsdoctor-core-1.0-SNAPSHOT.jar /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target</span><br><span class="line"></span><br><span class="line"># 删除 lib 下所有文件</span><br><span class="line">rm -rf /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin-1.0-SNAPSHOT/WEB-INF/lib/*</span><br><span class="line"></span><br><span class="line"># 删除生成的 war 包</span><br><span class="line">rm -rf /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin.war</span><br><span class="line"></span><br><span class="line"># 将 core 和 common 包移动回来</span><br><span class="line">mv /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-common-1.0-SNAPSHOT.jar /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin-1.0-SNAPSHOT/WEB-INF/lib/</span><br><span class="line"></span><br><span class="line">mv /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-core-1.0-SNAPSHOT.jar /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin-1.0-SNAPSHOT/WEB-INF/lib/</span><br><span class="line"></span><br><span class="line"># 打包</span><br><span class="line">cd /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target/jsdoctor-platform-admin-1.0-SNAPSHOT</span><br><span class="line">zip -q -r jsdoctor-platform-admin.war ./*</span><br><span class="line">mv jsdoctor-platform-admin.war /root/.jenkins/workspace/jsdoctor/jsdoctor-platform-admin/target</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/03/20/阻塞、非阻塞和同步、异步的区别/">
+        <span class="next-text nav-default">阻塞、非阻塞和同步、异步的区别</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
