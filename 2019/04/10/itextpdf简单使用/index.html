@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="itextpdf简单使用">
+
+
+
+
+  <meta name="keywords" content="Java, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2019/04/10/itextpdf简单使用/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"index_generator":{"per_page":20,"order_by":"-date"},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> itextpdf简单使用 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          itextpdf简单使用
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-10
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#官方-tutorial"><span class="toc-text">官方 tutorial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部分代码"><span class="toc-text">部分代码</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>前不久公司需要为用户生成一份报告，报告的模板是统一的，内容不同，并且用户可以打印。于是调研了有关 PDF 生成的方式，这里简单记录一下。方案是使用 itextpdf 这个类库对 PDF 模板进行内容填充，从而达到效果。demo 代码中有用到 zxing 进行二维码的生成，多张 PDF 合并成一张 PDF 等。</p>
+<a id="more"></a>
+<h2 id="官方-tutorial"><a href="#官方-tutorial" class="headerlink" title="官方 tutorial"></a>官方 tutorial</h2><p><a href="https://itextpdf.com/en/resources/books/itext-7-jump-start-tutorial-java/examples-itext-7-jump-start-tutorial" target="_blank" rel="noopener">Examples iText 7 jump-start tutorial</a></p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>准备 PDF From 域需要 AdobeAcrobat DC 中的高级功能，普通版无法添加 From 域。</p>
+<h2 id="部分代码"><a href="#部分代码" class="headerlink" title="部分代码"></a>部分代码</h2><p>下面的代码实现了 PDF 填充，多张 PDF 合并成一个 PDF，PDF 中添加图片，根据 URL 生成二维码图片。<br>PDF 模板下载地址：<a href="http://image.co2fe.com/pdf-template-form.pdf" target="_blank" rel="noopener">模板</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">package pdf;</span><br><span class="line"></span><br><span class="line">import com.alibaba.druid.util.StringUtils;</span><br><span class="line">import com.itextpdf.forms.PdfAcroForm;</span><br><span class="line">import com.itextpdf.forms.fields.PdfFormField;</span><br><span class="line">import com.itextpdf.io.image.ImageDataFactory;</span><br><span class="line">import com.itextpdf.io.source.ByteArrayOutputStream;</span><br><span class="line">import com.itextpdf.kernel.font.PdfFont;</span><br><span class="line">import com.itextpdf.kernel.font.PdfFontFactory;</span><br><span class="line">import com.itextpdf.kernel.pdf.PdfDocument;</span><br><span class="line">import com.itextpdf.kernel.pdf.PdfReader;</span><br><span class="line">import com.itextpdf.kernel.pdf.PdfWriter;</span><br><span class="line">import com.itextpdf.kernel.utils.PdfMerger;</span><br><span class="line">import com.itextpdf.layout.Document;</span><br><span class="line">import com.itextpdf.layout.element.Image;</span><br><span class="line">import com.itextpdf.layout.element.Paragraph;</span><br><span class="line"></span><br><span class="line">import java.io.ByteArrayInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 填充 pdf 并插入 二维码，如果有多个 pdf 进行合并操作</span><br><span class="line"> *</span><br><span class="line"> * @author Chengloong</span><br><span class="line"> */</span><br><span class="line">public class PdfTempleTest &#123;</span><br><span class="line"></span><br><span class="line">	private static final int NORMAL_FONT_SIZE = 12;</span><br><span class="line">	private static final int TWO_ROWS_FONT_SIZE = 7;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">		//生成二维码</span><br><span class="line">		QRCodeUtil.generateQRCode(&quot;https://blog.csdn.net/jinqilin721/article/details/78841028&quot;, 600, 600, &quot;jpg&quot;, &quot;D:\\qr2.png&quot;);</span><br><span class="line"></span><br><span class="line">		//填充 pdf 模板</span><br><span class="line">		fillTemplate();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 利用模板生成pdf</span><br><span class="line">	 */</span><br><span class="line">	public static void fillTemplate() &#123;</span><br><span class="line">		// 模板路径</span><br><span class="line">		String templatePath = &quot;D:/pdf-template-form.pdf&quot;;</span><br><span class="line"></span><br><span class="line">		List&lt;ByteArrayOutputStream&gt; baosList = new ArrayList&lt;&gt;();</span><br><span class="line">		try &#123;</span><br><span class="line"></span><br><span class="line">			//根据路径生成 pdf</span><br><span class="line">//			PdfWriter writer = new PdfWriter(newPDFPath);</span><br><span class="line"></span><br><span class="line">			//内存中创建 PDF</span><br><span class="line">			ByteArrayOutputStream baos = new ByteArrayOutputStream();</span><br><span class="line">			PdfWriter writer = new PdfWriter(baos);</span><br><span class="line">			PdfReader reader = new PdfReader(templatePath);</span><br><span class="line">			PdfDocument pdf = new PdfDocument(reader, writer);</span><br><span class="line">			PdfAcroForm form = PdfAcroForm.getAcroForm(pdf, true);</span><br><span class="line">			Map&lt;String, PdfFormField&gt; fields = form.getFormFields();</span><br><span class="line"></span><br><span class="line">			//处理中文问题</span><br><span class="line">			PdfFont font = PdfFontFactory.createFont(&quot;STSongStd-Light&quot;, &quot;UniGB-UCS2-H&quot;, false);</span><br><span class="line"></span><br><span class="line">			for (String name : fields.keySet()) &#123;</span><br><span class="line">				//获取文本域名称</span><br><span class="line">				if (StringUtils.equals(name, &quot;name&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;李四&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;sex&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;男&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;id_number&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;320123199309223211&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;address&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;江苏省无锡市滨湖区第一人民医院&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;input_1&quot;)) &#123;</span><br><span class="line">					//超过一行的文字使用 7 号字体</span><br><span class="line">					fields.get(name).setValue(&quot;盐城继续教育公需课我是一段很长很长很长超过一行的文字&quot;).setFont(font).setFontSize(TWO_ROWS_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;input_2&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;专业类别&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;input_3&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;学习形式&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;input_4&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;2&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;input_5&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;20180909&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				if (StringUtils.equals(name, &quot;input_6&quot;)) &#123;</span><br><span class="line">					fields.get(name).setValue(&quot;优秀&quot;).setFont(font).setFontSize(NORMAL_FONT_SIZE);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			//生成的 pdf 不可以编辑</span><br><span class="line">			form.flattenFields();</span><br><span class="line"></span><br><span class="line">			//插入图片</span><br><span class="line">			Document document = new Document(pdf);</span><br><span class="line">			Image image = new Image(ImageDataFactory.create(&quot;D:\\qr2.png&quot;));</span><br><span class="line">			image.setWidth(80);</span><br><span class="line">			image.setHeight(80);</span><br><span class="line"></span><br><span class="line">			Paragraph paragraph = new Paragraph().add(image);</span><br><span class="line">			paragraph.setPaddings(140, 0, 0, 550);</span><br><span class="line"></span><br><span class="line">			document.add(paragraph);</span><br><span class="line">			document.close();</span><br><span class="line">			pdf.close();</span><br><span class="line"></span><br><span class="line">			baosList.add(baos);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">			mergerPDF(baosList);</span><br><span class="line"></span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 合并 PDF</span><br><span class="line">     */</span><br><span class="line">    public static void mergerPDF(List&lt;ByteArrayOutputStream&gt; baosList) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            PdfWriter writer = new PdfWriter(&quot;D:\\merger.pdf&quot;);</span><br><span class="line">            PdfDocument pdf = new PdfDocument(writer);</span><br><span class="line"></span><br><span class="line">            PdfMerger merger = new PdfMerger(pdf);</span><br><span class="line"></span><br><span class="line">//			这里可以直接读取已存在的文件</span><br><span class="line">//			PdfMerger merger = new PdfMerger(pdf);</span><br><span class="line">//			PdfDocument firstSourcePdf = new PdfDocument(new PdfReader(&quot;D:\\photo1.pdf&quot;));</span><br><span class="line">//			merger.merge(firstSourcePdf, 1, firstSourcePdf.getNumberOfPages());</span><br><span class="line"></span><br><span class="line">            for (ByteArrayOutputStream byteArrayOutputStream : baosList) &#123;</span><br><span class="line">                PdfDocument firstSourcePdf = new PdfDocument(new PdfReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray())));</span><br><span class="line">                merger.merge(firstSourcePdf, 1, firstSourcePdf.getNumberOfPages());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            pdf.close();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br></pre></td><td class="code"><pre><span class="line">package pdf;</span><br><span class="line"></span><br><span class="line">import java.awt.Graphics2D;</span><br><span class="line">import java.awt.geom.AffineTransform;</span><br><span class="line">import java.awt.image.BufferedImage;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.OutputStream;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Hashtable;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import javax.imageio.ImageIO;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import com.google.zxing.BarcodeFormat;</span><br><span class="line">import com.google.zxing.Binarizer;</span><br><span class="line">import com.google.zxing.BinaryBitmap;</span><br><span class="line">import com.google.zxing.DecodeHintType;</span><br><span class="line">import com.google.zxing.EncodeHintType;</span><br><span class="line">import com.google.zxing.LuminanceSource;</span><br><span class="line">import com.google.zxing.MultiFormatReader;</span><br><span class="line">import com.google.zxing.MultiFormatWriter;</span><br><span class="line">import com.google.zxing.Result;</span><br><span class="line">import com.google.zxing.common.BitMatrix;</span><br><span class="line">import com.google.zxing.common.HybridBinarizer;</span><br><span class="line">import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 二维码生成工具类</span><br><span class="line"> */</span><br><span class="line">public final class QRCodeUtil extends LuminanceSource &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(QRCodeUtil.class);</span><br><span class="line"></span><br><span class="line">    // 二维码颜色</span><br><span class="line">    private static final int BLACK = 0xFF000000;</span><br><span class="line">    // 二维码颜色</span><br><span class="line">    private static final int WHITE = 0xFFFFFFFF;</span><br><span class="line"></span><br><span class="line">    private final BufferedImage image;</span><br><span class="line">    private final int left;</span><br><span class="line">    private final int top;</span><br><span class="line"></span><br><span class="line">    public QRCodeUtil(BufferedImage image) &#123;</span><br><span class="line">        this(image, 0, 0, image.getWidth(), image.getHeight());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public QRCodeUtil(BufferedImage image, int left, int top, int width, int height) &#123;</span><br><span class="line">        super(width, height);</span><br><span class="line">        int sourceWidth = image.getWidth();</span><br><span class="line">        int sourceHeight = image.getHeight();</span><br><span class="line">        if (left + width &gt; sourceWidth || top + height &gt; sourceHeight) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Crop rectangle does not fit within image data.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int y = top; y &lt; top + height; y++) &#123;</span><br><span class="line">            for (int x = left; x &lt; left + width; x++) &#123;</span><br><span class="line">                if ((image.getRGB(x, y) &amp; 0xFF000000) == 0) &#123;</span><br><span class="line">                    image.setRGB(x, y, 0xFFFFFFFF); // = white</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        this.image = new BufferedImage(sourceWidth, sourceHeight, BufferedImage.TYPE_BYTE_GRAY);</span><br><span class="line">        this.image.getGraphics().drawImage(image, 0, 0, null);</span><br><span class="line">        this.left = left;</span><br><span class="line">        this.top = top;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public byte[] getRow(int y, byte[] row) &#123;</span><br><span class="line">        if (y &lt; 0 || y &gt;= getHeight()) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Requested row is outside the image: &quot; + y);</span><br><span class="line">        &#125;</span><br><span class="line">        int width = getWidth();</span><br><span class="line">        if (row == null || row.length &lt; width) &#123;</span><br><span class="line">            row = new byte[width];</span><br><span class="line">        &#125;</span><br><span class="line">        image.getRaster().getDataElements(left, top + y, width, 1, row);</span><br><span class="line">        return row;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public byte[] getMatrix() &#123;</span><br><span class="line">        int width = getWidth();</span><br><span class="line">        int height = getHeight();</span><br><span class="line">        int area = width * height;</span><br><span class="line">        byte[] matrix = new byte[area];</span><br><span class="line">        image.getRaster().getDataElements(left, top, width, height, matrix);</span><br><span class="line">        return matrix;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isCropSupported() &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public LuminanceSource crop(int left, int top, int width, int height) &#123;</span><br><span class="line">        return new QRCodeUtil(image, this.left + left, this.top + top, width, height);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isRotateSupported() &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public LuminanceSource rotateCounterClockwise() &#123;</span><br><span class="line">        int sourceWidth = image.getWidth();</span><br><span class="line">        int sourceHeight = image.getHeight();</span><br><span class="line">        AffineTransform transform = new AffineTransform(0.0, -1.0, 1.0, 0.0, 0.0, sourceWidth);</span><br><span class="line">        BufferedImage rotatedImage = new BufferedImage(sourceHeight, sourceWidth, BufferedImage.TYPE_BYTE_GRAY);</span><br><span class="line">        Graphics2D g = rotatedImage.createGraphics();</span><br><span class="line">        g.drawImage(image, transform, null);</span><br><span class="line">        g.dispose();</span><br><span class="line">        int width = getWidth();</span><br><span class="line">        return new QRCodeUtil(rotatedImage, top, sourceWidth - (left + width), getHeight(), width);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @param matrix</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    private static BufferedImage toBufferedImage(BitMatrix matrix) &#123;</span><br><span class="line">        int width = matrix.getWidth();</span><br><span class="line">        int height = matrix.getHeight();</span><br><span class="line">        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line">        for (int x = 0; x &lt; width; x++) &#123;</span><br><span class="line">            for (int y = 0; y &lt; height; y++) &#123;</span><br><span class="line">                image.setRGB(x, y, matrix.get(x, y) ? BLACK : WHITE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return image;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 生成二维码图片</span><br><span class="line">     *</span><br><span class="line">     * @param matrix</span><br><span class="line">     * @param format</span><br><span class="line">     * @param file</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    public static void writeToFile(BitMatrix matrix, String format, File file) throws IOException &#123;</span><br><span class="line">        BufferedImage image = toBufferedImage(matrix);</span><br><span class="line">        if (!ImageIO.write(image, format, file)) &#123;</span><br><span class="line">            throw new IOException(&quot;Could not write an image of format &quot; + format + &quot; to &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 生成二维码图片流</span><br><span class="line">     *</span><br><span class="line">     * @param matrix</span><br><span class="line">     * @param format</span><br><span class="line">     * @param stream</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    public static void writeToStream(BitMatrix matrix, String format, OutputStream stream) throws IOException &#123;</span><br><span class="line">        BufferedImage image = toBufferedImage(matrix);</span><br><span class="line">        if (!ImageIO.write(image, format, stream)) &#123;</span><br><span class="line">            throw new IOException(&quot;Could not write an image of format &quot; + format);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根据内容，生成指定宽高、指定格式的二维码图片</span><br><span class="line">     *</span><br><span class="line">     * @param text   内容</span><br><span class="line">     * @param width  宽</span><br><span class="line">     * @param height 高</span><br><span class="line">     * @param format 图片格式</span><br><span class="line">     * @return 生成的二维码图片路径</span><br><span class="line">     * @throws Exception</span><br><span class="line">     */</span><br><span class="line">    public static String generateQRCode(String text, int width, int height, String format, String pathName)</span><br><span class="line">            throws Exception &#123;</span><br><span class="line">        Hashtable&lt;EncodeHintType, Object&gt; hints = new Hashtable&lt;&gt;();</span><br><span class="line">        hints.put(EncodeHintType.CHARACTER_SET, &quot;utf-8&quot;);// 指定编码格式</span><br><span class="line">        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);// 指定纠错等级</span><br><span class="line">        hints.put(EncodeHintType.MARGIN, 0); // 白边大小，取值范围0~4</span><br><span class="line">        BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);</span><br><span class="line">        File outputFile = new File(pathName);</span><br><span class="line">        writeToFile(bitMatrix, format, outputFile);</span><br><span class="line">        return pathName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 输出二维码图片流</span><br><span class="line">     *</span><br><span class="line">     * @param text     二维码内容</span><br><span class="line">     * @param width    二维码宽</span><br><span class="line">     * @param height   二维码高</span><br><span class="line">     * @param format   图片格式eg: png, jpg, gif</span><br><span class="line">     * @param response HttpServletResponse</span><br><span class="line">     * @throws Exception</span><br><span class="line">     */</span><br><span class="line">    public static void generateQRCode(String text, int width, int height, String format, HttpServletResponse response)</span><br><span class="line">            throws Exception &#123;</span><br><span class="line">        Hashtable&lt;EncodeHintType, Object&gt; hints = new Hashtable&lt;&gt;();</span><br><span class="line">        hints.put(EncodeHintType.CHARACTER_SET, &quot;utf-8&quot;);// 指定编码格式</span><br><span class="line">        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);// 指定纠错等级</span><br><span class="line">        hints.put(EncodeHintType.MARGIN, 1); // 白边大小，取值范围0~4</span><br><span class="line">        BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);</span><br><span class="line">        writeToStream(bitMatrix, format, response.getOutputStream());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解析指定路径下的二维码图片</span><br><span class="line">     *</span><br><span class="line">     * @param filePath 二维码图片路径</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String parseQRCode(String filePath) &#123;</span><br><span class="line">        String content = &quot;&quot;;</span><br><span class="line">        try &#123;</span><br><span class="line">            File file = new File(filePath);</span><br><span class="line">            BufferedImage image = ImageIO.read(file);</span><br><span class="line">            LuminanceSource source = new QRCodeUtil(image);</span><br><span class="line">            Binarizer binarizer = new HybridBinarizer(source);</span><br><span class="line">            BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);</span><br><span class="line">            Map&lt;DecodeHintType, Object&gt; hints = new HashMap&lt;&gt;();</span><br><span class="line">            hints.put(DecodeHintType.CHARACTER_SET, &quot;UTF-8&quot;);</span><br><span class="line">            MultiFormatReader formatReader = new MultiFormatReader();</span><br><span class="line">            Result result = formatReader.decode(binaryBitmap, hints);</span><br><span class="line"></span><br><span class="line">            logger.info(&quot;result 为：&quot; + result.toString());</span><br><span class="line">            logger.info(&quot;resultFormat 为：&quot; + result.getBarcodeFormat());</span><br><span class="line">            logger.info(&quot;resultText 为：&quot; + result.getText());</span><br><span class="line">            // 设置返回值</span><br><span class="line">            content = result.getText();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            logger.error(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        return content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String text = &quot;hello world!&quot;; // 随机生成验证码</span><br><span class="line">        System.out.println(&quot;随机码： &quot; + text);</span><br><span class="line">        int width = 100; // 二维码图片的宽</span><br><span class="line">        int height = 100; // 二维码图片的高</span><br><span class="line">        String format = &quot;png&quot;; // 二维码图片的格式</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            // 生成二维码图片，并返回图片路径</span><br><span class="line">            String pathName = generateQRCode(text, width, height, format, &quot;D:/new.png&quot;);</span><br><span class="line">            System.out.println(&quot;生成二维码的图片路径： &quot; + pathName);</span><br><span class="line"></span><br><span class="line">            String content = parseQRCode(pathName);</span><br><span class="line">            System.out.println(&quot;解析出二维码的图片的内容为： &quot; + content);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/04/10/MacLaunchpad图标大小调整/">
+        <span class="next-text nav-default">MacLaunchpad图标大小调整</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>
