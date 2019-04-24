@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="爱生活，爱Java，认真过好每一天。">
+  <meta name="description" content="Thread类">
 
 
 
+
+  <meta name="keywords" content="Java, 一任阶前">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/tags/zsh/">
+<link rel="canonical" href="http://www.co2fe.com/2019/04/24/Thread类/">
 
 
 
@@ -87,11 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"index_generator":{"per_page":20,"order_by":"-date"},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title>
-  
-    zsh · 一任阶前
-  
-</title>
+    <title> Thread类 - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -185,47 +183,92 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Thread类
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title tag">
-          <h2 class="archive-name">zsh</h2>
-        </div>
-      
-    
-
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2017-03-17
-          
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-24
         </span>
-        <span class="archive-post-title">
-          <a href="/2017/03/17/zsh-的简单介绍/" class="archive-post-link">
-            zsh 的简单介绍
-          </a>
-        </span>
+        
+        
       </div>
-    
-  </section>
+    </header>
 
-  
-  <nav class="pagination">
     
+    
+
+
+    <div class="post-content">
+      
+        <p>Java 多线程最基本的类就是位于 java.lang 包下的 Thread 类 ，这个类继承 Object 类，实现了 Runnable。</p>
+<p>public class Thread extends Object implements Runnable</p>
+<p>Thread 有优先级的区分，优先级较高的线程优先于优先级较低的线程执行（但不是绝对的）。每一个线程都可以作为一个守护线程。</p>
+<a id="more"></a>
+<p>创建线程的方式有两种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class PrimeThread extends Thread &#123;</span><br><span class="line">         long minPrime;</span><br><span class="line">         PrimeThread(long minPrime) &#123;</span><br><span class="line">             this.minPrime = minPrime;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         public void run() &#123;</span><br><span class="line">             // compute primes larger than minPrime</span><br><span class="line">              . . .</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PrimeThread p = new PrimeThread(143);</span><br><span class="line">p.start();</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class PrimeRun implements Runnable &#123;</span><br><span class="line">    long minPrime;</span><br><span class="line">    PrimeRun(long minPrime) &#123;</span><br><span class="line">        this.minPrime = minPrime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        // compute primes larger than minPrime</span><br><span class="line">         . . .</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PrimeRun p = new PrimeRun(143);</span><br><span class="line">new Thread(p).start();</span><br></pre></td></tr></table></figure>
+<p>Thread 类有以下几种构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Thread()</span><br><span class="line">Thread(Runnable target)</span><br><span class="line">Thread(Runnable target, String name)</span><br><span class="line">Thread(String name)</span><br><span class="line">Thread(ThreadGroup group, Runnable target)</span><br><span class="line">Thread(ThreadGroup group, Runnable target, String name)</span><br><span class="line">Thread(ThreadGroup group, Runnable target, String name, long stackSize)</span><br><span class="line">Thread(ThreadGroup group, String name)</span><br></pre></td></tr></table></figure>
+<p>Thread 可以接收一个 Runnable 的 target 作为参数，这样可以有效的将业务实现和 Thread 类进行解耦。所以推荐使用这种方式进行线程的创建。</p>
+<p>name 参数可以指定该线程的名称，如果不指定 Thread 类将会调用 threadInitNumber 这个成员变量来计数当前线程的名称，第一个就是 thread-0，第二个就是 thread-1，依次类推。</p>
+<p>ThreadGroup 定义了该线程属于哪个 group 中，同一组的线程可以批量停止或者挂起。</p>
+<p>stackSize 是一个很有意思的参数。它是否起作用高度依赖于平台，在某些平台上该参数将不会起作用。简单的理解就是这个参数可以左右栈深度，较小的栈深度，JVM能支持更多的线程；较大的栈深度，单个线程拥有更大的递归深度，但是带来的是较少的线程同时存活。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/04/10/itextpdf简单使用/">
+        <span class="next-text nav-default">itextpdf简单使用</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
