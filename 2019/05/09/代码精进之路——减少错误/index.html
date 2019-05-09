@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="代码精进之路——减少错误">
+
+
+
+
+  <meta name="keywords" content="代码精进之路, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2019/05/09/代码精进之路——减少错误/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"category_generator":{"per_page":20},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":20,"order_by":"-date"},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"tag_generator":{"per_page":20},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 代码精进之路——减少错误 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          代码精进之路——减少错误
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-05-09
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何减少错误"><span class="toc-text">如何减少错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一：程序员"><span class="toc-text">第一：程序员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二：编译器"><span class="toc-text">第二：编译器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三：回归测试"><span class="toc-text">第三：回归测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四：代码评审"><span class="toc-text">第四：代码评审</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五：代码分析"><span class="toc-text">第五：代码分析</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>编写优秀的代码，不能仅仅依靠 一个人的战斗。高质量的代码，依赖于高质量的流水线。作为一个程序员，大家都希望写出优秀的代码。不被 bug 所困扰，可是如何才能编写出没有错误的代码呢？</p>
+<a id="more"></a>
+<h3 id="如何减少错误"><a href="#如何减少错误" class="headerlink" title="如何减少错误"></a>如何减少错误</h3><p>先来看一段有问题的代码：</p>
+<p><img src="http://image.co2fe.com/20190509155740798398823.jpg" alt=" 20190509155740798398823.jpg "></p>
+<p>其实这段代码非常简单，它有两个判断语句，如果判断条件成立，那就执行“goto fail”语句，如果不成立，那就跳过判断语句继续执行。上面的“goto fail”语句，它的意 思是略过它之后的所有语句，直接跳转到标有“fail”语句的地方，也就是第 6 行。</p>
+<p>这一段乍一看没有啥问题，但是我们仔细看一下第三行，是不是就看出了问题，如果还没有看出来，那我们就将代码格式化一下。</p>
+<p><img src="http://image.co2fe.com/2019050915574081072254.jpg" alt="2019050915574081072254.jpg"></p>
+<p>是不是一下就清晰了，第三行明显是一个问题，无论第一行如何判断，代码最终都会进入 fail 的代码片段。这显然是一个非常低级的错误。无论是资深的程序员，还是刚刚入行的菜鸟都是会犯错的，无非是高级错误后者低级错误罢了。那么我们怎么样才能减少错误的产生呢？</p>
+<p>范老师给出了五点建议：</p>
+<h3 id="第一：程序员"><a href="#第一：程序员" class="headerlink" title="第一：程序员"></a>第一：程序员</h3><p>提高程序员的修养，是一个永不过时的课题。从别人的失败和自己的失败中学习、积累、 提高，是一个程序员成长的必修课。如果书写上述代码的程序员使用正确的缩进，在 if 语句后面使用大括号。那么这个问题是不是就不再是问题了？</p>
+<p><img src="http://image.co2fe.com/20190509155740838550390.jpg" alt="20190509155740838550390.jpg"></p>
+<p>魔鬼藏于细节。很多时候， 优秀的代码源于我们对细节的热情和执着。可能，你遇到的或 者想到的问题，不是每一个都有完美的答案或者解决办法。但是，如果你能够找到哪怕仅 仅是一个小问题的一个小小的改进办法，都有可能会给你的代码质量带来巨大的提升和改变。</p>
+<h3 id="第二：编译器"><a href="#第二：编译器" class="headerlink" title="第二：编译器"></a>第二：编译器</h3><p>现在很多现代化的编辑器，比如 IntelliJ IDEA 等。他们都是非常强大的，可以在编译器就发现很多代码的缺陷或者是错误，并且给出明确的提示。像上面如果 if 后面没有大括号，或者是某一段代码永远都不会执行。那么编辑器就会给出明确的警告或者是错误，程序员如果将这些警告看在眼里，那么很多错误就可以防范于未然，扼杀在萌芽之中。</p>
+<h3 id="第三：回归测试"><a href="#第三：回归测试" class="headerlink" title="第三：回归测试"></a>第三：回归测试</h3><p>对关键代码进行单元测试，以确保关键功能能够正确执行。软件测试没有办法覆盖所有的使用场景。但是，我们千万要覆盖关键逻辑和负面清单。一 个没有良好回归测试的软件，很难保证代码变更的质量；也会使得代码变更充满不确定 性，从而大幅地提高代码维护的成本。</p>
+<h3 id="第四：代码评审"><a href="#第四：代码评审" class="headerlink" title="第四：代码评审"></a>第四：代码评审</h3><p>代码评审是一个有效的在软件研发过程中抵御人类缺陷的制度。我一直都推崇使用代码评审，这样不仅对代码质量提供保障，也对程序员的成长有莫大的帮助。新手可以从老手那里学到很多技巧和代码编写的规范；老手可以不断磨练自己的设计能力和编写优秀代码的机会，通过教学巩固自己的知识体系。毕竟一个知识点自己会写还不算可以，教会别人，和别人说清楚，这才是真正的懂。</p>
+<h3 id="第五：代码分析"><a href="#第五：代码分析" class="headerlink" title="第五：代码分析"></a>第五：代码分析</h3><p>静态代码分析（Static Code Analysis）是通过对源代码的检查来发现潜在问题的一种软 件质量保障方式。有很多静态代码分析工具可以帮助你检查代码缺陷，比如说商业软件 Coverity，以及开源软件 FindBugs。这些静态代码分析器都可以在上线前找到代码中潜在的问题。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/代码精进之路/">代码精进之路</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/05/09/代码精进之路——关键的六个特质/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">代码精进之路——关键的六个特质</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/05/09/代码精进之路——开篇/">
+        <span class="next-text nav-default">代码精进之路——开篇</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="代码精进之路——如何写好代码">
+
+
+
+
+  <meta name="keywords" content="代码精进之路, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2019/05/09/代码精进之路——如何写好代码/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"category_generator":{"per_page":20},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":20,"order_by":"-date"},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"tag_generator":{"per_page":20},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 代码精进之路——如何写好代码 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          代码精进之路——如何写好代码
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-05-09
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码规范"><span class="toc-text">代码规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#起好名字"><span class="toc-text">起好名字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写好注释"><span class="toc-text">写好注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码片段"><span class="toc-text">代码片段</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>如何才能写好代码呢？我们可以从代码规范、起好名字、写好注释以及合理划分代码块等反面优化自己的代码。</p>
+<a id="more"></a>
+<h2 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h2><p>编码规范指的是针对特定编程语言约定的一系列规则，通常包括文件组织、缩进、注释、 声明、语句、空格、命名约定、编程实践、编程原则和最佳实践等。</p>
+<p>规范的代码，可以降低代码出错的几率。比如之前提到的因为没有正确的缩进和括号导致的 bug。如果是一个追求或者遵从代码规范的程序员就很难犯这样的错误。</p>
+<p>复杂是代码质量的敌人。 越复杂的代码，越容易出现问题，并且由于复杂性，我们很难发现这些隐藏的问题。在编码的时候，我们应该尽量使代码风格直观、逻辑简单、表述直接。</p>
+<p>规范的代码，降低软件维护成本。大家写的代码都遵循规范，代码审阅人员看的舒心，后期维护人员也能看懂。就算是自己维护自己的代码，我相信在三个月后再看自己写的代码也一定会为当时的自己点赞，明确的变量，准确的缩进，简单的逻辑，恰当的注释…</p>
+<blockquote>
+<p>一件东西，无论其实用性多强，终究比不上让人心情愉悦更为实用。</p>
+</blockquote>
+<p>优秀的代码不 光是给自己看的，也是给别人看的，而且首先是给别人看的。</p>
+<h2 id="起好名字"><a href="#起好名字" class="headerlink" title="起好名字"></a>起好名字</h2><p>为什么需要一个好的名字？首先我们先看一个列子：</p>
+<p>public byte[] isEmpty();</p>
+<p>这个命名是不是非常的蛋疼？根本看不懂这个名字是用来干嘛的，所以使用一个好的命名规范是非常重要的。</p>
+<p>一段优秀的代码应该是自解释的，通过简单明了的变量、方法、类的命名可以让代码变得易于理解，提高代码的清晰度、可读性以及美观程度。</p>
+<h2 id="写好注释"><a href="#写好注释" class="headerlink" title="写好注释"></a>写好注释</h2><p>如果一段代码没有办法做到自解释该怎么办？这个时候就该注释了。注释其实是一种无奈的妥协。</p>
+<p>首先，因为注释不需要运行，所以没有常规的办法来测试它。 注释对不对？有没有随着代码变更？这些问题都是写注释需要注意的地方。注释难以维护，这是使用注释带来的最大的麻烦。但是，对于大部分程序员来说，问题还是注释太少，而不是太多。</p>
+<p>我们要对关键代码和方法提供明确的注释，注释要准确、必要、清晰。</p>
+<ol>
+<li>准确，错误的注释比没有注释更糟糕。</li>
+<li>必要，多余的注释浪费阅读者的时间。</li>
+<li>清晰，混乱的注释会把代码搞得更乱。</li>
+</ol>
+<h2 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h2><p>有没有看过一个方法 2000 多行？是不是看到这样的代码就感到非常的头痛？或者是一个类写的乱七八糟？构造方法在中间，get/set 方法在成员变量上面等等。</p>
+<p>首先，类的属性和方法，一般是一个代码文件的主要组成部分。类的结构，推荐的编码顺序依次 为：</p>
+<ol>
+<li>类的属性；</li>
+<li>构造方法；</li>
+<li>工厂方法；</li>
+<li>其他方法。</li>
+</ol>
+<p>按照这样的规范，一个类的方法一目了然，读这样的代码不会像无头苍蝇一样的猜这个是什么方法，那个是什么方法。</p>
+<p>其次按顺序使用限定词，在声明一个类、方法或者方法属性时，为了更准确地描述和理解声明的适用场景，我们通常要使用修饰性的关键词。<br><code>private final static long serialVersionUID</code> 就没有 <code>private static final long serialVersionUID</code> 来的规范，<code>static</code> 关键字应该在 <code>final</code> 关键字之前。</p>
+<p>代码块应该通过空格、缩进、空行进行分割。使用空行来分开同级别的不同代码块。这样可以使得代码变得更加的清晰和明了。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/代码精进之路/">代码精进之路</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/05/09/代码精进之路——关键的六个特质/">
+        <span class="next-text nav-default">代码精进之路——关键的六个特质</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>
