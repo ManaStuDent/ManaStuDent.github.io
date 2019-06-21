@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="Java 单例">
+  <meta name="description" content="在分布式场景，生成唯一ID">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://www.co2fe.com/2017/04/13/Java-单例/">
+<link rel="canonical" href="http://www.co2fe.com/2019/06/21/在分布式场景，生成唯一ID/">
 
 
 
@@ -89,7 +89,7 @@
   window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"index_generator":{"per_page":20,"order_by":"-date"},"category_generator":{"per_page":20},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
 </script>
 
-    <title> Java 单例 - 一任阶前 </title>
+    <title> 在分布式场景，生成唯一ID - 一任阶前 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -187,13 +187,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Java 单例
+          在分布式场景，生成唯一ID
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2017-04-13
+          2019-06-21
         </span>
         
         
@@ -205,7 +205,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#懒汉模式"><span class="toc-text">懒汉模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#饿汉模式"><span class="toc-text">饿汉模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态内部类"><span class="toc-text">静态内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#枚举"><span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库自增长序列或字段"><span class="toc-text">数据库自增长序列或字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UUID"><span class="toc-text">UUID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-生成-ID"><span class="toc-text">Redis 生成 ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Twitter-的-snowflake-算法"><span class="toc-text">Twitter 的 snowflake 算法</span></a></li></ol>
     </div>
   </div>
 
@@ -213,16 +213,20 @@
 
     <div class="post-content">
       
-        <p>最近在网上看到一篇关于 Java 单例的创建问题，虽然是一个 Java 程序员，但是到现在还没有真正的深入了解到 Java 的原理和机制。所以每每看到这样能够“真正”接触 Java 的机会内心总是充满了欣喜。记录下，以后备用。<br><a id="more"></a></p>
-<h2 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Singlton&#123;</span><br><span class="line">    private static Singleton instance;</span><br><span class="line">    private Singlton()&#123;&#125;</span><br><span class="line">    public static Singlton getInstance()&#123;</span><br><span class="line">        if(instacne == null)</span><br><span class="line">            instance = new Singlton();</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>教科书式的写法，但是无法适用于多线程的状态下。</p>
-<h2 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton&#123;</span><br><span class="line">    private static Singletion instance = new Singleton();</span><br><span class="line">    private Singleton()&#123;&#125;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>饿汉模式可以有效的避免多线程的同步问题，不过使用 static 会多多少少牺牲点性能。</p>
-<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton&#123;</span><br><span class="line">    private static class SingltonHolder&#123;</span><br><span class="line">        private static final Singleton INSTANCE = new Singlton();</span><br><span class="line">    &#125;</span><br><span class="line">    private Singleton()&#123;&#125;</span><br><span class="line">    public static final Singleton getInstance()&#123;</span><br><span class="line">        return SingletonHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用静态内部类的方式，利用 ClassLoder 的机制保证了初始化的时候只有一个线程，并且兼顾了性能——Singleton 类被装载的时候，getInstance 并不会立马初始化，只有调用的时候才会被初始化。</p>
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public enum Singleton&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    public void method()&#123;</span><br><span class="line">    //do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种方式 Effective Java 中推荐的方式，很厉害的一种写法。唯一的缺点就是无法继承了吧。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>虽然只是创造一个单例，但是其中需要考虑的东西真的有很多。不得不感叹那些编程高手，能够将心思缜密，利用语言的各种特性去编程创造。对于创建单例模式还是比较推荐使用静态内部类的方式创建，不失性能的同时又兼顾安全。但是其实我更加喜欢枚举的方式。</p>
+        <p>在分布式环境下生成数据库主键是一件比较麻烦的事情，这里简单总结下，以供以后使用。</p>
+<a id="more"></a>
+<h2 id="数据库自增长序列或字段"><a href="#数据库自增长序列或字段" class="headerlink" title="数据库自增长序列或字段"></a>数据库自增长序列或字段</h2><p>每个服务器使用自增主键，不同服务器的步长不一样，比如 A 服务器生成 <code>1，3，5，7...</code> B 服务器生成 <code>2，4，6，8...</code>。</p>
+<p>缺点：难以扩展。合并数据库时非常麻烦。分库分表时难以处理。</p>
+<h2 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h2><p>常见的方式。可以利用数据库也可以利用程序生成，一般来说全球唯一。</p>
+<p>缺点：没有排序，无法保证趋势递增。查询效率比较低。存储量比较大。不可读。</p>
+<h2 id="Redis-生成-ID"><a href="#Redis-生成-ID" class="headerlink" title="Redis 生成 ID"></a>Redis 生成 ID</h2><p>使用 Redis 的原子性生成自增主键（INCR 和 INCRBY 来实现）。</p>
+<p>缺点：需要引入 Redis，系统复杂度增加</p>
+<h2 id="Twitter-的-snowflake-算法"><a href="#Twitter-的-snowflake-算法" class="headerlink" title="Twitter 的 snowflake 算法"></a>Twitter 的 snowflake 算法</h2><p>snowflake的结构如下(每部分用-分开):</p>
+<p>0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000</p>
+<p>第一位为未使用，接下来的41位为毫秒级时间(41位的长度可以使用69年)，然后是5位datacenterId和5位workerId(10位的长度最多支持部署1024个节点） ，最后12位是毫秒内的计数（12位的计数顺序号支持每个节点每毫秒产生4096个ID序号）</p>
+<p>一共加起来刚好64位，为一个Long型。(转换成字符串后长度最多19)</p>
+<p>snowflake生成的ID整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞（由datacenter和workerId作区分），并且效率较高。经测试snowflake每秒能够产生26万个ID。</p>
+<p>缺点：占用空间很大，不可读</p>
 
       
     </div>
@@ -250,15 +254,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/07/10/原来-Set-集合也可以排序/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">原来 Set 集合也可以排序</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2017/03/28/Linux-文件权限/">
-        <span class="next-text nav-default">Linux 文件权限</span>
+      <a class="next" href="/2019/06/05/Navicat-Keygen/">
+        <span class="next-text nav-default">Navicat Keygen</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
