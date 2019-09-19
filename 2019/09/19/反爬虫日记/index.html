@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="反爬虫日记">
+
+
+
+
+  <meta name="keywords" content="Linux, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2019/09/19/反爬虫日记/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"tag_generator":{"per_page":20},"index_generator":{"per_page":20,"order_by":"-date"},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"category_generator":{"per_page":20},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 反爬虫日记 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          反爬虫日记
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-09-19
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#大量请求导致数据库不可用"><span class="toc-text">大量请求导致数据库不可用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库压力增大"><span class="toc-text">数据库压力增大</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大量流量导致-Tomcat-链接数达到上限"><span class="toc-text">大量流量导致 Tomcat 链接数达到上限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大量请求仍在继续"><span class="toc-text">大量请求仍在继续</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他用到的东西"><span class="toc-text">其他用到的东西</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>最近服务器接口一直被疑似爬虫爬取数据，之前从来都没有在意过这方面的东西。发现这个爬虫还是因为磁盘空间不足发现的。公司的接口都是通过 Nginx 反代的，所以 Nginx 一直都有日志记录的，这次爬虫爬取的速度非常的快，4 个小时有将近 300W 次的请求。从而导致日志异常庞大，最后触发磁盘使用量报警。磁盘容量报警后才发现有人恶意的请求服务器的接口，通过分析接口的参数发现攻击者一直在请求后端的一个接口，于是这几天都在和攻击者斗智斗勇。</p>
+<a id="more"></a>
+<h3 id="大量请求导致数据库不可用"><a href="#大量请求导致数据库不可用" class="headerlink" title="大量请求导致数据库不可用"></a>大量请求导致数据库不可用</h3><p>这次的爬虫或者说是攻击一直再使用手机号查询该手机号是否在系统中注册过，大量的请求导致进出系统的带宽明显不够用。公司的带宽一直都是很紧张的，并不是很富裕。这一次攻击直接导致系统反应速度大大的降低，不少接口都超时了。</p>
+<p>应对策略：<br><strong>临时提升服务器带宽</strong>，减少因为带宽导致的服务不可用</p>
+<hr>
+<h3 id="数据库压力增大"><a href="#数据库压力增大" class="headerlink" title="数据库压力增大"></a>数据库压力增大</h3><p>由于爬取的是用户是否注册过接口，每一次请求都会查询一次数据库，导致数据库无法承受高频率的访问。这里系统是没有缓存的（历史原因，公司项目小，使用的人也少，所以数据都没有啥缓存），但是这里加上缓存估计效果也不是很大，通过请求参数分析攻击者每一次都是使用一个新的手机号码去请求接口，这些手机号码在数据库中是没有的。也就是说缓存是 hit 不到的，查询数据库是肯定的了。</p>
+<p>应对策略：<br>分析攻击者请求头，临时改变程序。<br>这次攻击者的请求头有几个很明显的特征，于是通过这些特征值在<strong>代码层面进行了拦截</strong>，防止这类恶意的请求访问数据库。这个措施也是临时的，毕竟如果攻击者发现爬取不到数据，估计会修改请求头或者跟换其他接口访问。</p>
+<hr>
+<h3 id="大量流量导致-Tomcat-链接数达到上限"><a href="#大量流量导致-Tomcat-链接数达到上限" class="headerlink" title="大量流量导致 Tomcat 链接数达到上限"></a>大量流量导致 Tomcat 链接数达到上限</h3><p>做了以上的工作后发现系统任然还是很慢，虽然服务器带宽和数据库的压力通过监测都已不是瓶颈。这时估计是由于连接数太多，导致单个 Tomcat 达到瓶颈，这里我并不知道该用什么工具去监测 Tocmat 的连接数或者其他的参数，仅仅是猜想。</p>
+<p>应对策略：<br>于是使用 <strong>Nginx 负载均衡 2 个 Tomcat</strong> 对外提供访问。使用多个 Tomcat 对外提供访问后，系统响应速度明显回到了正常的水平。</p>
+<hr>
+<h3 id="大量请求仍在继续"><a href="#大量请求仍在继续" class="headerlink" title="大量请求仍在继续"></a>大量请求仍在继续</h3><p>虽然通过以上的应对措施服务对外是可以正常访问了，但是异常的访问任然还在继续。Nginx 的日志任然在不停的滚动，身为一个有责任心的程序员是无法容忍这样的访问和攻击的。</p>
+<p>应对策略：<br>通过 Nginx 日志上 <code>$http_x_forwarded_for</code> 上的 IP 地址，然后使用 Linux 的 <code>iptables</code> 进行 IP 封杀。<br>一开始是用手动的方式，也起一定的效果，但是好景不长，一会会爬虫就更换了 IP，试了几次，最后放弃这种方式。毕竟人哪能和机器抗衡。</p>
+<p>于是开始纠结的一天，查阅了很多网上的资料。最终尝试使用 Nginx 的 <code>ngx_http_limit_req_module</code> 模块的 <code>limit_req_zone</code> 指令进行限流访问，防止用户恶意攻击刷爆服务器。该模块是集成在 Nginx 中的，不用额外安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">limit_req_status 503; ## 可配置在 http, server, location 默认是 503</span><br><span class="line">limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s; ## 可配置在 http 中</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    location /search/ &#123;</span><br><span class="line">        limit_req zone=one burst=5 nodelay; ## 可配置在 http, server, location</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;</code><br>第一个参数：$binary_remote_addr 表示通过remote_addr这个标识来做限制，“binary_”的目的是缩写内存占用量，是限制同一客户端 ip 地址<br>第二个参数：zone=one:10m 表示生成一个大小为10M，名字为one的内存区域，用来存储访问的频次信息<br>第三个参数：rate=1r/s 表示允许相同标识的客户端的访问频次，这里限制的是每秒 1 次，还可以有比如 30r/m 的，表示一分钟内限制 30 次访问</p>
+<p><code>limit_req zone=one burst=5 nodelay;</code><br>第一个参数：zone=one 设置使用哪个配置区域来做限制，与上面 limit_req_zone 里的 name 对应<br>第二个参数：burst=5，重点说明一下这个配置，burst爆发的意思，这个配置的意思是设置一个大小为 5 的缓冲区当有大量请求（爆发）过来时，超过了访问频次限制的请求可以先放到这个缓冲区内<br>第三个参数：nodelay，如果设置，超过访问频次而且缓冲区也满了的时候就会直接返回 503，如果没有设置，则所有请求会等待排队</p>
+<p><strong>注意</strong>：我平时修改 Nginx 的配置时都是使用 <code>kill -HUP 进程号</code> 的方式热重启 Nginx 的，但是这里不适用，需要关闭 Nginx 后重启方可生效</p>
+<hr>
+<h3 id="其他用到的东西"><a href="#其他用到的东西" class="headerlink" title="其他用到的东西"></a>其他用到的东西</h3><p>nginx 日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                   &apos;$status $gzip_ratio - $body_bytes_sent - $request_time &quot;$http_referer&quot; &apos;</span><br><span class="line">                    &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">log_format main escape=json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;</span><br><span class="line">                   &apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;,&apos;</span><br><span class="line">                   &apos;&quot;costime&quot;: &quot;$request_time&quot;,&apos;</span><br><span class="line">                   &apos;&quot;realtime&quot;: &quot;$upstream_response_time&quot;,&apos;</span><br><span class="line">                   &apos;&quot;status&quot;: $status,&apos;</span><br><span class="line">                   &apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;,&apos;</span><br><span class="line">                   &apos;&quot;referer&quot;: &quot;$http_referer&quot;,&apos;</span><br><span class="line">                   &apos;&quot;request&quot;: &quot;$request&quot;,&apos;</span><br><span class="line">                   &apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;</span><br><span class="line">                   &apos;&quot;bytes&quot;:$body_bytes_sent,&apos;</span><br><span class="line">                   &apos;&quot;dm&quot;:$request_body,&apos;</span><br><span class="line">                   &apos;&quot;agent&quot;: &quot;$http_user_agent&quot; &#125;&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>都是些常用的参数，可以查阅其他资料，学习具体参数是什么意思。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set $Real $http_x_forwarded_for;</span><br><span class="line">if ( $Real ~ (\d+)\.(\d+)\.(\d+)\.(\d+),(.*) )&#123;</span><br><span class="line">	set $Real $1.$2.$3.$4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个是由于原来的 Nginx 配置使用 <code>$remote_addr</code> 没有办法拿到用户的 IP 地址。而 <code>$http_x_forwarded_for</code> 可以，于是取 <code>$http_x_forwarded_for</code> 的 IP。上面的代码做了一个简单的拆分，取 <code>$http_x_forwarded_for</code> 的第一组 IP。<br>我这了设置了 <code>$Real</code> 作为限流的 key，所以 <code>limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;</code> 中的 <code>$binary_remote_addr</code> 就可以 跟换成 <code>$Real</code> 作为 key。这里还可以优化一下，把它转换成二进制的会更节省空间。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/09/16/利用iftop找出是谁占用了带宽/">
+        <span class="next-text nav-default">利用iftop找出是谁占用了带宽</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>
