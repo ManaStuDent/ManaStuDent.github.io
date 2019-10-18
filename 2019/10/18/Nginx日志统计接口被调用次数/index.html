@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Nginx日志统计接口被调用次数">
+
+
+
+
+  <meta name="keywords" content="Linux, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2019/10/18/Nginx日志统计接口被调用次数/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"category_generator":{"per_page":20},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"index_generator":{"per_page":20,"order_by":"-date"},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"tag_generator":{"per_page":20},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> Nginx日志统计接口被调用次数 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Nginx日志统计接口被调用次数
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-10-18
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初步分析："><span class="toc-text">初步分析：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据清洗"><span class="toc-text">数据清洗</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>cat access.log | awk ‘{ if($6~”POST” &amp;&amp; $7~”jsdoctor-mobile-api”)print $7 }’ | awk -F ‘?’ ‘{print $1}’ | sort | uniq -c | sort</p>
+<p>Nginx日志统计接口被调用次数</p>
+<p>最近公司系统总是出问题，看到项目经理通过日志统计出了后台 API 接口的调用次数（统计在了 Excel 表中）。因为之前自己都没有做过类似的统计，今天看到了不禁在想他是怎么统计的，自己能否也可以做出这样的报表。</p>
+<p>初步设想他应该是统计 Nginx 的 access.log 里面所有的请求，然后对数据进行过滤和分组统计次数。</p>
+<h4 id="初步分析："><a href="#初步分析：" class="headerlink" title="初步分析："></a>初步分析：</h4><p>观察 access.log 里面的日志记录的规则。<br>先通过 <code>tail -n 2000 access.log &gt; fenxi.log</code> 将 access.log 日志中的后 2000 行单独放到名为 <code>fenxi.log</code> 的文件中，方便后面的分析和测试。</p>
+<p>分析日志的生成规则，通过查看 Nginx.conf 配置文件，日志的组成部分如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                    &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                    &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; &quot;$request_body&quot;&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>看上去还是挺规则的，下面是部分日志文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">21.228.17.85 - - [18/Oct/2019:15:46:45 +0800] &quot;POST /mobile-api/index_layout/config/query?token=1e8cb0ffe3ca6253a46c013ac067cb69 HTTP/1.1&quot; 200 791 &quot;-&quot; &quot;okhttp/3.10.0&quot; &quot;-&quot; &quot;&#123;...&#125;&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:45 +0800] &quot;GET /platform-admin/member_second/info_manage/edit?id=b74d1bb9ea3b4fd78657ba565caa1c03 HTTP/1.1&quot; 200 2396 &quot;http://test.xxx.com/platform-admin/member_second/info_manage/list&quot; &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36&quot; &quot;-&quot; &quot;-&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:46 +0800] &quot;POST /mobile-api/member_message_reader/query HTTP/1.1&quot; 200 35 &quot;-&quot; &quot;yancheng/2.3.4 (iPhone; iOS 12.4; Scale/2.00)&quot; &quot;-&quot; &quot;&#123;...&#125;&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:47 +0800] &quot;POST /mobile-api/medical_branch_apply_record/query_newest_self?token=08ff294b6ad93aa700fc2d010387c4c7 HTTP/1.1&quot; 200 917 &quot;-&quot; &quot;okhttp/3.10.0&quot; &quot;-&quot; &quot;&#123;...&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>然后对数据进行清理下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">21.228.17.85 - - [18/Oct/2019:15:46:45 +0800] &quot;POST /mobile-api/index_layout/config/query?token=1e8cb0ffe3ca6253a46c013ac067cb69 HTTP/1.1&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:45 +0800] &quot;GET /platform-admin/member_second/info_manage/edit?id=b74d1bb9ea3b4fd78657ba565caa1c03 HTTP/1.1&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:46 +0800] &quot;POST /platform-admin/member_message_reader/query HTTP/1.1&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:47 +0800] &quot;POST /mobile-api/medical_branch_apply_record/query_newest_self?token=08ff294b6ad93aa700fc2d010387c4c7 HTTP/1.1&quot;</span><br></pre></td></tr></table></figure></p>
+<p>现在这个日志看起来就比较清晰了，我们需要过滤掉 GET 请求，然后只需要 mobile-api 的数据，最后再把 URL 后的参数去除，统计出 <code>/mobile-api/xxxx</code> 分别被调用的次数即可。</p>
+<h4 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h4><p>1.过滤非 POST 请求<br>2.过滤非 mobile-api 请求<br>3.去除 URL 后的参数<br>4.统计各个 URL 被调用的次数</p>
+<p>技术选型：我们可以使用 awk 命令对数据进行过滤</p>
+<p>1.过滤非 POST 请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat fenxi.log | awk &apos;&#123; if($6~&quot;POST&quot;)print &#125;&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">21.228.17.85 - - [18/Oct/2019:15:46:45 +0800] &quot;POST /mobile-api/index_layout/config/query?token=1e8cb0ffe3ca6253a46c013ac067cb69 HTTP/1.1&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:46 +0800] &quot;POST /platform-admin/member_message_reader/query HTTP/1.1&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:47 +0800] &quot;POST /mobile-api/medical_branch_apply_record/query_newest_self?token=08ff294b6ad93aa700fc2d010387c4c7 HTTP/1.1&quot;</span><br></pre></td></tr></table></figure>
+<p>2.过滤非 mobile-api 请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat fenxi.log | awk &apos;&#123; if($6~&quot;POST&quot; &amp;&amp; $7~&quot;mobile-api&quot;)print&#125;&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.228.17.85 - - [18/Oct/2019:15:46:45 +0800] &quot;POST /mobile-api/index_layout/config/query?token=1e8cb0ffe3ca6253a46c013ac067cb69 HTTP/1.1&quot;</span><br><span class="line">221.228.17.85 - - [18/Oct/2019:15:46:47 +0800] &quot;POST /mobile-api/medical_branch_apply_record/query_newest_self?token=08ff294b6ad93aa700fc2d010387c4c7 HTTP/1.1&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat fenxi.log | awk &apos;&#123; if($6~&quot;POST&quot; &amp;&amp; $7~&quot;mobile-api&quot;)print $7&#125;&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/mobile-api/index_layout/config/query?token=1e8cb0ffe3ca6253a46c013ac067cb69</span><br><span class="line">/mobile-api/medical_branch_apply_record/query_newest_self?token=08ff294b6ad93aa700fc2d010387c4c7</span><br></pre></td></tr></table></figure>
+<p>3.去除 URL 后的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat fenxi.log | awk &apos;&#123; if($6~&quot;POST&quot; &amp;&amp; $7~&quot;mobile-api&quot;)print $7&#125;&apos; | awk -F &apos;?&apos; &apos;&#123;print $1&#125;&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/mobile-api/index_layout/config/query</span><br><span class="line">/mobile-api/medical_branch_apply_record/query_newest_self</span><br></pre></td></tr></table></figure>
+<p>4.统计各个 URL 被调用的次数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat fenxi.log | awk &apos;&#123; if($6~&quot;POST&quot; &amp;&amp; $7~&quot;mobile-api&quot;)print $7&#125;&apos; | awk -F &apos;?&apos; &apos;&#123;print $1&#125;&apos; | sort | uniq -c</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1 /mobile-api/index_layout/config/query</span><br><span class="line">1 /mobile-api/medical_branch_apply_record/query_newest_self</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/10/11/将当前Git最新版本回退到指定版本号并创建新分支/">
+        <span class="next-text nav-default">将当前Git最新版本回退到指定版本号并创建新分支</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>
