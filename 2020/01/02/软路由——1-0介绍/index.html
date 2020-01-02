@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="软路由——1.0介绍">
+
+
+
+
+  <meta name="keywords" content="软路由, 一任阶前">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一任阶前">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1">
+
+
+
+<link rel="canonical" href="http://www.co2fe.com/2020/01/02/软路由——1-0介绍/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"title":"一任阶前","subtitle":"一任阶前","description":"爱生活，爱Java，认真过好每一天。","author":"Romition","language":"zh-Hans","timezone":null,"url":"http://www.co2fe.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"even","deploy":{"type":"git","message":"","repo":{"github":"git@github.com:ManaStuDent/ManaStuDent.github.io.git,master","qcloud":"root@118.89.176.215:/data/gitLibrary/hexo"},"branch":"master"},"ignore":[],"avatar":"/images/favicon.jpg","jsonContent":{"meta":false,"pages":false,"posts":{"title":true,"date":true,"path":true,"text":false,"raw":false,"content":false,"slug":false,"updated":false,"comments":false,"link":false,"permalink":false,"excerpt":false,"categories":false,"tags":true}},"index_generator":{"per_page":20,"order_by":"-date"},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2015,"favicon":"/favicon.ico","rss":false,"menu":{"Home":"/","Archives":"/archives/","Tags":"/tags"},"color":"mint green","mode":"default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"liukeeps@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/ManaStuDent","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.10.1"};
+</script>
+
+    <title> 软路由——1.0介绍 - 一任阶前 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">一任阶前</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">一任阶前</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          软路由——1.0介绍
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-01-02
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要使用软路由"><span class="toc-text">为什么要使用软路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问答环节"><span class="toc-text">问答环节</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>如果你不知道什么是 SS，什么是梅林，或者对软路由一点都不了解，请先了解。</p>
+<p>生命不息，折腾不止。2019年末开始折腾软路由这个东西，什么是软路由呢，可以简单的理解为由一个小型电脑，靠着某种软件设置，达成路由器功能。一般这种小型电脑都是使用非常低功耗的CPU组成，不是我们家庭常用的那种，体积也很小。</p>
+<p>软路由可以干什么呢？它基本上是为 200M 以上宽带科学上网使用的。划重点：200M，科学上网。<br>家庭宽带决定了它并不会有很多设备同时上网，所以买一个靠谱的路由器基本就足够了。我估计 100 块左右的 TP-link 和 700块左右的 ASUS-AC86U，在 50M 的宽带下很多时候的上网体验可能是差不多的，并不会有太大的区别。</p>
+<p>做程序员的估计有很多人都有科学上网的需求，毕竟现在网络环境越来越不好。比如说 GitHub，我记得前几年都是可以正常访问的，但是最近开始越来越慢了。不开科学上网访问基本慢如狗，拉个库就像百度云下载一样，只有几十 KB。</p>
+<p>我知道的科学上网的方式就那么几种————VPN,hosts,SS,SSR,V2ray 等。当然这些都需要配合着软件使用，我自己用的是SSR，购买的是一个机场的服务。这里我就不介绍什么是 SS啊，SSR了，如果没有用过，请自行 Google。我的 Mac 设备使用的是 Surge 或者 ShadowsocksX-NG-R 软件使用，Windows 电脑使用的是 ShadowsocksR，IOS 设备使用的是 Shadowrocket。如果你没有用过类似的服务，估计已经晕头转向了，不同的设备需要使用不同的软件配合 SSR 服务使用。</p>
+<a id="more"></a>
+<h3 id="为什么要使用软路由"><a href="#为什么要使用软路由" class="headerlink" title="为什么要使用软路由"></a>为什么要使用软路由</h3><p>我在使用科学上网的时候就遇到了以下几个问题：<br>1.不同设备需要使用不同的软件，有学习成本。<br>2.并不能跑满宽带，速度差强人意。<br>3.无法分享，有的时候一个新设备没有软件，必须要安装并配置后才能使用。</p>
+<p>针对以上几点问题，软路由可以很好的解决。软路由有很多种使用的方式，我这里刚刚学习折腾，所以并没有把它作为家里所有网络的中枢，而是将它作为一个旁路由来使用。什么是旁路由呢？简单来说就是一个网络中间交换设备。</p>
+<p>原本我们上网是这样的:<br>电脑/手机等设备 -&gt; 路由器 -&gt; 互联网</p>
+<p>加入了旁路由我们上网是这样的：<br>电脑/手机等设备 -&gt; 旁路由 -&gt; 路由器 -&gt; 互联网</p>
+<p>这样有什么用呢？<br>我们可以将科学上网软件安装在旁路由上，这样我们各种各样的上网设备就不用再安装各种各样的科学上网软件，也只需要配置一遍就可以做到科学上网了，并且由于其系统的特殊性，基本上一个好一点的 CPU 完全可以跑满带宽。</p>
+<h3 id="问答环节"><a href="#问答环节" class="headerlink" title="问答环节"></a>问答环节</h3><p>Q：为什么不用路由器？梅林不是可以吗？<br>A：支持梅林系统的路由器一般都是比较高端的路由器，很多路由器并不支持，并且就算支持由于路由器的 CPU 是 ARM 架构，性能羸弱，并不适合使用科学上网软件。<br>科学上网很多协议都是加密协议，在网络传输的过程中需要反复的加解密，性能不够的 CPU 加解密慢，从而导致上网体验不佳。</p>
+<p>Q: 为什么不用软路由作为主路由，仅仅做一个旁路由？<br>A：1.我对软路由还并不是很了解。2.我并不认为软路由做主路由会很稳定，网路第一要义就是稳定，不稳定其他都是白瞎。3.并不是所有设备都需要科学上网，旁路由可以比主路由的方案更加方便设定。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/软路由/">软路由</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/12/27/docker-安装-mysql/">
+        <span class="next-text nav-default">docker 安装 mysql</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      
+  
+  
+
+  
+
+
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:liukeeps@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ManaStuDent" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2020
+    苏ICP备17043724号
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Romition</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+<script src="//instant.page/1.2.0" type="module" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
+
+  </body>
+</html>
