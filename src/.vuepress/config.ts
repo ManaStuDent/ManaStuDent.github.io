@@ -7,7 +7,6 @@ export default defineUserConfig({
   lang: "zh-CN",
   title: "",
   description: "",
-
   theme,
 
   // 和 PWA 一起启用

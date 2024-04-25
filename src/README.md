@@ -3,7 +3,7 @@ home: true
 layout: BlogHome
 icon: home
 title: 博客主页
-heroImage: https://theme-hope-assets.vuejs.press/logo.svg
+bgImage: http://media.ebowin.com/p-admin-bb35f25d-bg.png
 heroText: Chengloong's Blog
 heroFullScreen: false
 tagline: 

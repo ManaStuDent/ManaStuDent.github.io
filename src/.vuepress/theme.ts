@@ -4,29 +4,22 @@ import sidebar from "./sidebar.js";
 import { MR_HOPE_AVATAR } from "./logo.js";
 
 export default hopeTheme({
+  pure:true,
   hostname: "https://manastudent.github.io",
-
   author: {
     name: "ChengLoong",
     url: "https://manastudent.github.io",
   },
-
   iconAssets: "fontawesome-with-brands",
-
-  logo: "https://theme-hope-assets.vuejs.press/logo.svg",
-
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
-
+  logo: "logo.jpg",
+  repo: "",
   docsDir: "src",
-
   // 导航栏
   navbar,
-
   // 侧边栏
   sidebar,
-
   // 页脚
-  footer: "默认页脚",
+  footer: "",
   displayFooter: true,
 
   // 博客相关
@@ -36,12 +29,13 @@ export default hopeTheme({
     medias: {
       // Baidu: "https://example.com"
     },
+    articleInfo:["Original", "Date", "PageView", "ReadingTime", "Category", "Tag"]
   },
 
   // 加密配置
   encrypt: {
     config: {
-      "/demo/encrypt.html": ["1234"],
+      // "/posts/Javaagent 的简单使用.html": ["1234"],
     },
   },
 
@@ -56,14 +50,7 @@ export default hopeTheme({
   // 在这里配置主题提供的插件
   plugins: {
     blog: true,
-
-    // 启用之前需安装 @waline/client
-    // 警告: 这是一个仅供演示的测试服务，在生产环境中请自行部署并使用自己的服务！
-    // comment: {
-    //   provider: "Waline",
-    //   serverURL: "https://waline-comment.vuejs.press",
-    // },
-
+    searchPro: true,
     components: {
       components: ["Badge", "VPCard"],
     },
